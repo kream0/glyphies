@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Glyphies</string>
+    <string name="glyph_toy_name">Glyphies</string>
+    <string name="glyph_toy_summary">Affiche le dessin ou l\'animation choisi dans Glyphies (l\'envahisseur sinon). Sur le Phone (3), un appui long sur le Glyph Button la relance.</string>
+</resources>

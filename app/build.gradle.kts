@@ -1,0 +1,129 @@
+import java.net.URI
+import java.security.MessageDigest
+
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
+}
+
+// Release builds get their version from the tag (v1.2.3 -> versionCode 1002003); test builds
+// from branch pushes are "0.dev.<run>" with a small versionCode, so any release updates them.
+val runNumber = System.getenv("GITHUB_RUN_NUMBER")?.toIntOrNull() ?: 1
+val releaseVersionName = System.getenv("GLYPHIES_VERSION_NAME")?.takeIf { it.isNotBlank() }
+val releaseVersionCode = System.getenv("GLYPHIES_VERSION_CODE")?.toIntOrNull()
+
+// Nothing's Glyph Matrix SDK is a closed-source AAR whose licence doesn't allow
+// redistribution, so it isn't committed: it's fetched from Nothing's official repo at a
+// pinned commit and checked against a known SHA-256.
+val glyphSdk = file("libs/glyph-matrix-sdk-2.0.aar")
+if (!glyphSdk.exists()) {
+    val url = "https://raw.githubusercontent.com/Nothing-Developer-Programme/Glyph-Developer-Kit/" +
+        "8ee807a9312a640b0d43051450924e3446bc1d78/sdk/glyph-matrix-sdk-2.0.aar"
+    val bytes = URI(url).toURL().readBytes()
+    val sha = MessageDigest.getInstance("SHA-256").digest(bytes).joinToString("") { "%02x".format(it) }
+    check(sha == "329393019db5f0f987c6245855d13fa273d06756c68829ca0f6ae686ba336da1") {
+        "Unexpected checksum for the Glyph SDK download ($sha)"
+    }
+    glyphSdk.parentFile.mkdirs()
+    glyphSdk.writeBytes(bytes)
+}
+
+// Where the in-app updater looks for new builds (the latest published release).
+val updateRepo = System.getenv("GITHUB_REPOSITORY") ?: "kream0/glyphies"
+
+// A private keystore can be supplied through env vars (see README / the CI workflow).
+// Without one, builds are signed with the public dev key in /keystore so updates still
+// install over each other.
+val releaseKeystore = System.getenv("GLYPHIES_KEYSTORE")?.takeIf { it.isNotBlank() && file(it).exists() }
+
+android {
+    namespace = "app.glyphies"
+    compileSdk = 36
+
+    defaultConfig {
+        applicationId = "app.glyphies"
+        minSdk = 26
+        // Android 16: Nothing's Glyph service only waives its API-key check for apps targeting it.
+        targetSdk = 36
+        versionCode = releaseVersionCode ?: runNumber
+        versionName = releaseVersionName ?: "0.dev.$runNumber"
+        buildConfigField("String", "UPDATE_REPO", "\"$updateRepo\"")
+    }
+
+    signingConfigs {
+        create("sideload") {
+            if (releaseKeystore != null) {
+                storeFile = file(releaseKeystore)
+                storePassword = System.getenv("GLYPHIES_KEYSTORE_PASSWORD")
+                keyAlias = System.getenv("GLYPHIES_KEY_ALIAS")
+                keyPassword = System.getenv("GLYPHIES_KEY_PASSWORD")
+            } else {
+                storeFile = rootProject.file("keystore/glyphies-dev.jks")
+                storeType = "pkcs12"
+                storePassword = "glyphies-dev"
+                keyAlias = "glyphies"
+                keyPassword = "glyphies-dev"
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            isMinifyEnabled = false
+            signingConfig = signingConfigs.getByName("sideload")
+        }
+        debug {
+            applicationIdSuffix = ".debug"
+            signingConfig = signingConfigs.getByName("sideload")
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+
+    buildFeatures {
+        compose = true
+        buildConfig = true
+    }
+
+    packaging {
+        resources {
+            excludes += setOf(
+                "/META-INF/{AL2.0,LGPL2.1}",
+                "META-INF/LICENSE*",
+                "META-INF/NOTICE*",
+            )
+        }
+    }
+
+    lint {
+        abortOnError = false
+        checkReleaseBuilds = false
+    }
+}
+
+dependencies {
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.ui.graphics)
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.okhttp)
+
+    implementation(files(glyphSdk))
+}
