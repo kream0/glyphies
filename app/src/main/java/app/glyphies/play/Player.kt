@@ -9,6 +9,7 @@ import app.glyphies.engine.Hud
 import app.glyphies.engine.Need
 import app.glyphies.engine.Playable
 import app.glyphies.glyph.GlyphOutput
+import app.glyphies.glyph.GlyphSupport
 import app.glyphies.glyph.MatrixShape
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -61,7 +62,7 @@ class Player(private val context: Context, private val scope: CoroutineScope) {
 
     fun play(builtIn: BuiltIn) {
         val settings = Graph.settings.current
-        val p = Catalog.builtIn(builtIn, app.glyphies.glyph.GlyphSupport.displayShape(settings.previewSize), settings)
+        val p = Catalog.builtIn(builtIn, GlyphSupport.displayShape(settings.previewSize), settings)
         start(builtIn.title, p, isGame = builtIn.isGame, builtIn = builtIn)
     }
 

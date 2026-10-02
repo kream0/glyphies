@@ -42,6 +42,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.glyphies.Graph
+import app.glyphies.data.GameTemplate
 import app.glyphies.data.description
 import app.glyphies.engine.Need
 import app.glyphies.glyph.GlyphOutput
@@ -49,8 +50,8 @@ import app.glyphies.glyph.GlyphSupport
 import app.glyphies.play.BuiltIn
 import app.glyphies.play.PlayState
 import app.glyphies.tr
-import app.glyphies.ui.components.IconBtn
 import app.glyphies.ui.components.Ic
+import app.glyphies.ui.components.IconBtn
 import app.glyphies.ui.components.LocalSheets
 import app.glyphies.ui.components.MatrixView
 import app.glyphies.ui.components.PillButton
@@ -254,7 +255,7 @@ private fun hint(s: PlayState): String {
     val trigger = if (g.template.triggers.isNotEmpty()) g.trigger.description else ""
     return listOf(
         when (g.template) {
-            app.glyphies.data.GameTemplate.MAZE -> tr("Tilt to roll the ball to the blinking goal.", "Inclinez pour rouler la bille jusqu'à l'arrivée qui clignote.")
+            GameTemplate.MAZE -> tr("Tilt to roll the ball to the blinking goal.", "Inclinez pour rouler la bille jusqu'à l'arrivée qui clignote.")
             else -> move
         },
         trigger,

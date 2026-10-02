@@ -53,6 +53,7 @@ import app.glyphies.data.label
 import app.glyphies.engine.Driver
 import app.glyphies.engine.LoopMode
 import app.glyphies.engine.Marks
+import app.glyphies.engine.Move
 import app.glyphies.engine.Sprite
 import app.glyphies.glyph.Frames
 import app.glyphies.glyph.GlyphOutput
@@ -64,14 +65,14 @@ import app.glyphies.trCount
 import app.glyphies.ui.AppViewModel
 import app.glyphies.ui.components.Block
 import app.glyphies.ui.components.Chips
-import app.glyphies.ui.components.IconBtn
 import app.glyphies.ui.components.Ic
+import app.glyphies.ui.components.IconBtn
 import app.glyphies.ui.components.Line
 import app.glyphies.ui.components.LivePreview
 import app.glyphies.ui.components.LocalSheets
 import app.glyphies.ui.components.MatrixView
-import app.glyphies.ui.components.NothingSwitch
 import app.glyphies.ui.components.Note
+import app.glyphies.ui.components.NothingSwitch
 import app.glyphies.ui.components.PillButton
 import app.glyphies.ui.components.PillStyle
 import app.glyphies.ui.components.Section
@@ -208,7 +209,7 @@ fun EditorScreen(app: AppViewModel, id: String, onClose: () -> Unit) {
                                 Graph.creations.get(id)?.let { c ->
                                     val g = c.game ?: return@let null
                                     // Previews steer by finger so they move on their own.
-                                    Catalog.creation(c.copy(game = g.copy(move = app.glyphies.engine.Move.TOUCH)), settings)
+                                    Catalog.creation(c.copy(game = g.copy(move = Move.TOUCH)), settings)
                                 }
                             }
                         }

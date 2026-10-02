@@ -1,5 +1,6 @@
 package app.glyphies.engine
 
+import app.glyphies.glyph.DotText
 import app.glyphies.glyph.MatrixShape
 import kotlin.math.abs
 import kotlin.math.roundToInt
@@ -165,11 +166,11 @@ class AnimationPlayer(
     companion object {
         /** Frames that scroll [text] across the matrix (for the "Text" creation). */
         fun scrollingText(shape: MatrixShape, text: String): List<IntArray> {
-            val strip = app.glyphies.glyph.DotText.layout(text)
+            val strip = DotText.layout(text)
             val total = strip.width + shape.width + 2
             return List(total.coerceAtLeast(1)) { k ->
                 val out = shape.blank()
-                Canvas(shape, out).strip(strip, shape.width - k, app.glyphies.glyph.DotText.centredTop(shape.height), 255)
+                Canvas(shape, out).strip(strip, shape.width - k, DotText.centredTop(shape.height), 255)
                 out
             }
         }

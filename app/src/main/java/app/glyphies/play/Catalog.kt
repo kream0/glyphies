@@ -16,6 +16,7 @@ import app.glyphies.engine.MazeGame
 import app.glyphies.engine.Playable
 import app.glyphies.engine.SandToy
 import app.glyphies.engine.ShooterSprites
+import app.glyphies.engine.Sprite
 import app.glyphies.engine.Trigger
 import app.glyphies.glyph.MatrixShape
 import app.glyphies.tr
@@ -86,7 +87,7 @@ object Catalog {
         val t = game.template
         fun sprite(key: String) = t.role(key)?.let { game.sprite(it, shape) }
         // Optional pictures: the default until drawn; drawn empty means "none".
-        fun optional(key: String): app.glyphies.engine.Sprite? {
+        fun optional(key: String): Sprite? {
             val stored = game.sprites[key] ?: return t.role(key)?.default?.invoke(shape)
             return stored.toSprite().takeUnless { it.isEmpty }
         }
