@@ -39,7 +39,8 @@ import app.glyphies.glyph.GlyphLink
 import app.glyphies.glyph.GlyphStatus
 import app.glyphies.glyph.GlyphSupport
 import app.glyphies.glyph.GlyphTest
-import app.glyphies.glyph.Mascot
+import app.glyphies.play.FaceDown
+import app.glyphies.ui.components.LocalSheets
 import app.glyphies.tr
 import app.glyphies.ui.components.Block
 import app.glyphies.ui.components.Line
@@ -147,10 +148,21 @@ fun SettingsScreen() {
 private fun GlyphSection(output: Boolean, brightness: Int, previewSize: Int) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
+    val sheets = LocalSheets.current
     val shape = GlyphSupport.displayShape(previewSize)
+    val settings by Graph.settings.state.collectAsStateWithLifecycle()
+    val onBack = settings.toy ?: FaceDown.DEFAULT
+    // What the back shows with the app closed, live.
     Box(Modifier.fillMaxWidth().padding(vertical = 8.dp), contentAlignment = Alignment.Center) {
-        LivePreview(key = "mascot:${shape.width}", modifier = Modifier.size(150.dp)) { Mascot.playable(shape) }
+        LivePreview(key = "facedown:$onBack:${shape.width}", modifier = Modifier.size(150.dp)) { FaceDown.playable(onBack, shape) }
     }
+    Line(
+        tr("Face down", "Face cachée"),
+        tr(
+            "${FaceDown.name(onBack)} · shown on the back with the app closed, instead of Nothing's clock",
+            "${FaceDown.name(onBack)} · affiché au dos app fermée, à la place de l'horloge de Nothing",
+        ),
+    ) { PillButton(tr("Change", "Changer"), { sheets(faceDownPicker()) }) }
     if (!GlyphSupport.isSupported) {
         Note(
             tr(
@@ -175,25 +187,14 @@ private fun GlyphSection(output: Boolean, brightness: Int, previewSize: Int) {
         Segmented(steps.map { "$it %" }, steps.indexOf(brightness).coerceAtLeast(0), { i -> Graph.settings.update { it.copy(brightness = steps[i]) } })
     }
     Line(
-        "Glyph Toy",
-        if (GlyphSupport.hasGlyphTouch) {
-            tr(
-                "Add Glyphies to the Glyph Button carousel: it plays the drawing or animation you pick (⋯ › Use as Glyph Toy in Create)",
-                "Ajoutez Glyphies au carrousel du Glyph Button : il joue le dessin ou l'animation choisi (⋯ › Utiliser comme Glyph Toy dans Créer)",
-            )
-        } else {
-            tr(
-                "Keep your drawing on the back: Settings › Glyph Interface › Flip to Glyph › Always-on Glyph Toy › Glyphies. Pick what it shows with ⋯ › Use as Glyph Toy in Create",
-                "Gardez votre dessin au dos : Paramètres › Glyph Interface › Flip to Glyph › Always-on Glyph Toy › Glyphies. Choisissez ce qu'il affiche avec ⋯ › Utiliser comme Glyph Toy dans Créer",
-            )
-        },
+        tr("Turn it on once", "À activer une fois"),
+        FaceDown.howTo,
     ) {
         PillButton(tr("Open", "Ouvrir"), {
             if (!GlyphSupport.openToysManager(context)) {
                 runCatching {
                     context.startActivity(Intent(android.provider.Settings.ACTION_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
                 }
-                Graph.toast("Glyph Interface › Flip to Glyph › Always-on Glyph Toy › Glyphies")
             }
         })
     }

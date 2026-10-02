@@ -9,14 +9,14 @@ import android.os.Message
 import android.os.Messenger
 import android.os.SystemClock
 import app.glyphies.Graph
-import app.glyphies.data.CreationKind
-import app.glyphies.engine.AnimationPlayer
-import app.glyphies.engine.Driver
+import app.glyphies.data.Facing
+import app.glyphies.engine.HourglassToy
 import app.glyphies.engine.InputFrame
-import app.glyphies.engine.LoopMode
+import app.glyphies.engine.Need
 import app.glyphies.engine.NoFx
 import app.glyphies.engine.Playable
-import app.glyphies.engine.Sprite
+import app.glyphies.play.FaceDown
+import app.glyphies.sense.Sensors
 import com.nothing.ketchum.GlyphToy
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -29,57 +29,29 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
-
-/** The walking invader: the app's mascot and the Glyph Toy when nothing else is chosen. */
-object Mascot {
-    private val a = Sprite.parse(
-        "..#.....#..",
-        "...#...#...",
-        "..#######..",
-        ".##.###.##.",
-        "###########",
-        "#.#######.#",
-        "#.#.....#.#",
-        "...##.##...",
-    )
-    private val b = Sprite.parse(
-        "..#.....#..",
-        "#..#...#..#",
-        "#.#######.#",
-        "###.###.###",
-        "###########",
-        ".#########.",
-        "..#.....#..",
-        ".#.......#.",
-    )
-
-    fun frames(shape: MatrixShape): List<IntArray> = listOf(a, b).map { s ->
-        val out = shape.blank()
-        val x0 = (shape.width - s.w) / 2
-        val y0 = (shape.height - s.h) / 2
-        for (y in 0 until s.h) for (x in 0 until s.w) {
-            if (s.lit(x, y) && shape.isLed(x0 + x, y0 + y)) out[(y0 + y) * shape.width + x0 + x] = 255
-        }
-        out
-    }
-
-    fun playable(shape: MatrixShape): Playable =
-        AnimationPlayer(shape, frames(shape), fps = 2, loop = LoopMode.LOOP, driver = Driver.TIME, id = "mascot")
-}
+import kotlin.math.PI
+import kotlin.math.cos
+import kotlin.math.hypot
+import kotlin.math.sin
 
 /**
- * "Glyphies" Glyph Toy: plays the drawing or animation chosen in the app (the walking invader
- * otherwise) on the Glyph Matrix, even with the app closed.
+ * "Glyphies" Glyph Toy: plays what you picked in the app (⋯ › Show face down) on the Glyph
+ * Matrix with the app closed — the analog clock unless you chose sand, the hourglass or one of
+ * your drawings or animations.
  *
  * - Phone (4a) Pro: always-on toys only. Settings › Glyph Interface › Flip to Glyph ›
- *   Always-on Glyph Toy › Glyphies; the system sends EVENT_AOD every minute.
- * - Phone (3): add it to the Glyph Button carousel; a long press restarts the animation.
+ *   Always-on Glyph Toy › Glyphies: it shows when the phone lies face down.
+ * - Phone (3): add it to the Glyph Button carousel; a long press restarts it.
+ *
+ * Sand and the hourglass read the tilt when Android lets a toy use the accelerometer; lying
+ * flat (or without sensor data) they get a slow, gentle sway so the sand keeps moving.
  */
 class ToyService : Service() {
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
     private var session: GlyphSession? = null
     private val jobs = ArrayList<Job>()
     private var playable: Playable? = null
+    private var sensors: Sensors? = null
 
     private val handler = object : Handler(Looper.getMainLooper()) {
         override fun handleMessage(msg: Message) {
@@ -103,51 +75,81 @@ class ToyService : Service() {
             session = s
             val device = MatrixShape.forSize(GlyphSupport.matrixSize)
             jobs += scope.launch {
-                // Rebuild whenever the chosen creation (or its content) changes.
+                // Rebuild whenever the choice (or the chosen creation) changes.
                 combine(
-                    Graph.settings.state.map { it.toyCreation }.distinctUntilChanged(),
+                    Graph.settings.state.map { it.toy ?: FaceDown.DEFAULT }.distinctUntilChanged(),
                     Graph.creations.all,
-                ) { id, all -> all.firstOrNull { it.id == id } }
+                ) { key, all -> key to all.firstOrNull { it.id == key }?.updated }
                     .distinctUntilChanged()
-                    .collect { creation ->
-                        playable = creation
-                            ?.takeIf { it.kind != CreationKind.GAME }
-                            ?.let { c ->
-                                // No sensors here: sensor-driven animations simply play in time.
-                                AnimationPlayer(c.shape, c.decodedFrames(), c.fps, c.loop, Driver.TIME, id = c.id)
-                            }
-                            ?: Mascot.playable(device)
-                    }
+                    .collect { (key, _) -> rebuild(key, device) }
             }
             jobs += scope.launch {
                 var last = SystemClock.elapsedRealtime()
+                var t = 0f
+                var doneFor = 0f
                 while (isActive) {
                     val p = playable
                     val now = SystemClock.elapsedRealtime()
+                    val dt = ((now - last) / 1000f).coerceIn(0f, 0.5f)
+                    last = now
+                    t += dt
                     if (p != null) {
-                        p.update(((now - last) / 1000f).coerceAtMost(0.5f), InputFrame(), NoFx)
+                        p.update(dt, input(t), NoFx)
+                        // A face-down hourglass turns itself over a few seconds after it runs out.
+                        if (p is HourglassToy && p.finished) {
+                            doneFor += dt
+                            if (doneFor > 4f) {
+                                p.restart()
+                                doneFor = 0f
+                            }
+                        } else {
+                            doneFor = 0f
+                        }
                         val frame = p.shape.blank()
                         p.render(frame)
                         s.show(device.mask(Frames.fit(frame, p.shape.width, p.shape.height, device.width, device.height)))
                     }
-                    last = now
-                    delay(80)
+                    delay((p?.frameMs ?: 200L).coerceIn(60L, 250L))
                 }
             }
         }
         return messenger.binder
     }
 
+    private fun rebuild(key: String, device: MatrixShape) {
+        val p = FaceDown.playable(key, device)
+        playable = p
+        if (Need.TILT in p.needs) {
+            val sn = sensors ?: Sensors(applicationContext).also { sensors = it }
+            sn.start(setOf(Need.TILT), Facing.BACK, 0f)
+        } else {
+            sensors?.stop()
+        }
+    }
+
+    /** Real tilt when it's live and the phone isn't flat; otherwise a slow sway. */
+    private fun input(t: Float): InputFrame {
+        val real = sensors?.takeIf { it.tiltLive() }?.snapshot()
+        if (real != null && hypot(real.gx, real.gy) > 0.35f) return real
+        return InputFrame(
+            gx = 0.55f * sin(t * 2f * PI.toFloat() / 18f),
+            gy = 0.8f + 0.15f * cos(t * 2f * PI.toFloat() / 11f),
+            gz = real?.gz ?: 0f,
+        )
+    }
+
     override fun onUnbind(intent: Intent?): Boolean {
         jobs.forEach { it.cancel() }
         jobs.clear()
         playable = null
+        sensors?.stop()
         session?.close()
         session = null
         return false
     }
 
     override fun onDestroy() {
+        sensors?.stop()
         scope.cancel()
         super.onDestroy()
     }

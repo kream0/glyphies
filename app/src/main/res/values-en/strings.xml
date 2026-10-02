@@ -2,5 +2,5 @@
 <resources>
     <string name="app_name">Glyphies</string>
     <string name="glyph_toy_name">Glyphies</string>
-    <string name="glyph_toy_summary">Shows the drawing or animation picked in Glyphies (the invader otherwise). On Phone (3), long-press the Glyph Button to restart it.</string>
+    <string name="glyph_toy_summary">Shows what you put on the back in Glyphies: the analog clock, sand, the hourglass or your drawings and animations. On Phone (3), long-press the Glyph Button to restart it.</string>
 </resources>

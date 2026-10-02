@@ -48,6 +48,12 @@ class Sensors(private val context: Context) : SensorEventListener {
     }
 
     // Gravity in device axes (m/s²): x to the right of the screen, y to its top, z out of it.
+    /** When gravity last came in, to tell whether tilt data is live. */
+    @Volatile private var tiltAt = 0L
+
+    /** True while the tilt sensors are delivering (they may not in the background). */
+    fun tiltLive(maxAgeMs: Long = 1500): Boolean = SystemClock.elapsedRealtime() - tiltAt < maxAgeMs
+
     @Volatile private var gx = 0f
     @Volatile private var gy = SensorManager.GRAVITY_EARTH
     @Volatile private var gz = 0f
@@ -161,12 +167,14 @@ class Sensors(private val context: Context) : SensorEventListener {
         val v = event.values
         when (event.sensor.type) {
             Sensor.TYPE_GRAVITY -> {
+                tiltAt = SystemClock.elapsedRealtime()
                 fusedGravity = true
                 gx = v[0]
                 gy = v[1]
                 gz = v[2]
             }
             Sensor.TYPE_ACCELEROMETER -> {
+                tiltAt = SystemClock.elapsedRealtime()
                 if (!fusedGravity) { // low-pass the raw acceleration into gravity
                     gx += (v[0] - gx) * 0.2f
                     gy += (v[1] - gy) * 0.2f

@@ -82,8 +82,13 @@ data class AppSettings(
     val haptics: Boolean = true,
     /** Matrix shown on phones without one: 13 (Phone (4a) Pro) or 25 (Phone (3)). */
     val previewSize: Int = 13,
-    /** Creation shown by the Glyph Toy; null = the built-in invader. */
-    val toyCreation: String? = null,
+    /**
+     * What the Glyphies Glyph Toy shows (face down on the (4a) Pro, in the Glyph Button carousel
+     * on the Phone (3)): "builtin:CLOCK", "builtin:SAND"… or a creation id. Null = the clock.
+     */
+    val toy: String? = null,
+    /** The how-to for Flip to Glyph has been shown once. */
+    val toyGuideShown: Boolean = false,
     val hourglassSeconds: Int = 60,
     /** Tiles on the home screen play a live preview (off: a still picture, saves battery). */
     val animatedTiles: Boolean = true,
@@ -120,7 +125,8 @@ class Settings(context: Context) {
             volumeKeys = prefs.getBoolean("volumeKeys", d.volumeKeys),
             haptics = prefs.getBoolean("haptics", d.haptics),
             previewSize = prefs.getInt("previewSize", d.previewSize).let { if (it == 25) 25 else 13 },
-            toyCreation = prefs.getString("toyCreation", null),
+            toy = prefs.getString("toy", null) ?: prefs.getString("toyCreation", null),
+            toyGuideShown = prefs.getBoolean("toyGuideShown", d.toyGuideShown),
             hourglassSeconds = prefs.getInt("hourglassSeconds", d.hourglassSeconds).coerceIn(10, 3600),
             animatedTiles = prefs.getBoolean("animatedTiles", d.animatedTiles),
             lastPlayed = prefs.getString("lastPlayed", null),
@@ -142,7 +148,8 @@ class Settings(context: Context) {
             .putBoolean("volumeKeys", s.volumeKeys)
             .putBoolean("haptics", s.haptics)
             .putInt("previewSize", s.previewSize)
-            .putString("toyCreation", s.toyCreation)
+            .putString("toy", s.toy)
+            .putBoolean("toyGuideShown", s.toyGuideShown)
             .putInt("hourglassSeconds", s.hourglassSeconds)
             .putBoolean("animatedTiles", s.animatedTiles)
             .putString("lastPlayed", s.lastPlayed)

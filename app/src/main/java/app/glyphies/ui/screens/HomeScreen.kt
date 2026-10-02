@@ -34,6 +34,7 @@ import app.glyphies.data.GameTemplate
 import app.glyphies.engine.Driver
 import app.glyphies.glyph.GlyphSupport
 import app.glyphies.play.BuiltIn
+import app.glyphies.play.FaceDown
 import app.glyphies.tr
 import app.glyphies.ui.AppViewModel
 import app.glyphies.ui.HomeFilter
@@ -158,7 +159,7 @@ private fun LazyGridScope.tiles(list: List<Entry>, app: AppViewModel, settings: 
     items(list, key = { it.key }) { e ->
         val sheets = LocalSheets.current
         val score = best[e.creation?.id ?: e.builtIn?.id ?: ""]
-        val isToy = e.creation != null && settings.toyCreation == e.creation.id
+        val onBack = (settings.toy ?: FaceDown.DEFAULT) == e.key
         MatrixTile(
             category = e.kindLabel,
             title = e.title,
@@ -168,7 +169,7 @@ private fun LazyGridScope.tiles(list: List<Entry>, app: AppViewModel, settings: 
             shape = e.shape,
             animate = settings.animatedTiles,
             status = when {
-                isToy -> "TOY"
+                onBack -> onBackLabel
                 score != null && score > 0 -> tr("BEST $score", "RECORD $score")
                 else -> null
             },
@@ -234,6 +235,7 @@ fun entrySheet(app: AppViewModel, e: Entry, settings: AppSettings): SheetSpec {
         content = { Text(b.blurb, style = Type.body, color = P.textDim) },
         actions = buildList {
             add(SheetAction(tr("Play", "Jouer"), Ic.Play) { Graph.player.play(b) })
+            if (FaceDown.canShow(b)) add(faceDownAction(FaceDown.key(b)))
             if (b == BuiltIn.HOURGLASS) {
                 add(
                     SheetAction(tr("Duration · ${duration(settings.hourglassSeconds)}", "Durée · ${duration(settings.hourglassSeconds)}"), Ic.Refresh, next = {

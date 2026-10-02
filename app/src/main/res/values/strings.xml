@@ -2,5 +2,5 @@
 <resources>
     <string name="app_name">Glyphies</string>
     <string name="glyph_toy_name">Glyphies</string>
-    <string name="glyph_toy_summary">Affiche le dessin ou l\'animation choisi dans Glyphies (l\'envahisseur sinon). Sur le Phone (3), un appui long sur le Glyph Button la relance.</string>
+    <string name="glyph_toy_summary">Affiche ce que vous avez mis au dos dans Glyphies : l\'horloge à aiguilles, le sable, le sablier ou vos dessins et animations. Sur le Phone (3), un appui long sur le Glyph Button le relance.</string>
 </resources>

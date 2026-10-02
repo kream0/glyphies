@@ -52,6 +52,7 @@ import app.glyphies.data.GameTemplate
 import app.glyphies.data.Seeds
 import app.glyphies.engine.AnimationPlayer
 import app.glyphies.engine.Driver
+import app.glyphies.play.FaceDown
 import app.glyphies.glyph.Frames
 import app.glyphies.glyph.GlyphSupport
 import app.glyphies.glyph.MatrixShape
@@ -134,7 +135,7 @@ fun GalleryScreen(app: AppViewModel) {
                 still = Thumbs.of(c),
                 shape = c.shape,
                 animate = false,
-                status = if (settings.toyCreation == c.id) "TOY" else null,
+                status = if (settings.toy == c.id) onBackLabel else null,
                 onClick = { app.openEditor(c.id) },
                 onMore = { sheets(creationSheet(app, c)) },
             ) { null }
@@ -282,7 +283,6 @@ private fun TextEntry(app: AppViewModel) {
 
 /** ⋯ on a creation. */
 fun creationSheet(app: AppViewModel, c: Creation, onDeleted: () -> Unit = {}): SheetSpec {
-    val isToy = Graph.settings.current.toyCreation == c.id
     return SheetSpec(
         title = c.name,
         subtitle = c.kindLabel,
@@ -291,20 +291,7 @@ fun creationSheet(app: AppViewModel, c: Creation, onDeleted: () -> Unit = {}): S
             add(SheetAction(tr("Edit", "Modifier"), Ic.Edit) { app.openEditor(c.id) })
             add(SheetAction(tr("Rename", "Renommer"), Ic.Text, next = { renameSheet(c) }))
             add(SheetAction(tr("Duplicate", "Dupliquer"), Ic.Copy) { Graph.creations.duplicate(c, c.name + tr(" (copy)", " (copie)")) })
-            if (c.kind != CreationKind.GAME) {
-                add(
-                    SheetAction(
-                        if (isToy) tr("Stop using as Glyph Toy", "Ne plus utiliser comme Glyph Toy") else tr("Use as Glyph Toy", "Utiliser comme Glyph Toy"),
-                        Ic.Glyph,
-                    ) {
-                        Graph.settings.update { it.copy(toyCreation = if (isToy) null else c.id) }
-                        Graph.toast(
-                            if (isToy) tr("The Glyph Toy shows the invader again", "Le Glyph Toy affiche à nouveau l'envahisseur")
-                            else tr("The Glyphies Glyph Toy now shows \"${c.name}\"", "Le Glyph Toy Glyphies affiche maintenant « ${c.name} »")
-                        )
-                    }
-                )
-            }
+            if (FaceDown.canShow(c)) add(faceDownAction(c.id))
             add(
                 SheetAction(tr("Delete", "Supprimer"), Ic.Delete, destructive = true, next = {
                     SheetSpec(
@@ -313,7 +300,7 @@ fun creationSheet(app: AppViewModel, c: Creation, onDeleted: () -> Unit = {}): S
                             SheetAction(tr("Delete", "Supprimer"), Ic.Delete, destructive = true) {
                                 Graph.creations.delete(c.id)
                                 Graph.scores.forget(c.id)
-                                if (Graph.settings.current.toyCreation == c.id) Graph.settings.update { it.copy(toyCreation = null) }
+                                if (Graph.settings.current.toy == c.id) Graph.settings.update { it.copy(toy = null) }
                                 onDeleted()
                             },
                             SheetAction(tr("Keep", "Garder"), Ic.Close) {},

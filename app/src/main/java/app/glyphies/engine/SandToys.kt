@@ -103,6 +103,9 @@ class HourglassToy(
     private var done = false
     private var lastDown = true
 
+    /** The top bulb is empty: time's up. */
+    val finished: Boolean get() = done
+
     init {
         fillTop()
     }

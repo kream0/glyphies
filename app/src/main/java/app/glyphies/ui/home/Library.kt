@@ -6,6 +6,7 @@ import app.glyphies.data.Creation
 import app.glyphies.data.CreationKind
 import app.glyphies.data.GameTemplate
 import app.glyphies.data.label
+import app.glyphies.engine.AnalogClock
 import app.glyphies.engine.Driver
 import app.glyphies.engine.GameConfig
 import app.glyphies.engine.HourglassToy
@@ -67,6 +68,7 @@ class Entry private constructor(
             subtitle = when (b) {
                 BuiltIn.SAND -> tr("Tilt · shake", "Incliner · secouer")
                 BuiltIn.HOURGLASS -> tr("Timer · ${duration(s.hourglassSeconds)}", "Minuteur · ${duration(s.hourglassSeconds)}")
+                BuiltIn.CLOCK -> tr("Time · face down", "Heure · face cachée")
                 BuiltIn.INVADERS -> if (s.autoFire) tr("Tilt · auto-fire", "Incliner · tir auto") else tr("Tilt · tap to fire", "Incliner · toucher pour tirer")
             },
             shape = shape,
@@ -110,6 +112,7 @@ class Entry private constructor(
         fun previewOf(b: BuiltIn, shape: MatrixShape, s: AppSettings): Playable = when (b) {
             BuiltIn.SAND -> SandToy(shape)
             BuiltIn.HOURGLASS -> HourglassToy(shape, seconds = 20)
+            BuiltIn.CLOCK -> AnalogClock(shape)
             BuiltIn.INVADERS -> InvadersGame(shape, GameConfig(move = Move.TOUCH, trigger = Trigger.AUTO))
         }
 

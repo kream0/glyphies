@@ -9,7 +9,7 @@ Everything you start lights up the 137 LEDs on the back of the (4a) Pro (the 489
 
 Three tabs:
 
-- **Home:** what you played last as a big live matrix with *Play*, then every game and animation (built in and yours) as tiles that play a live preview of themselves. Filter with `ALL / GAMES / ANIMATIONS / MINE`. Tap a tile to play it; long-press it (or ⋯) to edit, rename, duplicate, use as Glyph Toy or delete. *Settings → Appearance → Live tiles* switches the previews to still pictures.
+- **Home:** what you played last as a big live matrix with *Play*, then every game and animation (built in and yours) as tiles that play a live preview of themselves. Filter with `ALL / GAMES / ANIMATIONS / MINE`. Tap a tile to play it; long-press it (or ⋯) to edit, rename, duplicate, show it face down or delete. *Settings → Appearance → Live tiles* switches the previews to still pictures.
 - **Editor:** reopens what you were working on. Its gallery (tap the grid icon, or the tab again) starts a drawing, an animation, a scrolling text or a game (each template is a tile playing a demo of itself) and lists your creations.
 - **Settings.**
 
@@ -17,6 +17,7 @@ Three tabs:
 
 - **Sand:** grains of sand follow the tilt of the phone, with real physics (each grain has a speed, bounces, and piles roll off at 45° like real sand). Shake to throw them about; volume + / − (or + / − on screen) adds or removes sand.
 - **Hourglass:** a real timer (30 s, 1, 3, 5 or 10 min). One grain passes the neck at a time; turn the phone over and it runs back, lay it on its side and it pauses. It vibrates when the time is up.
+- **Clock:** an analog clock: hour marks on the rim (brighter at 12, 3, 6, 9), anti-aliased hour and minute hands, and the seconds going round the rim (tap to hide them). It's what the back shows face down by default.
 - **Invaders:** Space Invaders on the back of the phone. Tilt to slide the ship, it fires on its own (or on a tap / volume key: *Settings → Controls*). The formation marches, bounces off the round edge and comes down; a UFO crosses now and then; every fourth wave is a boss. Lives are the dim dots on the bottom row, hits vibrate, and the best score is kept.
 
 ## Create
@@ -35,12 +36,14 @@ In the **Editor** tab (the samples show each idea):
   - **Bricks:** breakout; each frame is a level whose lit dots are bricks.
   
   Move with **tilt**, a **finger** (it works behind the phone too) or your **voice** (quiet = left, loud = right); fire / flap / launch with **auto**, **tap**, **clap**, **shake** or **voice**; speed and lives.
-- Every creation has a ⋯ menu: play, rename, duplicate, delete, and **Use as Glyph Toy**.
+- Every creation has a ⋯ menu: play, rename, duplicate, delete, and **Show face down**.
 
 ## Glyph Matrix
 
-- **Phone (4a) Pro:** while the app is open, games and animations use the app channel of the matrix. To keep a drawing or animation on the back with the app closed: *Settings → Glyph Interface → Flip to Glyph → Always-on Glyph Toy → Glyphies*, and pick what it shows with ⋯ → *Use as Glyph Toy* (the walking invader otherwise).
-- **Phone (3):** add *Glyphies* to the Glyph Button carousel; a long press restarts the animation.
+- **Face down, instead of Nothing's clock:** ⋯ → *Show face down* on the clock, sand, the hourglass or any of your drawings and animations (or *Settings → Glyph Matrix → Face down*) puts it on the back for when the app is closed. The analog clock until you pick something else.
+  - **Phone (4a) Pro:** choose Glyphies once in *Settings → Glyph Interface → Flip to Glyph → Always-on Glyph Toy*; then it shows whenever the phone lies face down. Sand reads the tilt when Android lets a toy use the accelerometer; lying flat it gets a slow sway so it keeps flowing. The hourglass turns itself over a few seconds after it runs out.
+  - **Phone (3):** add *Glyphies* to the Glyph Button carousel; a long press restarts it.
+- While the app is open, games and animations use the app channel of the matrix.
 - **Which way is left:** by default the controls follow what you see on the back of the phone (from behind, the screen's left is your right). If you'd rather look at the screen: *Settings → Controls → You look at → Screen*.
 - **Volume keys** are buttons while something plays (fire, flap, more / less sand); turn that off in *Settings → Controls*.
 - *Settings → Glyph Matrix* has the brightness, an on/off switch, a test, and status lines (service found, connected, accepted, frames sent) that explain a dark matrix.

@@ -4,6 +4,7 @@ import app.glyphies.data.AppSettings
 import app.glyphies.data.Creation
 import app.glyphies.data.CreationKind
 import app.glyphies.data.GameTemplate
+import app.glyphies.engine.AnalogClock
 import app.glyphies.engine.AnimationPlayer
 import app.glyphies.engine.BricksGame
 import app.glyphies.engine.FallingGame
@@ -25,12 +26,14 @@ import app.glyphies.tr
 enum class BuiltIn(val id: String, val isGame: Boolean) {
     SAND("sand", false),
     HOURGLASS("hourglass", false),
+    CLOCK("clock", false),
     INVADERS("invaders", true);
 
     val title: String
         get() = when (this) {
             SAND -> tr("Sand", "Sable")
             HOURGLASS -> tr("Hourglass", "Sablier")
+            CLOCK -> tr("Clock", "Horloge")
             INVADERS -> tr("Invaders", "Envahisseurs")
         }
 
@@ -38,6 +41,7 @@ enum class BuiltIn(val id: String, val isGame: Boolean) {
         get() = when (this) {
             SAND -> tr("Grains of sand that follow the tilt of the phone. Shake to throw them about.", "Des grains de sable qui suivent l'inclinaison du téléphone. Secouez pour les projeter.")
             HOURGLASS -> tr("A real timer: the sand runs through the neck one grain at a time. Turn it over to start again.", "Un vrai minuteur : le sable passe le col grain par grain. Retournez-le pour recommencer.")
+            CLOCK -> tr("An analog clock with hands, hour marks and the seconds going round. Put it on the back for when the phone lies face down.", "Une horloge à aiguilles, avec les heures et les secondes qui tournent. Mettez-la au dos pour quand le téléphone est retourné.")
             INVADERS -> tr("Space Invaders on the back of the phone. Tilt to move, the ship fires on its own.", "Space Invaders au dos du téléphone. Inclinez pour bouger, le vaisseau tire tout seul.")
         }
 
@@ -45,6 +49,7 @@ enum class BuiltIn(val id: String, val isGame: Boolean) {
         get() = when (this) {
             SAND -> tr("Tilt · shake · volume +/− for more or less sand", "Inclinez · secouez · volume +/− pour plus ou moins de sable")
             HOURGLASS -> tr("Stand it up · turn it over · volume key to refill", "Tenez-le debout · retournez-le · touche de volume pour le remplir")
+            CLOCK -> tr("Tap to hide or show the seconds", "Touchez pour masquer ou afficher les secondes")
             INVADERS -> if (app.glyphies.Graph.settings.current.autoFire) {
                 tr("Tilt to move · fires on its own", "Inclinez pour bouger · tir automatique")
             } else {
@@ -63,6 +68,7 @@ object Catalog {
     fun builtIn(b: BuiltIn, shape: MatrixShape, s: AppSettings): Playable = when (b) {
         BuiltIn.SAND -> SandToy(shape)
         BuiltIn.HOURGLASS -> HourglassToy(shape, seconds = s.hourglassSeconds)
+        BuiltIn.CLOCK -> AnalogClock(shape)
         BuiltIn.INVADERS -> InvadersGame(
             shape,
             GameConfig(trigger = if (s.autoFire) Trigger.AUTO else Trigger.TAP, tiltRange = s.tilt.tiltRange, labels = labels()),
