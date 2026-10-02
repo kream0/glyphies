@@ -40,8 +40,16 @@ class AppViewModel : ViewModel() {
     var editing by mutableStateOf(Graph.settings.current.lastEdited)
         private set
 
+    /** Tapping the tab you're on takes it back to its start (the editor to its gallery). */
     fun selectTab(t: Tab) {
+        if (t == tab && t == Tab.EDITOR && editing != null) closeEditor()
         tab = t
+    }
+
+    /** The editor's gallery, to start something new. */
+    fun startNew() {
+        closeEditor()
+        tab = Tab.EDITOR
     }
 
     /** Opens [id] in the editor tab. */

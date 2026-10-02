@@ -37,7 +37,6 @@ import app.glyphies.play.BuiltIn
 import app.glyphies.tr
 import app.glyphies.ui.AppViewModel
 import app.glyphies.ui.HomeFilter
-import app.glyphies.ui.Tab
 import app.glyphies.ui.components.CountLabel
 import app.glyphies.ui.components.Ic
 import app.glyphies.ui.components.IconBtn
@@ -144,7 +143,7 @@ fun HomeScreen(app: AppViewModel) {
                     tr("Make one", "Créer"),
                     tr("Draw, animate or build a game", "Dessiner, animer ou créer un jeu"),
                     Pictos.DRAW,
-                    onClick = { app.selectTab(Tab.EDITOR) },
+                    onClick = { app.startNew() },
                 )
             }
         }

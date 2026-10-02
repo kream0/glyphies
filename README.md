@@ -7,6 +7,12 @@
 
 Everything you start lights up the 137 LEDs on the back of the (4a) Pro (the 489 of the Phone (3)), and plays on the screen at the same time. On a phone without a Glyph Matrix, the app is a preview: everything runs on the screen.
 
+Three tabs:
+
+- **Home:** what you played last as a big live matrix with *Play*, then every game and animation (built in and yours) as tiles that play a live preview of themselves. Filter with `ALL / GAMES / ANIMATIONS / MINE`. Tap a tile to play it; long-press it (or ⋯) to edit, rename, duplicate, use as Glyph Toy or delete. *Settings → Appearance → Live tiles* switches the previews to still pictures.
+- **Editor:** reopens what you were working on. Its gallery (tap the grid icon, or the tab again) starts a drawing, an animation, a scrolling text or a game (each template is a tile playing a demo of itself) and lists your creations.
+- **Settings.**
+
 ## Play
 
 - **Sand:** grains of sand follow the tilt of the phone, with real physics (each grain has a speed, bounces, and piles roll off at 45° like real sand). Shake to throw them about; volume + / − (or + / − on screen) adds or removes sand.
@@ -15,7 +21,7 @@ Everything you start lights up the 137 LEDs on the back of the (4a) Pro (the 489
 
 ## Create
 
-*Create → +* (or the samples, which show each idea):
+In the **Editor** tab (the samples show each idea):
 
 - **Draw** dot by dot: pen, eraser, fill, move, mirror, four brightness levels, undo / redo. Tapping a lit dot turns it off. What you draw lights up on the back while you draw (*Show while drawing*).
 - **Animate** with frames: a strip of frames, duplicate / reorder / delete, onion skin, 1–30 frames per second, loop, bounce or once. *Scrolling text* makes the frames for you.
