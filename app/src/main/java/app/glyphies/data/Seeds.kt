@@ -168,6 +168,9 @@ object Seeds {
         ".+++++++++++.",
     )
 
+    /** A level for the maze template's preview. */
+    fun demoMaze(): IntArray = maze1.copyOf()
+
     fun all(): List<Creation> {
         val now = System.currentTimeMillis()
         var t = now

@@ -131,11 +131,11 @@ fun EditorScreen(app: AppViewModel, id: String, onClose: () -> Unit) {
     }
     DisposableEffect(Unit) { onDispose { if (!Graph.player.isActive) GlyphOutput.release() } }
 
-    Box(Modifier.fillMaxSize().background(P.background).blockTouches()) {
+    Box(Modifier.fillMaxSize().background(P.background)) {
         Column(Modifier.fillMaxSize().statusBarsPadding()) {
             // Top bar
             Row(Modifier.fillMaxWidth().padding(start = 6.dp, end = 12.dp, top = 8.dp), verticalAlignment = Alignment.CenterVertically) {
-                IconBtn(Ic.Back, onClose, contentDescription = tr("Back", "Retour"))
+                IconBtn(Ic.Grid, onClose, contentDescription = tr("My creations", "Mes créations"))
                 Column(
                     Modifier
                         .weight(1f)
@@ -161,7 +161,6 @@ fun EditorScreen(app: AppViewModel, id: String, onClose: () -> Unit) {
                 Modifier
                     .weight(1f)
                     .verticalScroll(rememberScrollState())
-                    .navigationBarsPadding()
                     .padding(top = 12.dp, bottom = 32.dp),
             ) {
                 if (game != null) {

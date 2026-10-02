@@ -73,4 +73,7 @@ object Ic {
     val Glyph by lazy {
         icon("glyph", "M12,2C6.48,2 2,6.48 2,12s4.48,10 10,10 10,-4.48 10,-10S17.52,2 12,2zM12,20c-4.41,0 -8,-3.59 -8,-8s3.59,-8 8,-8 8,3.59 8,8 -3.59,8 -8,8zM8,8h2v2H8zM11,8h2v2h-2zM14,8h2v2h-2zM8,11h2v2H8zM11,11h2v2h-2zM14,11h2v2h-2zM8,14h2v2H8zM11,14h2v2h-2zM14,14h2v2h-2z")
     }
+    val Grid by lazy {
+        icon("grid", "M3,3v8h8V3H3zM9,9H5V5h4v4zM3,13v8h8v-8H3zM9,19H5v-4h4v4zM13,3v8h8V3h-8zM19,9h-4V5h4v4zM13,13v8h8v-8h-8zM19,19h-4v-4h4v4z")
+    }
 }

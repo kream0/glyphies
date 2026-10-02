@@ -3,6 +3,8 @@ package app.glyphies.ui
 import android.app.Activity
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.Crossfade
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
@@ -49,9 +51,9 @@ import app.glyphies.ui.components.LocalSheets
 import app.glyphies.ui.components.SheetAction
 import app.glyphies.ui.components.SheetHost
 import app.glyphies.ui.components.SheetSpec
-import app.glyphies.ui.screens.CreateScreen
 import app.glyphies.ui.screens.EditorScreen
-import app.glyphies.ui.screens.PlayScreen
+import app.glyphies.ui.screens.GalleryScreen
+import app.glyphies.ui.screens.HomeScreen
 import app.glyphies.ui.screens.PlayerScreen
 import app.glyphies.ui.screens.SettingsScreen
 import app.glyphies.ui.theme.P
@@ -83,20 +85,27 @@ fun AppRoot(app: AppViewModel) {
         )
     }
 
+    // Registered first so the screens' own back handlers (sheets, the sprite editor, the
+    // player) come before it: back leaves an open creation for the gallery, then goes home.
+    BackHandler(enabled = playing == null && sheet == null && app.tab != Tab.HOME) {
+        if (app.tab == Tab.EDITOR && app.editing != null) app.closeEditor() else app.selectTab(Tab.HOME)
+    }
+
     CompositionLocalProvider(LocalSheets provides openSheet) {
         Box(Modifier.fillMaxSize().background(P.background)) {
             Column(Modifier.fillMaxSize()) {
                 Box(Modifier.weight(1f)) {
-                    when (app.tab) {
-                        Tab.PLAY -> PlayScreen(app)
-                        Tab.CREATE -> CreateScreen(app)
-                        Tab.SETTINGS -> SettingsScreen()
+                    // Tabs swap with a quick fade (Nothing: elements fade, they don't slide).
+                    Crossfade(targetState = app.tab, animationSpec = tween(180), label = "tab") { tab ->
+                        when (tab) {
+                            Tab.HOME -> HomeScreen(app)
+                            Tab.EDITOR -> EditorTab(app)
+                            Tab.SETTINGS -> SettingsScreen()
+                        }
                     }
                 }
                 BottomNav(tab = app.tab, onTab = app::selectTab)
             }
-
-            EditorOverlay(app)
 
             AnimatedVisibility(
                 visible = playing != null,
@@ -110,21 +119,15 @@ fun AppRoot(app: AppViewModel) {
             SheetHost(sheet, onShow = { sheet = it }) { sheet = null }
         }
     }
-
-    BackHandler(enabled = app.editing != null && playing == null && sheet == null) { app.editing = null }
 }
 
-/** The editor slides over the tabs. */
+/** The editor tab: the creation you're working on, or the gallery to start or pick one. */
 @Composable
-private fun EditorOverlay(app: AppViewModel) {
-    var last by remember { mutableStateOf<String?>(null) }
-    app.editing?.let { last = it }
-    AnimatedVisibility(
-        visible = app.editing != null,
-        enter = slideInHorizontally { it / 3 } + fadeIn(),
-        exit = slideOutHorizontally { it / 3 } + fadeOut(),
-    ) {
-        last?.let { id -> EditorScreen(app, id, onClose = { app.editing = null }) }
+private fun EditorTab(app: AppViewModel) {
+    val all by Graph.creations.all.collectAsStateWithLifecycle()
+    val open = app.editing?.takeIf { id -> all.any { it.id == id } }
+    Crossfade(targetState = open, animationSpec = tween(180), label = "editor") { id ->
+        if (id == null) GalleryScreen(app) else EditorScreen(app, id, onClose = { app.closeEditor() })
     }
 }
 

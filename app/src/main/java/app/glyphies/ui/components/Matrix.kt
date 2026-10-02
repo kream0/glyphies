@@ -151,7 +151,7 @@ fun LivePreview(
     key: Any?,
     modifier: Modifier = Modifier,
     fps: Int = 20,
-    input: (t: Float) -> InputFrame = { t -> demoInput(t) },
+    input: (t: Float, dt: Float) -> InputFrame = { t, dt -> demoInput(t, dt) },
     factory: () -> Playable?,
 ) {
     var frame by remember(key) { mutableStateOf<IntArray?>(null) }
@@ -166,7 +166,7 @@ fun LivePreview(
             val dt = ((now - last) / 1000f).coerceIn(0f, 0.1f)
             last = now
             t += dt
-            p.update(dt, input(t), NoFx)
+            p.update(dt, input(t, dt), NoFx)
             val out = p.shape.blank()
             p.render(out)
             frame = out
@@ -178,14 +178,25 @@ fun LivePreview(
     if (s != null && f != null) MatrixView(f, s, modifier) else MatrixView(IntArray(169), MatrixShape.PRO_4A, modifier)
 }
 
-/** Made-up input for previews: a slow sway, a tap every few seconds, a voice that comes and goes. */
-fun demoInput(t: Float): InputFrame {
+/**
+ * Made-up input for previews: a slow sway, a voice that comes and goes, and now and then a
+ * tap (every 6 s) and a shake (2 s after it), so games restart and sand drawings crumble and
+ * rebuild on their own.
+ */
+fun demoInput(t: Float, dt: Float): InputFrame {
+    fun every(period: Float, phase: Float): Boolean {
+        val now = kotlin.math.floor((t - phase) / period)
+        val before = kotlin.math.floor((t - dt - phase) / period)
+        return t >= phase && now != before
+    }
     val sway = kotlin.math.sin(t * 0.8f)
     return InputFrame(
         gx = sway * 0.8f,
         gy = 0.75f + 0.25f * kotlin.math.cos(t * 0.5f),
         mic = (0.5f + 0.5f * kotlin.math.sin(t * 2.3f)).coerceIn(0f, 1f),
-        presses = if ((t * 10).toInt() % 25 == 0) 1 else 0,
+        claps = if (every(1.5f, 0.4f)) 1 else 0,
+        presses = if (every(6f, 0.5f)) 1 else 0,
+        shakes = if (every(6f, 2.5f)) 1 else 0,
         touchX = 0.5f + 0.45f * sway,
         heading = (t * 30f) % 360f,
         light = 0.5f + 0.5f * kotlin.math.sin(t * 0.7f),

@@ -85,6 +85,12 @@ data class AppSettings(
     /** Creation shown by the Glyph Toy; null = the built-in invader. */
     val toyCreation: String? = null,
     val hourglassSeconds: Int = 60,
+    /** Tiles on the home screen play a live preview (off: a still picture, saves battery). */
+    val animatedTiles: Boolean = true,
+    /** What was played last ("builtin:SAND" or a creation id), for "Continue" on the home screen. */
+    val lastPlayed: String? = null,
+    /** The creation open in the editor tab, so it comes back where you left it. */
+    val lastEdited: String? = null,
 )
 
 class Settings(context: Context) {
@@ -116,6 +122,9 @@ class Settings(context: Context) {
             previewSize = prefs.getInt("previewSize", d.previewSize).let { if (it == 25) 25 else 13 },
             toyCreation = prefs.getString("toyCreation", null),
             hourglassSeconds = prefs.getInt("hourglassSeconds", d.hourglassSeconds).coerceIn(10, 3600),
+            animatedTiles = prefs.getBoolean("animatedTiles", d.animatedTiles),
+            lastPlayed = prefs.getString("lastPlayed", null),
+            lastEdited = prefs.getString("lastEdited", null),
         )
     }
 
@@ -135,6 +144,9 @@ class Settings(context: Context) {
             .putInt("previewSize", s.previewSize)
             .putString("toyCreation", s.toyCreation)
             .putInt("hourglassSeconds", s.hourglassSeconds)
+            .putBoolean("animatedTiles", s.animatedTiles)
+            .putString("lastPlayed", s.lastPlayed)
+            .putString("lastEdited", s.lastEdited)
             .apply()
     }
 

@@ -49,6 +49,7 @@ import app.glyphies.data.CreationKind
 import app.glyphies.data.CreationStore
 import app.glyphies.data.GameData
 import app.glyphies.data.GameTemplate
+import app.glyphies.data.Seeds
 import app.glyphies.engine.AnimationPlayer
 import app.glyphies.engine.Driver
 import app.glyphies.glyph.Frames
@@ -56,99 +57,96 @@ import app.glyphies.glyph.GlyphSupport
 import app.glyphies.glyph.MatrixShape
 import app.glyphies.tr
 import app.glyphies.ui.AppViewModel
-import app.glyphies.ui.components.IconBtn
+import app.glyphies.ui.components.CountLabel
 import app.glyphies.ui.components.Ic
+import app.glyphies.ui.components.IconBtn
 import app.glyphies.ui.components.LocalSheetClose
 import app.glyphies.ui.components.LocalSheets
+import app.glyphies.ui.components.MatrixTile
 import app.glyphies.ui.components.MatrixView
+import app.glyphies.ui.components.NewTile
+import app.glyphies.ui.components.Pictos
 import app.glyphies.ui.components.PillButton
 import app.glyphies.ui.components.PillStyle
 import app.glyphies.ui.components.ScreenHeader
 import app.glyphies.ui.components.SheetAction
 import app.glyphies.ui.components.SheetSpec
 import app.glyphies.ui.components.Thumbs
+import app.glyphies.ui.home.Entry
 import app.glyphies.ui.theme.P
 import app.glyphies.ui.theme.Type
 
+/**
+ * The editor tab when nothing is open: start something new (drawing, animation, text, game),
+ * or pick one of your creations to carry on with.
+ */
 @Composable
-fun CreateScreen(app: AppViewModel) {
+fun GalleryScreen(app: AppViewModel) {
     val creations by Graph.creations.all.collectAsStateWithLifecycle()
+    val settings by Graph.settings.state.collectAsStateWithLifecycle()
     val sheets = LocalSheets.current
-    val newSheet = { sheets(newCreationSheet(app)) }
 
     LazyVerticalGrid(
-        columns = GridCells.Fixed(2),
+        columns = GridCells.Adaptive(minSize = 156.dp),
+        state = app.galleryGrid,
         modifier = Modifier.fillMaxSize().statusBarsPadding(),
-        contentPadding = PaddingValues(start = 14.dp, end = 14.dp, bottom = 24.dp),
-        horizontalArrangement = Arrangement.spacedBy(10.dp),
-        verticalArrangement = Arrangement.spacedBy(10.dp),
+        contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 32.dp),
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        item(span = { GridItemSpan(2) }) {
+        item(key = "header", span = { GridItemSpan(maxLineSpan) }) {
             Column {
-                ScreenHeader(tr("CREATE", "CRÉER"), Modifier.padding(start = 0.dp)) {
-                    IconBtn(Ic.Add, newSheet, bordered = true, contentDescription = tr("New", "Nouveau"))
-                }
+                ScreenHeader(tr("EDITOR", "ÉDITEUR"), Modifier.padding(start = 0.dp))
                 Text(
                     tr(
-                        "Draw on the matrix, animate it, make it react to your voice or the tilt, or build a game with your own pictures.",
-                        "Dessinez sur la matrice, animez-la, faites-la réagir à votre voix ou à l'inclinaison, ou créez un jeu avec vos propres dessins.",
+                        "Draw on the matrix, animate it, make it react to the phone, or build a game with your own pictures.",
+                        "Dessinez sur la matrice, animez-la, faites-la réagir au téléphone, ou créez un jeu avec vos dessins.",
                     ),
-                    style = Type.label,
+                    style = Type.body,
                     color = P.textDim,
-                    modifier = Modifier.padding(horizontal = 6.dp),
                 )
-                Spacer(Modifier.height(12.dp))
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.padding(horizontal = 4.dp)) {
-                    PillButton(tr("Drawing", "Dessin"), { create(app, CreationKind.DRAWING) }, icon = Ic.Edit, style = PillStyle.Filled)
-                    PillButton(tr("Game", "Jeu"), { sheets(templateSheet(app)) }, icon = Ic.Play)
-                }
-                Spacer(Modifier.height(6.dp))
+                Spacer(Modifier.height(20.dp))
+                CountLabel(tr("New", "Nouveau"), null)
             }
+        }
+        item(key = "new-drawing") {
+            NewTile(tr("Drawing", "Dessin"), tr("Dot by dot, shown live on the back", "Point par point, affiché en direct au dos"), Pictos.DRAW, { create(app, CreationKind.DRAWING) })
+        }
+        item(key = "new-animation") {
+            NewTile(tr("Animation", "Animation"), tr("Frames, driven by time, voice, tilt…", "Des images, pilotées par le temps, la voix, l'inclinaison…"), Pictos.FRAMES, { create(app, CreationKind.ANIMATION) })
+        }
+        item(key = "new-text") {
+            NewTile(tr("Scrolling text", "Texte défilant"), tr("Type it, it scrolls across", "Tapez-le, il défile"), Pictos.TEXT, { sheets(textSheet(app)) })
+        }
+        item(key = "new-game") {
+            NewTile(tr("Game", "Jeu"), tr("Six templates, your pictures and controls", "Six modèles, vos dessins et commandes"), Pictos.GAME, { sheets(templateSheet(app)) })
+        }
+        item(key = "mine-label", span = { GridItemSpan(maxLineSpan) }) {
+            CountLabel(tr("My creations", "Mes créations"), creations.size, Modifier.padding(top = 20.dp))
         }
         items(creations, key = { it.id }) { c ->
-            CreationCard(c, onOpen = { app.edit(c.id) }, onMore = { sheets(creationSheet(app, c)) })
+            val e = Entry.of(c)
+            MatrixTile(
+                category = e.kindLabel,
+                title = c.name,
+                subtitle = e.subtitle,
+                previewKey = "gallery:${c.id}:${c.updated}",
+                still = Thumbs.of(c),
+                shape = c.shape,
+                animate = false,
+                status = if (settings.toyCreation == c.id) "TOY" else null,
+                onClick = { app.openEditor(c.id) },
+                onMore = { sheets(creationSheet(app, c)) },
+            ) { null }
         }
-        item(span = { GridItemSpan(2) }) {
+        if (creations.isEmpty()) {
+            item(key = "empty", span = { GridItemSpan(maxLineSpan) }) {
+                Text(tr("Nothing yet. Start with a drawing.", "Rien pour l'instant. Commencez par un dessin."), style = Type.label, color = P.textFaint)
+            }
+        }
+        item(key = "samples", span = { GridItemSpan(maxLineSpan) }) {
             Row(Modifier.padding(top = 12.dp), horizontalArrangement = Arrangement.Center) {
                 PillButton(tr("Bring back the samples", "Remettre les exemples"), { Graph.creations.restoreSamples() }, icon = Ic.Refresh)
-            }
-        }
-    }
-}
-
-@Composable
-private fun CreationCard(c: Creation, onOpen: () -> Unit, onMore: () -> Unit) {
-    val toy by Graph.settings.state.collectAsStateWithLifecycle()
-    Column(
-        Modifier
-            .clip(RoundedCornerShape(22.dp))
-            .background(P.surface)
-            .border(1.dp, P.outline, RoundedCornerShape(22.dp))
-            .clickable(onClick = onOpen)
-            .padding(12.dp),
-    ) {
-        Box(
-            Modifier
-                .fillMaxWidth()
-                .clip(RoundedCornerShape(16.dp))
-                .background(if (P.isDark) P.background else P.surfaceHigh)
-                .padding(10.dp),
-        ) {
-            MatrixView(Thumbs.of(c), c.shape, Modifier.fillMaxWidth())
-        }
-        Spacer(Modifier.height(10.dp))
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Column(Modifier.weight(1f)) {
-                Text(c.name, style = Type.title, color = P.text, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                Text(
-                    c.kindLabel + if (toy.toyCreation == c.id) " · TOY" else "",
-                    style = Type.label,
-                    color = if (toy.toyCreation == c.id) P.accent else P.textDim,
-                    maxLines = 1,
-                )
-            }
-            Box(Modifier.size(36.dp).clip(CircleShape).clickable(onClick = onMore), contentAlignment = Alignment.Center) {
-                Icon(Ic.More, contentDescription = tr("More", "Plus"), tint = P.textDim, modifier = Modifier.size(20.dp))
             }
         }
     }
@@ -157,7 +155,15 @@ private fun CreationCard(c: Creation, onOpen: () -> Unit, onMore: () -> Unit) {
 /** The size new creations are made for: this phone's matrix, or the preview size. */
 fun newCreationSize(): Int = GlyphSupport.displayShape(Graph.settings.current.previewSize).width
 
-fun create(app: AppViewModel, kind: CreationKind, template: GameTemplate? = null, frames: List<IntArray>? = null, name: String? = null, fps: Int = 6) {
+fun create(
+    app: AppViewModel,
+    kind: CreationKind,
+    template: GameTemplate? = null,
+    frames: List<IntArray>? = null,
+    name: String? = null,
+    fps: Int = 6,
+    driver: Driver = Driver.TIME,
+) {
     val size = newCreationSize()
     val shape = MatrixShape.forSize(size)
     val count = Graph.creations.all.value.count { it.kind == kind } + 1
@@ -170,54 +176,64 @@ fun create(app: AppViewModel, kind: CreationKind, template: GameTemplate? = null
         },
         kind = kind,
         size = size,
-        frames = (frames ?: listOf(shape.blank())).map { Frames.encode(it) },
+        frames = (frames ?: templateFrames(template, shape)).map { Frames.encode(it) },
         fps = fps,
-        driver = Driver.TIME,
+        driver = driver,
         game = template?.let { GameData(it) },
     )
     Graph.creations.save(c)
-    app.edit(c.id)
+    app.openEditor(c.id)
 }
 
-private fun newCreationSheet(app: AppViewModel): SheetSpec = SheetSpec(
-    title = tr("New", "Nouveau"),
-    actions = listOf(
-        SheetAction(tr("Drawing", "Dessin"), Ic.Edit) { create(app, CreationKind.DRAWING) },
-        SheetAction(tr("Animation", "Animation"), Ic.Copy) { create(app, CreationKind.ANIMATION) },
-        SheetAction(tr("Scrolling text", "Texte défilant"), Ic.Text, next = { textSheet(app) }),
-        SheetAction(tr("Game", "Jeu"), Ic.Play, next = { templateSheet(app) }),
-    ),
-)
+/** A maze starts with a sample level so there's something to play straight away. */
+private fun templateFrames(t: GameTemplate?, shape: MatrixShape): List<IntArray> = when (t) {
+    GameTemplate.MAZE -> listOf(shape.mask(Frames.fit(Seeds.demoMaze(), 13, 13, shape.width, shape.height)))
+    else -> listOf(shape.blank())
+}
 
 private fun templateSheet(app: AppViewModel): SheetSpec = SheetSpec(
     title = tr("New game", "Nouveau jeu"),
-    subtitle = tr("Pick a kind of game", "Choisissez un type de jeu"),
+    subtitle = tr("Pick a template · you'll draw the pictures", "Choisissez un modèle · vous dessinerez les images"),
     content = { TemplatePicker(app) },
 )
 
+/** Each template as a tile playing a demo of itself. */
 @Composable
 private fun TemplatePicker(app: AppViewModel) {
     val close = LocalSheetClose.current
-    Column {
-        GameTemplate.entries.forEach { t ->
-            Row(
-                Modifier
-                    .fillMaxWidth()
-                    .clip(RoundedCornerShape(14.dp))
-                    .clickable {
-                        close()
-                        create(app, CreationKind.GAME, template = t)
+    val settings = Graph.settings.current
+    val size = newCreationSize()
+    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        GameTemplate.entries.chunked(2).forEach { pair ->
+            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                pair.forEach { t ->
+                    val demo = remember(t, size) {
+                        val shape = MatrixShape.forSize(size)
+                        Creation(
+                            id = "template-${t.name}",
+                            name = t.label,
+                            kind = CreationKind.GAME,
+                            size = size,
+                            frames = templateFrames(t, shape).map { Frames.encode(it) },
+                            game = GameData(t),
+                        )
                     }
-                    .padding(horizontal = 6.dp, vertical = 12.dp),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Box(Modifier.size(8.dp).clip(CircleShape).background(P.accent))
-                Spacer(Modifier.width(14.dp))
-                Column(Modifier.weight(1f)) {
-                    Text(t.label, style = Type.labelBold.copy(fontSize = Type.label.fontSize * 1.1f), color = P.text)
-                    Spacer(Modifier.height(2.dp))
-                    Text(t.description, style = Type.body, color = P.textDim)
+                    MatrixTile(
+                        category = tr("Template", "Modèle"),
+                        title = t.label.lowercase().replaceFirstChar { it.uppercase() },
+                        subtitle = Entry.subtitleOf(demo).substringAfter(" · "),
+                        previewKey = "template:${t.name}:$size",
+                        still = demo.frame(0),
+                        shape = demo.shape,
+                        animate = true,
+                        onClick = {
+                            close()
+                            create(app, CreationKind.GAME, template = t)
+                        },
+                        modifier = Modifier.weight(1f),
+                    ) { Entry.previewOf(demo, settings) }
                 }
+                if (pair.size == 1) Spacer(Modifier.weight(1f))
             }
         }
     }
@@ -272,7 +288,7 @@ fun creationSheet(app: AppViewModel, c: Creation, onDeleted: () -> Unit = {}): S
         subtitle = c.kindLabel,
         actions = buildList {
             add(SheetAction(tr("Play", "Jouer"), Ic.Play) { Graph.player.play(c.id) })
-            add(SheetAction(tr("Edit", "Modifier"), Ic.Edit) { app.edit(c.id) })
+            add(SheetAction(tr("Edit", "Modifier"), Ic.Edit) { app.openEditor(c.id) })
             add(SheetAction(tr("Rename", "Renommer"), Ic.Text, next = { renameSheet(c) }))
             add(SheetAction(tr("Duplicate", "Dupliquer"), Ic.Copy) { Graph.creations.duplicate(c, c.name + tr(" (copy)", " (copie)")) })
             if (c.kind != CreationKind.GAME) {

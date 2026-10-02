@@ -64,12 +64,14 @@ class Player(private val context: Context, private val scope: CoroutineScope) {
         val settings = Graph.settings.current
         val p = Catalog.builtIn(builtIn, GlyphSupport.displayShape(settings.previewSize), settings)
         start(builtIn.title, p, isGame = builtIn.isGame, builtIn = builtIn)
+        Graph.settings.update { it.copy(lastPlayed = "builtin:${builtIn.name}") }
     }
 
     fun play(creationId: String) {
         val c = Graph.creations.get(creationId) ?: return
         val p = Catalog.creation(c, Graph.settings.current)
         start(c.name, p, isGame = c.game != null, creationId = c.id)
+        Graph.settings.update { it.copy(lastPlayed = c.id) }
     }
 
     private fun start(title: String, p: Playable, isGame: Boolean, builtIn: BuiltIn? = null, creationId: String? = null) {

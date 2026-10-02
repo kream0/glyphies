@@ -119,6 +119,10 @@ fun SettingsScreen() {
             Block(tr("Language", "Langue"), tr("The app's menus and messages.", "Les menus et les messages de l'app.")) {
                 Segmented(Language.entries.map { it.label }, settings.language.ordinal, { i -> Graph.settings.update { it.copy(language = Language.entries[i]) } })
             }
+            Line(
+                tr("Live tiles", "Tuiles animées"),
+                tr("The home screen's tiles play a preview of each game and animation. Off: still pictures, saves battery", "Les tuiles de l'accueil jouent un aperçu de chaque jeu et animation. Désactivé : images fixes, économise la batterie"),
+            ) { NothingSwitch(settings.animatedTiles, { on -> Graph.settings.update { it.copy(animatedTiles = on) } }) }
         }
 
         Section(tr("Updates", "Mises à jour")) { UpdatesSection(settings.autoUpdate) }
