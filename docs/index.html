@@ -1,0 +1,1782 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Glyphies</title>
+<meta name="theme-color" content="#000000">
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Glyphies">
+<meta property="og:description" content="Jeux, animations et éditeur pour la Glyph Matrix du Nothing Phone : du sable qui suit l'inclinaison, un sablier, des envahisseurs, vos dessins.">
+<meta property="og:url" content="https://kream0.github.io/glyphies/">
+<meta property="og:image" content="https://kream0.github.io/glyphies/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script>try{var t=localStorage.getItem("glyphies-theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t}catch(e){}</script>
+<meta name="description" content="Glyphies, des jeux et des animations pour la Glyph Matrix du Nothing Phone (4a) Pro et du Phone (3) : sable, sablier, envahisseurs, éditeur point par point.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap">
+<style>
+@font-face {
+  font-family: "Doto App";
+  src: url(data:font/woff;base64,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) format("woff");
+  font-weight: 900;
+  font-display: swap;
+}
+
+/* Layout: a Nothing OS spec sheet, as for YTune. Black ground, dot-matrix type, one signal red;
+   the phone back with its live Glyph Matrix anchors the hero, two playable matrices follow. */
+:root {
+  --bg: #000000;
+  --surface: #0D0D0D;
+  --surface-2: #1A1A1A;
+  --line: #2B2B2B;
+  --fg: #FFFFFF;
+  --dim: #9B9B9B;
+  --faint: #5A5A5A;
+  --dot-off: #262626;
+  --red: #D71921;
+  --on-red: #FFFFFF;
+  --inv: #FFFFFF;
+  --on-inv: #000000;
+  --shadow: rgba(0, 0, 0, 0.6);
+  /* Hardware stays dark in both themes, like the phone itself. */
+  --device: #0A0A0A;
+  --device-rim: #2A2A2A;
+  --alu-hi: #E3E4E5;
+  --alu: #D4D5D7;
+  --alu-lo: #C2C3C5;
+  --alu-edge: #8E9195;
+  --alu-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --plate: #C8CACD;
+  --plate-hi: #D9DADC;
+  --glass: #060709;
+  --led-off: #1F2022;
+  --led-on: #FFFFFF;
+  --rec: #D0202A;
+  --grain: none;
+  --paper-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .27 0 0 0 0 .12 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --qr-bg: #FFFFFF;
+  --qr-fg: #000000;
+
+  --gutter: clamp(16px, 4vw, 44px);
+  --f-dot: "Doto App", "Doto", ui-monospace, monospace;
+  --f-sans: "Space Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "Space Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #EEE8DA; --surface: #F7F3EA; --surface-2: #E3DCCB; --line: #D2C8B4;
+    --fg: #1C1A16; --dim: #6A6252; --faint: #A0957F; --dot-off: #D8CFBC;
+    --inv: #1C1A16; --on-inv: #F7F3EA;
+    --shadow: rgba(70, 52, 20, 0.16);
+    --grain: var(--paper-grain);
+    color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #EEE8DA; --surface: #F7F3EA; --surface-2: #E3DCCB; --line: #D2C8B4;
+  --fg: #1C1A16; --dim: #6A6252; --faint: #A0957F; --dot-off: #D8CFBC;
+  --inv: #1C1A16; --on-inv: #F7F3EA;
+  --shadow: rgba(70, 52, 20, 0.16);
+  --grain: var(--paper-grain);
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+html, body { margin: 0; }
+body {
+  background: var(--grain), var(--bg);
+  color: var(--fg);
+  font-family: var(--f-sans);
+  font-size: 16px;
+  line-height: 1.55;
+  padding-inline: var(--gutter);
+  padding-block: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+[hidden] { display: none !important; }
+a { color: inherit; }
+button { font: inherit; }
+:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; border-radius: 6px; }
+.wrap { max-width: 1180px; margin-inline: auto; }
+
+/* ---------- type ---------- */
+.label {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.label.red { color: var(--red); font-weight: 700; }
+.dotmark { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--red); vertical-align: 0.1em; margin-right: 10px; }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+h2 {
+  font-family: var(--f-sans);
+  font-weight: 700;
+  font-size: clamp(30px, 4.4vw, 50px);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+}
+h2 .dots { font-family: var(--f-dot); font-weight: 900; letter-spacing: 0.02em; }
+p { margin: 0; }
+.lede { color: var(--dim); max-width: 60ch; font-size: 17px; }
+.as-is { text-transform: none; }
+kbd {
+  font-family: var(--f-mono); font-size: .86em; color: var(--fg);
+  border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 6px; padding: 0 6px; background: var(--surface-2);
+}
+
+/* ---------- top bar ---------- */
+.top {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding-block: 22px;
+}
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.brand svg { width: 34px; height: 34px; flex: none; }
+.brand b { font-family: var(--f-dot); font-weight: 900; font-size: 24px; letter-spacing: 0.08em; }
+.top nav { display: flex; align-items: center; gap: 22px; }
+.top nav a { text-decoration: none; }
+.top nav a:hover { color: var(--fg); }
+.top nav .label { transition: color .2s; }
+.mode {
+  display: inline-flex; padding: 3px; gap: 2px; border: 1px solid var(--line); border-radius: 99px;
+}
+.mode button {
+  font-family: var(--f-mono); font-size: 11px; letter-spacing: .12em; font-weight: 700;
+  border: 0; border-radius: 99px; padding: 7px 12px; cursor: pointer;
+  background: transparent; color: var(--dim);
+}
+.mode button[aria-pressed="true"] { background: var(--inv); color: var(--on-inv); }
+
+/* ---------- hero ---------- */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  gap: clamp(28px, 5vw, 72px);
+  align-items: center;
+  padding-block: clamp(16px, 4vw, 48px) clamp(56px, 8vw, 110px);
+  position: relative;
+}
+.hero-copy { display: grid; gap: 26px; min-width: 0; container-type: inline-size; }
+.hero h1 {
+  font-family: var(--f-dot);
+  font-weight: 900;
+  /* eight letters: sized on the column, not the screen */
+  font-size: clamp(48px, 17.6cqw, 132px);
+  line-height: 0.86;
+  letter-spacing: 0.03em;
+  margin-left: -0.04em;
+  position: relative;
+  width: fit-content;
+}
+.hero h1 .pip {
+  position: absolute; right: -0.24em; top: 0.02em;
+  width: 0.13em; height: 0.13em; border-radius: 50%;
+  background: var(--red);
+  box-shadow: 0 0 0.25em rgba(215, 25, 33, 0.55);
+  animation: pip 2.4s ease-in-out infinite;
+}
+@keyframes pip { 50% { opacity: .35; } }
+.hero .claim {
+  font-size: clamp(21px, 2.3vw, 28px);
+  line-height: 1.3;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  max-width: 27ch;
+}
+.hero .claim em { font-style: normal; color: var(--dim); }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.btn {
+  display: inline-flex; align-items: center; gap: 12px;
+  min-height: 58px; padding: 0 26px 0 20px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-family: var(--f-mono); font-weight: 700; font-size: 16px; letter-spacing: .02em;
+  transition: transform .15s ease, background .2s, box-shadow .2s;
+  white-space: nowrap;
+}
+.btn:active { transform: scale(0.97); }
+.btn-dl { background: var(--red); color: var(--on-red); box-shadow: 0 10px 34px rgba(215, 25, 33, 0.28); }
+.btn-dl:hover { box-shadow: 0 12px 44px rgba(215, 25, 33, 0.45); }
+.btn-dl .play { width: 30px; height: 30px; border-radius: 50%; background: var(--on-red); display: grid; place-items: center; }
+.btn-dl .play svg { width: 13px; height: 13px; margin-left: 2px; }
+.btn-dl small { font-family: var(--f-mono); font-weight: 400; font-size: 11px; letter-spacing: .1em; opacity: .8; }
+.btn-ghost { border: 1px solid var(--line); color: var(--fg); padding: 0 22px; font-size: 14px; }
+.btn-ghost:hover { border-color: var(--dim); }
+.specs { display: flex; flex-wrap: wrap; gap: 8px 18px; padding: 0; margin: 0; list-style: none; }
+.specs li { display: flex; align-items: center; gap: 8px; }
+.specs li::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--faint); }
+
+/* the phone back */
+.stage { display: grid; justify-items: center; gap: 18px; min-width: 0; }
+/* The back of a silver Nothing Phone (4a) Pro, measured off a product photo (312 × 682 px body):
+   every size inside is in cqw, i.e. % of the phone's width. Aluminium stays silver in both themes. */
+.device {
+  position: relative;
+  container-type: inline-size;
+  aspect-ratio: 312 / 682;
+  border-radius: 9.6% / 4.4%;
+  background:
+    var(--alu-grain),
+    linear-gradient(100deg, rgba(255,255,255,.45), rgba(255,255,255,0) 32% 68%, rgba(0,0,0,.05)),
+    linear-gradient(180deg, var(--alu-hi), var(--alu) 45%, var(--alu-lo));
+  box-shadow:
+    0 0 0 1px var(--alu-edge),
+    inset 0 0 0 1px rgba(255,255,255,.75),
+    inset 0 0 0 3px rgba(0,0,0,.04),
+    0 40px 80px var(--shadow);
+}
+/* the band where the back meets the frame, round the bottom */
+.device::before {
+  content: ""; position: absolute; left: 2.6%; right: 2.6%; bottom: 1.3%; height: 11%;
+  border: 1px solid rgba(0, 0, 0, .1); border-top: 0;
+  border-radius: 0 0 7.4% 7.4% / 0 0 29% 29%;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .55);
+}
+.device .key {
+  position: absolute; left: -1.9%; width: 2.2%; border-radius: 2px 0 0 2px;
+  background: linear-gradient(90deg, var(--alu-edge), var(--alu-hi) 55%, var(--alu-lo));
+}
+.device .key.k1 { top: 28.2%; height: 5.6%; }
+.device .key.k2 { top: 35.2%; height: 5.7%; }
+.device .key.k3 { top: 46.2%; height: 5.7%; }
+.device .gap { position: absolute; width: .9%; height: .7%; background: var(--alu-lo); box-shadow: inset 0 0 0 1px rgba(0,0,0,.08); }
+.device .gap.t1 { top: 0; left: 21.7%; } .device .gap.t2 { top: 0; left: 78.3%; }
+.device .gap.b1 { bottom: 0; left: 37.8%; } .device .gap.b2 { bottom: 0; left: 61.2%; }
+.device .engrave {
+  position: absolute; left: 5.5%; top: 89.3%; width: 16.7%; aspect-ratio: 1; border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, .16); box-shadow: 0 1px 0 rgba(255, 255, 255, .6), inset 0 1px 0 rgba(255, 255, 255, .5);
+}
+
+/* "The Window": a raised clear cover over the camera plate */
+.win {
+  position: absolute; left: 4.5cqw; top: 4.8cqw; width: 90.4cqw; height: 68cqw;
+  border-radius: 12.2cqw;
+  background: linear-gradient(150deg, #F6F7F8, #C2C4C7 38%, #E9EAEB 62%, #B4B7BA);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, .22),
+    0 1.6cqw 3.4cqw rgba(0, 0, 0, .16),
+    inset 0 0 0 .5cqw rgba(255, 255, 255, .55);
+}
+.win::after { /* the clear plastic's sheen, over everything */
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background:
+    linear-gradient(125deg, rgba(255,255,255,.34) 0%, rgba(255,255,255,0) 26%),
+    linear-gradient(305deg, rgba(255,255,255,.18) 0%, rgba(255,255,255,0) 20%);
+  box-shadow: inset 0 .4cqw .6cqw rgba(255, 255, 255, .5);
+}
+.win > * { position: absolute; }
+.win .plate {
+  inset: 4.6cqw; border-radius: 8cqw;
+  background: linear-gradient(160deg, var(--plate-hi), var(--plate) 55%, var(--plate-hi));
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .24), inset 0 .6cqw 1.4cqw rgba(0, 0, 0, .16);
+}
+.win .sub { /* the dotted plate under the matrix */
+  left: 49.3cqw; top: 44.5cqw; width: 36.5cqw; height: 18.9cqw;
+  border-radius: 6cqw 0 8cqw 0;
+  background: radial-gradient(circle, rgba(0,0,0,.13) .22cqw, transparent .3cqw) 0 0 / 1.1cqw 1.1cqw, var(--plate-hi);
+  box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .12), -1px -1px 0 rgba(255, 255, 255, .5);
+}
+.win .lens {
+  border-radius: 50%; background: var(--glass);
+  box-shadow: 0 0 0 1.1cqw #DADCDE, 0 0 0 1.5cqw #8F9296, 0 .8cqw 1.6cqw 1.5cqw rgba(0, 0, 0, .22), inset 0 0 0 .5cqw #25272B;
+}
+.win .lens i {
+  position: absolute; border-radius: 50%;
+  background: radial-gradient(circle at 38% 34%, #9DB8D8 0 7%, #2E4666 18%, #0C1220 42%, #020305 70%);
+  box-shadow: 0 0 0 .5cqw #1B1D22, 0 0 0 .8cqw #33363C;
+}
+.win .main { left: 6.45cqw; top: 7.65cqw; width: 24.5cqw; height: 24.5cqw; }
+.win .main i { left: 8.4cqw; top: 8.4cqw; width: 7.7cqw; height: 7.7cqw; }
+.win .pill { left: 7.05cqw; top: 36.9cqw; width: 42.3cqw; height: 24cqw; border-radius: 12cqw; }
+.win .pill i.uw { left: 7.45cqw; top: 8.1cqw; width: 8.6cqw; height: 8.6cqw; }
+.win .pill i.tele { left: 26.4cqw; top: 8.5cqw; width: 7.2cqw; height: 7.2cqw; }
+.win .disc {
+  border-radius: 50%;
+  background: radial-gradient(circle, #909397 0 17%, #D4D6D8 20% 100%);
+  box-shadow: inset 0 0 0 .3cqw rgba(0, 0, 0, .12), 0 .3cqw .7cqw rgba(0, 0, 0, .18);
+}
+.win .sensor { left: 34.6cqw; top: 10.2cqw; width: 7.8cqw; height: 7.8cqw; background: radial-gradient(circle, #1C1D20 0 16%, #9A9DA1 19% 26%, #D4D6D8 29% 100%); }
+.win .flash { left: 34.3cqw; top: 21.4cqw; width: 8.4cqw; height: 8.4cqw; background: radial-gradient(circle at 46% 44%, #FFF7E2 0 9%, #E4CB8E 17%, #B7A276 25%, #CDCFD1 29% 100%); }
+.win .hole { left: 46.45cqw; top: 10.55cqw; width: 1.3cqw; height: 1.3cqw; border-radius: 50%; background: #7C7F83; }
+.win .dot { width: .9cqw; height: .9cqw; border-radius: 50%; background: #8A8D91; }
+.win .dot.d1 { left: 56.9cqw; top: 51.3cqw; } .win .dot.d2 { left: 59.2cqw; top: 51.3cqw; } .win .dot.d3 { left: 77.2cqw; top: 7.2cqw; }
+.win .groove { left: 11.2cqw; top: 33.8cqw; width: 7.7cqw; height: .4cqw; border-radius: 1cqw; background: #9EA1A5; }
+.win .screw {
+  width: 3.8cqw; height: 3.8cqw; border-radius: 50%;
+  background:
+    linear-gradient(#5A5D61, #5A5D61) center / 55% 16% no-repeat,
+    linear-gradient(#5A5D61, #5A5D61) center / 16% 55% no-repeat,
+    radial-gradient(circle at 38% 34%, #FAFBFB, #B3B6BA 58%, #7F8286);
+  box-shadow: 0 .25cqw .5cqw rgba(0, 0, 0, .3);
+}
+.win .s1 { left: 80.1cqw; top: 7.4cqw; } .win .s2 { left: 2.8cqw; top: 35.3cqw; }
+.win .s3 { left: 80.7cqw; top: 50.9cqw; } .win .s4 { left: 48.6cqw; top: 58.8cqw; }
+.win .rec { left: 80.1cqw; top: 44.2cqw; width: 5.1cqw; height: 4.8cqw; border-radius: .4cqw; background: var(--rec); box-shadow: inset 0 0 0 .25cqw rgba(0, 0, 0, .18); }
+.win .slot {
+  left: 55.7cqw; top: 57.3cqw; width: 20.8cqw; height: 4.3cqw; border-radius: 2.2cqw;
+  background: linear-gradient(180deg, #C4C6C9, #E6E7E9); box-shadow: inset 0 .3cqw .6cqw rgba(0, 0, 0, .22), 0 1px 0 rgba(255, 255, 255, .6);
+}
+/* the Glyph Matrix: 137 square LEDs in a black disc */
+.win .matrix-btn {
+  left: 47.4cqw; top: 8.3cqw; width: 36.4cqw; height: 36.4cqw; padding: 0;
+  border: 0; border-radius: 50%; cursor: pointer;
+  background: radial-gradient(circle, #0B0B0C 60%, #030303);
+  box-shadow: 0 0 0 .6cqw #C9CBCE, 0 0 0 1cqw #8C8F93, 0 .6cqw 1.4cqw 1cqw rgba(0, 0, 0, .2);
+  display: grid; place-items: center;
+  touch-action: none;
+}
+.win .matrix-btn canvas { width: 80.6%; height: 80.6%; display: block; }
+.stage > .label { text-align: center; max-width: 42ch; line-height: 1.7; text-wrap: balance; }
+/* hero pair: the phone back, and its matrix up close */
+.duo { position: relative; width: min(500px, 100%); aspect-ratio: 1 / 1.2; }
+.duo .device { position: absolute; left: 0; top: 0; width: 55%; }
+.duo .loupe {
+  position: absolute; right: 0; top: 40%; width: 54%; margin: 0; padding: 0; border: 0; cursor: pointer; z-index: 2;
+  box-shadow: 0 0 0 6px #C9CBCE, 0 0 0 10px #8C8F93, 0 0 0 11px rgba(0, 0, 0, .3), 0 34px 70px var(--shadow);
+}
+
+/* under the phone: sand count, more / less, shake, and a spirit level for the gravity */
+.sandbar { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; }
+.sandbar .count {
+  font-family: var(--f-dot); font-weight: 900; font-size: 20px; letter-spacing: .04em; line-height: 1;
+  font-variant-numeric: tabular-nums; min-width: 4.6em; text-align: center; white-space: nowrap;
+}
+.sandbar .count small { color: var(--dim); font-size: inherit; }
+.sandbar .group { display: flex; align-items: center; gap: 8px; }
+#clock { min-width: 3.4em; }
+/* the toy picker, in the free corner of the hero pair */
+.toys { position: absolute; left: 62%; top: 4%; display: grid; gap: 8px; justify-items: start; }
+.toys .label { margin-bottom: 2px; }
+.toy {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--f-mono); font-size: 11px; letter-spacing: .12em; font-weight: 700;
+  border: 1px solid var(--line); border-radius: 99px; padding: 0 16px 0 13px; min-height: 36px;
+  background: transparent; color: var(--dim); cursor: pointer; transition: color .2s, border-color .2s;
+}
+.toy::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--dot-off); transition: background .2s; }
+.toy:hover { color: var(--fg); border-color: var(--dim); }
+.toy[aria-pressed="true"] { color: var(--fg); border-color: var(--fg); }
+.toy[aria-pressed="true"]::before { background: var(--red); }
+.loupe.hit { animation: buzz .24s linear 3; }
+.round {
+  width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line);
+  background: transparent; color: var(--fg); cursor: pointer;
+  font-family: var(--f-mono); font-size: 18px; line-height: 1; display: grid; place-items: center; padding: 0;
+}
+.round:hover, .chipbtn:hover { border-color: var(--dim); }
+.level { width: 40px; height: 40px; display: block; }
+.chipbtn {
+  font-family: var(--f-mono); font-size: 11px; letter-spacing: .12em; font-weight: 700;
+  border: 1px solid var(--line); border-radius: 99px; padding: 0 16px; min-height: 40px;
+  background: transparent; color: var(--fg); cursor: pointer; white-space: nowrap;
+  transition: background .2s, color .2s, border-color .2s, opacity .2s;
+}
+.chipbtn.red { background: var(--red); border-color: var(--red); color: var(--on-red); }
+.chipbtn.red:hover { border-color: var(--red); box-shadow: 0 6px 24px rgba(215, 25, 33, 0.35); }
+.chipbtn[aria-pressed="true"] { background: var(--inv); border-color: var(--inv); color: var(--on-inv); }
+.chipbtn:disabled { opacity: .35; cursor: default; }
+.chipbtn:disabled:hover { border-color: var(--line); }
+
+/* ---------- sections ---------- */
+section { padding-block: clamp(56px, 9vw, 120px); border-top: 1px solid var(--line); }
+.head { display: grid; gap: 16px; margin-bottom: clamp(32px, 5vw, 56px); }
+
+/* ---------- the two playable matrices ---------- */
+.demo { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
+.demo.flip { grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); }
+.demo.flip .copy { order: 2; }
+.copy { display: grid; gap: 20px; min-width: 0; }
+.copy .more { color: var(--dim); font-size: 15.5px; border-top: 1px solid var(--line); padding-top: 18px; max-width: 60ch; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips span { font-family: var(--f-mono); font-size: 11px; letter-spacing: .12em; padding: 6px 12px; border-radius: 99px; border: 1px solid var(--line); color: var(--dim); text-transform: uppercase; }
+.panel {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 28px;
+  padding: clamp(20px, 3.2vw, 36px); display: grid; gap: 22px; min-width: 0;
+}
+/* a big Glyph Matrix: the same black disc and silver rings as on the phone */
+.glass {
+  position: relative; width: min(400px, 100%); aspect-ratio: 1; margin-inline: auto;
+  border-radius: 50%;
+  background: radial-gradient(circle, #0B0B0C 60%, #030303);
+  box-shadow: 0 0 0 6px #C9CBCE, 0 0 0 10px #8C8F93, 0 22px 50px var(--shadow);
+  display: grid; place-items: center;
+  touch-action: none; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent;
+}
+.glass canvas { width: 80.6%; height: 80.6%; display: block; }
+.glass.hit { animation: buzz .24s linear; }
+@keyframes buzz { 20% { transform: translate(-3px, 1px); } 40% { transform: translate(3px, -1px); } 60% { transform: translate(-2px, -1px); } 80% { transform: translate(2px, 1px); } }
+#draw-glass[data-mode="draw"] { cursor: crosshair; }
+#draw-glass[data-mode="sand"] { cursor: grab; }
+#game-glass { cursor: pointer; }
+.glass:focus-visible { outline-offset: 14px; border-radius: 50%; }
+.play-grid { display: grid; grid-template-columns: minmax(0, 1fr) 132px; gap: clamp(20px, 3vw, 36px); align-items: center; }
+.hud { display: grid; gap: 18px; margin: 0; }
+.hud div { display: grid; gap: 4px; }
+.hud dt { font-family: var(--f-mono); font-size: 11px; letter-spacing: .12em; color: var(--dim); text-transform: uppercase; }
+.hud dd { margin: 0; font-family: var(--f-dot); font-weight: 900; font-size: 32px; letter-spacing: .04em; line-height: 1; font-variant-numeric: tabular-nums; }
+.hud .lives { display: flex; gap: 8px; height: 32px; align-items: center; }
+.hud .lives i { width: 10px; height: 10px; border-radius: 50%; background: var(--fg); }
+.hud .lives i.off { background: var(--dot-off); }
+.bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; border-top: 1px solid var(--line); padding-top: 18px; }
+.bar .label { min-width: 0; flex: 1 1 220px; }
+.tools { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* ---------- features ---------- */
+.feats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(28px, 5vw, 72px); }
+.feat { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 18px; padding-block: 26px; border-top: 1px solid var(--line); }
+.feat canvas { width: 56px; height: 56px; }
+.feat h3 { font-size: 21px; line-height: 1.25; margin-bottom: 8px; letter-spacing: -0.01em; }
+.feat p { color: var(--dim); font-size: 15.5px; }
+.feat code { font-family: var(--f-mono); font-size: .86em; color: var(--fg); background: var(--surface-2); padding: 1px 6px; border-radius: 6px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+
+/* ---------- install ---------- */
+.install { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: clamp(28px, 5vw, 72px); align-items: start; }
+.steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; }
+.steps li { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 16px; padding-block: 22px; border-top: 1px solid var(--line); }
+.steps li:last-child { border-bottom: 1px solid var(--line); }
+.steps .num { font-family: var(--f-dot); font-weight: 900; font-size: 58px; line-height: .9; color: var(--red); }
+.steps h3 { font-size: 21px; margin-bottom: 6px; }
+.steps p { color: var(--dim); font-size: 15.5px; }
+.side { display: grid; gap: 20px; min-width: 0; }
+.qr-card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 28px;
+  padding: 28px; display: grid; gap: 18px; justify-items: center; text-align: center; min-width: 0;
+}
+.qr-tile { background: var(--qr-bg); border-radius: 20px; padding: 16px; width: min(260px, 100%); }
+.qr-tile canvas { width: 100%; aspect-ratio: 1; display: block; }
+.link-row { display: flex; align-items: stretch; width: 100%; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.link-row code {
+  flex: 1; min-width: 0; font-family: var(--f-mono); font-size: 12px; padding: 12px 14px; text-align: left;
+  overflow-x: auto; white-space: nowrap; user-select: all; color: var(--dim);
+}
+.link-row button {
+  font-family: var(--f-mono); font-size: 11px; letter-spacing: .12em; font-weight: 700;
+  border: 0; border-left: 1px solid var(--line); background: var(--surface-2); color: var(--fg);
+  padding: 0 16px; cursor: pointer; min-width: 88px;
+}
+.link-row button:hover { color: var(--red); }
+.install .cta { margin-top: 28px; }
+.compat { list-style: none; margin: 0; padding: 4px 24px; border: 1px solid var(--line); border-radius: 28px; }
+.compat li { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 14px; align-items: baseline; padding-block: 16px; }
+.compat li + li { border-top: 1px dashed var(--line); }
+.compat b { font-family: var(--f-dot); font-weight: 900; font-size: 30px; line-height: 1; letter-spacing: .02em; }
+.compat b.r { color: var(--red); }
+.compat span { color: var(--dim); font-size: 15px; }
+.compat strong { color: var(--fg); font-weight: 500; }
+
+/* ---------- footer ---------- */
+footer { border-top: 1px solid var(--line); padding-block: 40px 56px; display: grid; gap: 20px; }
+footer .row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; align-items: center; }
+footer p { color: var(--faint); font-size: 14px; max-width: 74ch; }
+footer a { color: var(--dim); }
+
+/* ---------- responsive ---------- */
+@media (max-width: 900px) {
+  .hero, .install, .demo, .demo.flip { grid-template-columns: minmax(0, 1fr); }
+  .demo.flip .copy { order: 0; }
+  .feats { grid-template-columns: minmax(0, 1fr); }
+  .side { max-width: 520px; }
+}
+@media (max-width: 560px) {
+  .top nav .hide-s { display: none; }
+  .top { gap: 10px; }
+  .brand b { font-size: 20px; }
+  .qr-card .qr-tile { display: none; }
+  .steps li { grid-template-columns: 52px minmax(0, 1fr); }
+  .steps .num { font-size: 44px; }
+  .btn { width: 100%; justify-content: center; }
+  .btn-dl small { display: none; }
+  .play-grid { grid-template-columns: minmax(0, 1fr); }
+  .hud { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+  .hud dd { font-size: 24px; }
+  .hud .lives { height: 24px; gap: 6px; }
+  .hud .lives i { width: 8px; height: 8px; }
+  .panel { border-radius: 24px; }
+  .glass { box-shadow: 0 0 0 4px #C9CBCE, 0 0 0 7px #8C8F93, 0 16px 40px var(--shadow); }
+  .duo .loupe { box-shadow: 0 0 0 4px #C9CBCE, 0 0 0 7px #8C8F93, 0 0 0 8px rgba(0, 0, 0, .3), 0 24px 50px var(--shadow); }
+  .tools.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; }
+  .tools.grid .chipbtn { width: 100%; }
+  .compat { padding-inline: 18px; }
+  .compat li { grid-template-columns: 78px minmax(0, 1fr); }
+  .compat b { font-size: 26px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#top" aria-label="Glyphies">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <circle cx="32" cy="32" r="31.5" fill="var(--device)" stroke="var(--device-rim)"/>
+        <g fill="#FFFFFF">
+          <circle cx="17.1" cy="17.95" r="1.62"/><circle cx="42.9" cy="17.95" r="1.62"/>
+          <circle cx="21.4" cy="22.25" r="1.62"/><circle cx="38.6" cy="22.25" r="1.62"/>
+          <circle cx="17.1" cy="26.55" r="1.62"/><circle cx="21.4" cy="26.55" r="1.62"/><circle cx="25.7" cy="26.55" r="1.62"/><circle cx="30" cy="26.55" r="1.62"/><circle cx="34.3" cy="26.55" r="1.62"/><circle cx="38.6" cy="26.55" r="1.62"/><circle cx="42.9" cy="26.55" r="1.62"/>
+          <circle cx="12.8" cy="30.85" r="1.62"/><circle cx="17.1" cy="30.85" r="1.62"/><circle cx="25.7" cy="30.85" r="1.62"/><circle cx="30" cy="30.85" r="1.62"/><circle cx="34.3" cy="30.85" r="1.62"/><circle cx="42.9" cy="30.85" r="1.62"/><circle cx="47.2" cy="30.85" r="1.62"/>
+          <circle cx="8.5" cy="35.15" r="1.62"/><circle cx="12.8" cy="35.15" r="1.62"/><circle cx="17.1" cy="35.15" r="1.62"/><circle cx="21.4" cy="35.15" r="1.62"/><circle cx="25.7" cy="35.15" r="1.62"/><circle cx="30" cy="35.15" r="1.62"/><circle cx="34.3" cy="35.15" r="1.62"/><circle cx="38.6" cy="35.15" r="1.62"/><circle cx="42.9" cy="35.15" r="1.62"/><circle cx="47.2" cy="35.15" r="1.62"/><circle cx="51.5" cy="35.15" r="1.62"/>
+          <circle cx="8.5" cy="39.45" r="1.62"/><circle cx="17.1" cy="39.45" r="1.62"/><circle cx="21.4" cy="39.45" r="1.62"/><circle cx="25.7" cy="39.45" r="1.62"/><circle cx="30" cy="39.45" r="1.62"/><circle cx="34.3" cy="39.45" r="1.62"/><circle cx="38.6" cy="39.45" r="1.62"/><circle cx="42.9" cy="39.45" r="1.62"/><circle cx="51.5" cy="39.45" r="1.62"/>
+          <circle cx="8.5" cy="43.75" r="1.62"/><circle cx="17.1" cy="43.75" r="1.62"/><circle cx="42.9" cy="43.75" r="1.62"/><circle cx="51.5" cy="43.75" r="1.62"/>
+          <circle cx="21.4" cy="48.05" r="1.62"/><circle cx="25.7" cy="48.05" r="1.62"/><circle cx="34.3" cy="48.05" r="1.62"/><circle cx="38.6" cy="48.05" r="1.62"/>
+        </g>
+        <circle cx="55.8" cy="17.95" r="2.15" fill="#D71921"/>
+      </svg>
+      <b>GLYPHIES</b>
+    </a>
+    <nav>
+      <a class="label hide-s" href="#jouer">Jouer</a>
+      <a class="label hide-s" href="#editeur">Éditeur</a>
+      <a class="label hide-s" href="#installer">Installer</a>
+      <a class="label hide-s" href="https://github.com/kream0/glyphies" target="_blank" rel="noopener">GitHub ↗</a>
+      <div class="mode" role="group" aria-label="Thème">
+        <button type="button" data-mode="dark" aria-pressed="false">SOMBRE</button>
+        <button type="button" data-mode="light" aria-pressed="false">PAPIER</button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <div class="hero">
+      <div class="hero-copy">
+        <p class="label"><span class="dotmark"></span>Jeux et animations pour la Glyph Matrix</p>
+        <h1>GLYPHIES<span class="pip" aria-hidden="true"></span></h1>
+        <p class="claim">Du sable, un sablier, des envahisseurs et vos propres dessins, au dos du Nothing Phone. <em>Penchez, secouez, dessinez.</em></p>
+        <div class="cta">
+          <a class="btn btn-dl" href="https://github.com/kream0/glyphies/releases/latest/download/glyphies.apk" target="_blank" rel="noopener">
+            <span class="play"><svg viewBox="0 0 10 12" aria-hidden="true"><path d="M0 0 10 6 0 12z" fill="var(--red)"/></svg></span>
+            Télécharger l'APK
+            <small>ANDROID 8+</small>
+          </a>
+          <a class="btn btn-ghost" href="https://github.com/kream0/glyphies/releases/latest" target="_blank" rel="noopener">Notes de version ↗</a>
+        </div>
+        <ul class="specs label">
+          <li>Sans compte</li>
+          <li>Sans pub</li>
+          <li>Aucune donnée collectée</li>
+          <li>Mises à jour intégrées</li>
+          <li>Français ou anglais</li>
+        </ul>
+      </div>
+
+      <div class="stage" id="stage">
+        <div class="duo">
+        <div class="device" id="device" role="img" aria-label="Dos d'un Nothing Phone (4a) Pro argent : sur sa Glyph Matrix, des grains de sable suivent l'inclinaison.">
+          <span class="key k1"></span><span class="key k2"></span><span class="key k3"></span>
+          <span class="gap t1"></span><span class="gap t2"></span><span class="gap b1"></span><span class="gap b2"></span>
+          <span class="engrave"></span>
+          <div class="win">
+            <span class="plate"></span>
+            <span class="sub"></span>
+            <span class="lens main"><i></i></span>
+            <span class="lens pill"><i class="uw"></i><i class="tele"></i></span>
+            <span class="disc sensor"></span>
+            <span class="disc flash"></span>
+            <span class="hole"></span>
+            <span class="groove"></span>
+            <span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span>
+            <span class="screw s1"></span><span class="screw s2"></span><span class="screw s3"></span><span class="screw s4"></span>
+            <span class="slot"></span>
+            <span class="rec"></span>
+            <button class="matrix-btn" id="matrix-btn" type="button" aria-label="Glyph Matrix : du sable. Touchez pour secouer.">
+              <canvas id="matrix" width="520" height="520"></canvas>
+            </button>
+          </div>
+        </div>
+        <div class="toys" role="group" aria-label="Jouet affiché">
+          <p class="label">Jouet</p>
+          <button class="toy" type="button" data-toy="sand" aria-pressed="true">SABLE</button>
+          <button class="toy" type="button" data-toy="hourglass" aria-pressed="false">SABLIER</button>
+        </div>
+        <button class="glass loupe" id="loupe" type="button" aria-label="La même Glyph Matrix, en grand : du sable. Touchez pour secouer.">
+          <canvas id="matrix-big" width="600" height="600"></canvas>
+        </button>
+        </div>
+        <div class="sandbar">
+          <canvas class="level" id="level" width="80" height="80" role="img" aria-label="Niveau : sens de la gravité"></canvas>
+          <div class="group" data-for="sand">
+            <button class="round" type="button" id="less" aria-label="Moins de sable">−</button>
+            <span class="count" aria-live="polite"><span id="grains">58</span> <small>/ 137</small></span>
+            <button class="round" type="button" id="more" aria-label="Plus de sable">+</button>
+            <button class="chipbtn" type="button" id="shake">SECOUER</button>
+          </div>
+          <div class="group" data-for="hourglass" hidden>
+            <span class="count" id="clock" role="timer" aria-live="off">0:30</span>
+            <button class="chipbtn" type="button" id="dur" aria-label="Durée du sablier">30 S</button>
+            <button class="chipbtn" type="button" id="refill">REMPLIR</button>
+          </div>
+        </div>
+        <p class="label" id="hero-hint">Les 137 LED de la Glyph Matrix du Nothing Phone <span class="as-is">(4a)</span> Pro, et en grand. Le sable suit l'inclinaison&nbsp;: bougez la souris autour, cliquez pour secouer.</p>
+      </div>
+    </div>
+
+    <section id="jouer">
+      <div class="demo">
+        <div class="copy">
+          <p class="label red">Jouer</p>
+          <h2>Des envahisseurs sur <span class="dots">137</span> points.</h2>
+          <p class="lede">La formation avance d'un point à la fois, rebondit sur le bord rond et descend. Le vaisseau tire tout seul&nbsp;: il suffit de viser. Un boss toutes les quatre vagues, une soucoupe en bonus.</p>
+          <div class="chips" aria-label="Commandes">
+            <span>← → ou A D</span><span>Souris ou doigt</span><span>Pencher le téléphone</span>
+          </div>
+          <p class="more">Dans l'app, on penche le téléphone pour bouger, les touches de volume servent de boutons, et il vibre quand on est touché. Les vies sont les points pâles en bas, le meilleur score est gardé.</p>
+        </div>
+        <div class="panel" id="play-panel">
+          <div class="play-grid">
+            <div class="glass" id="game-glass" tabindex="0" role="application" aria-roledescription="jeu" aria-label="Envahisseurs sur la Glyph Matrix. Flèches gauche et droite ou A et D pour bouger, Espace pour jouer.">
+              <canvas id="game" width="640" height="640"></canvas>
+            </div>
+            <dl class="hud" aria-live="off">
+              <div><dt>Score</dt><dd id="g-score">0000</dd></div>
+              <div><dt>Vies</dt><dd class="lives" id="g-lives"><i></i><i></i><i></i></dd></div>
+              <div><dt>Vague</dt><dd id="g-wave">1</dd></div>
+              <div><dt>Meilleur</dt><dd id="g-best">0</dd></div>
+            </dl>
+          </div>
+          <div class="bar">
+            <p class="label" id="g-status">Démo&nbsp;: le vaisseau joue seul</p>
+            <div class="tools"><button class="chipbtn red" type="button" id="g-play">JOUER</button></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="editeur">
+      <div class="demo flip">
+        <div class="copy">
+          <p class="label red">Éditeur</p>
+          <h2>Un dessin, puis du <span class="dots">SABLE</span>.</h2>
+          <p class="lede">Touchez un point pour l'allumer, glissez pour peindre. «&nbsp;Sable&nbsp;» fait s'effondrer le dessin, grain par grain, et le sable suit l'inclinaison. «&nbsp;Reconstruire&nbsp;» remet chaque grain à sa place.</p>
+          <p class="more">Dans l'app, l'onglet Éditeur reprend là où vous en étiez. Sa galerie lance un dessin, une animation, un texte défilant ou un jeu, et ce que vous dessinez s'allume en direct au dos du téléphone.</p>
+        </div>
+        <div class="panel">
+          <div class="glass" id="draw-glass" data-mode="draw" tabindex="0" role="application" aria-roledescription="éditeur" aria-label="Glyph Matrix à dessiner, 137 points. Flèches pour se déplacer, Espace pour allumer ou éteindre un point.">
+            <canvas id="draw" width="640" height="640"></canvas>
+          </div>
+          <div class="bar">
+            <p class="label" id="d-status">Touchez pour allumer · glissez pour peindre</p>
+            <div class="tools grid">
+              <button class="chipbtn" type="button" id="d-clear">EFFACER</button>
+              <button class="chipbtn" type="button" id="d-mirror" aria-pressed="false">MIROIR</button>
+              <button class="chipbtn red" type="button" id="d-sand">SABLE</button>
+              <button class="chipbtn" type="button" id="d-build" disabled>RECONSTRUIRE</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="fonctions">
+      <div class="head">
+        <p class="label red">Ce que fait Glyphies</p>
+        <h2>Des jouets, des jeux, vos dessins.</h2>
+      </div>
+      <div class="feats">
+        <article class="feat"><canvas data-icon="home" width="112" height="112" aria-hidden="true"></canvas><div>
+          <h3>Tout sur l'accueil</h3>
+          <p>Le dernier jeu joué en grand, en direct, avec un bouton <code>JOUER</code>. Dessous, tous les jeux et animations, les vôtres compris, en tuiles qui se jouent d'elles-mêmes&nbsp;; filtres Tout, Jeux, Animations, Les miens. Appui long pour modifier, dupliquer ou en faire le Glyph Toy.</p></div></article>
+        <article class="feat"><canvas data-icon="sand" width="112" height="112" aria-hidden="true"></canvas><div>
+          <h3>Sable</h3>
+          <p>Des grains qui suivent l'inclinaison du téléphone, avec une vraie physique&nbsp;: vitesse, rebonds, avalanches. Secouez pour les lancer, volume&nbsp;+ ou&nbsp;− pour ajouter ou retirer du sable.</p></div></article>
+        <article class="feat"><canvas data-icon="hourglass" width="112" height="112" aria-hidden="true"></canvas><div>
+          <h3>Sablier</h3>
+          <p>Un vrai minuteur&nbsp;: 30&nbsp;s, 1, 3 ou 5&nbsp;min. Un seul grain passe le goulot à la fois. Retournez le téléphone pour le relancer&nbsp;; il vibre quand le temps est écoulé.</p></div></article>
+        <article class="feat"><canvas data-icon="invader" width="112" height="112" aria-hidden="true"></canvas><div>
+          <h3>Envahisseurs</h3>
+          <p>Penchez pour déplacer le vaisseau, il tire seul (ou au toucher, ou avec une touche de volume). Un boss toutes les quatre vagues, une soucoupe en bonus, le meilleur score est gardé.</p></div></article>
+        <article class="feat"><canvas data-icon="pen" width="112" height="112" aria-hidden="true"></canvas><div>
+          <h3>L'éditeur, point par point</h3>
+          <p>Un dessin, une animation, un texte défilant ou un jeu. Crayon, gomme, remplissage, déplacement, miroir, quatre luminosités, annuler&nbsp;; le dessin s'affiche en direct au dos du téléphone.</p></div></article>
+        <article class="feat"><canvas data-icon="frames" width="112" height="112" aria-hidden="true"></canvas><div>
+          <h3>Des images qui s'animent</h3>
+          <p>Ajoutez des images à la suite, avec la pelure d'oignon pour caler le mouvement. Vitesse en images par seconde, en boucle, en aller-retour ou une seule fois. Et du texte qui défile.</p></div></article>
+        <article class="feat"><canvas data-icon="mic" width="112" height="112" aria-hidden="true"></canvas><div>
+          <h3>À la voix</h3>
+          <p>Une animation peut suivre le micro&nbsp;: plus c'est fort, plus elle avance. Le micro mesure seulement le volume, rien n'est enregistré.</p></div></article>
+        <article class="feat"><canvas data-icon="compass" width="112" height="112" aria-hidden="true"></canvas><div>
+          <h3>Inclinaison, boussole, lumière</h3>
+          <p>Ou pilotez-la en penchant le téléphone (↔ ou ↕), avec la boussole, la lumière ambiante, une main au-dessus de l'écran, une secousse, un toucher ou un clap. Un dessin peut aussi devenir du sable qui s'effrite quand on secoue.</p></div></article>
+        <article class="feat"><canvas data-icon="bricks" width="112" height="112" aria-hidden="true"></canvas><div>
+          <h3>Six jeux, vos sprites, vos niveaux</h3>
+          <p>Tir, Esquive, Attrape, Labyrinthe, Envol et Casse-briques, chacun montré en train de jouer sa démo. Vos dessins deviennent les sprites&nbsp;; un niveau est une image&nbsp;: murs, départ, arrivée et pièges du labyrinthe, briques du casse-briques. On joue en penchant, au doigt ou à la voix.</p></div></article>
+        <article class="feat"><canvas data-icon="glyph" width="112" height="112" aria-hidden="true"></canvas><div>
+          <h3>Glyph Toy, app fermée</h3>
+          <p>Le dessin ou l'animation choisi reste au dos, même app fermée. Sur le (4a)&nbsp;Pro&nbsp;: <code>Réglages › Glyph Interface › Flip to Glyph › Always-on Glyph Toy › Glyphies</code>.</p></div></article>
+        <article class="feat"><canvas data-icon="update" width="112" height="112" aria-hidden="true"></canvas><div>
+          <h3>Se met à jour tout seul</h3>
+          <p>Glyphies regarde la dernière version publiée sur GitHub, vérifie son empreinte SHA-256, puis Android propose de l'installer.</p></div></article>
+        <article class="feat"><canvas data-icon="theme" width="112" height="112" aria-hidden="true"></canvas><div>
+          <h3>Sombre ou papier, en français</h3>
+          <p>Noir comme Nothing OS, ou papier chaud. En français ou en anglais. On joue en regardant le dos du téléphone, ou l'écran&nbsp;: un réglage inverse gauche et droite.</p></div></article>
+      </div>
+    </section>
+
+    <section id="installer">
+      <div class="install">
+        <div>
+          <div class="head">
+            <p class="label red">Installer</p>
+            <h2>Trois gestes, une fois.</h2>
+          </div>
+          <ol class="steps">
+            <li><span class="num">1</span><div><h3>Téléchargez l'APK sur le téléphone</h3><p>Le bouton pointe toujours vers la dernière version publiée.</p></div></li>
+            <li><span class="num">2</span><div><h3>Autorisez le navigateur à installer des applis</h3><p>Android le demande une seule fois, pour les applis qui ne viennent pas du Play Store.</p></div></li>
+            <li><span class="num">3</span><div><h3>Installez, c'est tout</h3><p>Les versions suivantes arrivent depuis l'app elle-même. Android 8.0 ou plus récent.</p></div></li>
+          </ol>
+          <div class="cta">
+            <a class="btn btn-dl" href="https://github.com/kream0/glyphies/releases/latest/download/glyphies.apk" target="_blank" rel="noopener">
+              <span class="play"><svg viewBox="0 0 10 12" aria-hidden="true"><path d="M0 0 10 6 0 12z" fill="var(--red)"/></svg></span>
+              Télécharger l'APK
+              <small>DERNIÈRE VERSION</small>
+            </a>
+          </div>
+        </div>
+        <div class="side">
+          <div class="qr-card">
+            <p class="label">Sur un ordinateur&nbsp;? Scannez avec le téléphone</p>
+            <div class="qr-tile"><canvas id="qr" width="600" height="600" role="img" aria-label="QR code du lien de téléchargement de l'APK"></canvas></div>
+            <div class="link-row">
+              <code id="apk-url">https://github.com/kream0/glyphies/releases/latest/download/glyphies.apk</code>
+              <button type="button" id="copy">COPIER</button>
+            </div>
+          </div>
+          <ul class="compat" aria-label="Compatibilité">
+            <li><b class="r">137</b><span><strong>Nothing Phone (4a) Pro</strong><br>Grille de 13&nbsp;×&nbsp;13, Android 14 ou plus</span></li>
+            <li><b>489</b><span><strong>Nothing Phone (3)</strong><br>Grille de 25&nbsp;×&nbsp;25, Android 14 ou plus</span></li>
+            <li><b>8+</b><span><strong>Tout téléphone Android 8 ou plus</strong><br>La matrice s'affiche à l'écran, en aperçu</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="row">
+      <a class="brand" href="#top"><b>GLYPHIES</b></a>
+      <a class="label" href="https://github.com/kream0/glyphies" target="_blank" rel="noopener">Code source et versions sur GitHub ↗</a>
+    </div>
+    <p>Polices&nbsp;: Doto, Space Grotesk et Space Mono (OFL). Glyph Matrix SDK © Nothing. Glyphies n'est pas affilié à Nothing. Du même auteur&nbsp;: <a href="https://kream0.github.io/ytune/">YTune</a>, un lecteur de musique façon Nothing.</p>
+  </footer>
+</div>
+
+<script>
+(() => {
+  const FONT = {"!":[190],"\"":[14,0,14],"#":[40,254,40,254,40],"$":[8,84,254,84,32],"%":[196,42,84,168,70],"&":[108,146,172,64,160],"'":[14],"(":[56,68,130],")":[130,68,56],"*":[84,56,16,56,84],"+":[16,16,124,16,16],",":[256,192,64],"-":[16,16,16,16,16],".":[128,448,128],"/":[192,32,16,8,6],"0":[56,68,130,68,56],"1":[136,132,254,128,128],"2":[196,162,146,146,140],"3":[66,130,146,154,102],"4":[48,40,36,254,32],"5":[94,146,138,138,114],"6":[120,164,146,146,96],"7":[2,194,34,26,6],"8":[108,146,146,146,108],"9":[12,146,146,74,60],":":[136,476,136],";":[264,220,72],"<":[16,40,68,130],"=":[40,40,40,40,40],">":[130,68,40,16],"?":[4,2,178,10,4],"@":[124,130,178,170,28],"A":[248,36,34,36,248],"B":[130,254,146,146,108],"C":[124,130,130,130,68],"D":[130,254,130,130,124],"E":[254,146,146,146,130],"F":[254,18,18,18,2],"G":[124,130,130,162,100],"H":[254,16,16,16,254],"I":[130,254,130],"J":[64,128,130,126,2],"K":[254,16,40,68,130],"L":[254,128,128,128,128],"M":[254,8,16,8,254],"N":[254,8,16,32,254],"O":[124,130,130,130,124],"P":[254,18,18,18,12],"Q":[124,130,194,130,380],"R":[254,18,50,82,140],"S":[76,146,146,146,100],"T":[2,2,254,2,2],"U":[126,128,128,128,126],"V":[14,112,128,112,14],"W":[254,64,48,64,254],"X":[198,40,16,40,198],"Y":[6,8,240,8,6],"Z":[194,162,146,138,134],"[":[254,130,130],"\\":[6,8,16,32,192],"]":[130,130,254],"^":[8,4,2,4,8],"_":[256,256,256,256,256],"`":[1,2],"a":[64,168,168,168,240],"b":[254,80,136,136,112],"c":[112,136,136,136,80],"d":[112,136,136,80,254],"e":[112,168,168,168,48],"f":[16,252,18,18,4],"g":[304,584,584,584,504],"h":[254,16,8,8,240],"i":[136,250,128],"j":[384,512,520,506],"k":[254,32,32,80,136],"l":[130,254,128],"m":[248,8,112,8,240],"n":[248,16,8,8,240],"o":[112,136,136,136,112],"p":[1016,80,136,136,112],"q":[112,136,136,80,1016],"r":[248,16,8,8,16],"s":[144,168,168,168,64],"t":[8,126,136,136,64],"u":[120,128,128,64,248],"v":[24,96,128,96,24],"w":[120,128,96,128,120],"x":[136,80,32,80,136],"y":[312,576,576,544,504],"z":[136,200,168,152,136],"{":[16,84,170,130],"|":[254],"}":[130,170,84,16],"~":[12,2,4,8,6]};
+  const QR = ["1111111010011101101100110111101111111","1000001001100000111010000010101000001","1011101000011101111111111011101011101","1011101011011010000110111111101011101","1011101010100110101000011111101011101","1000001010100000101101000100001000001","1111111010101010101010101010101111111","0000000010001010011011011000000000000","1000101111111110001101011011011111001","1101000100000000110111010011100011110","0110111101001010101010011111000111100","0111010000010100011001010010001110110","1000001110110001010111111001011100111","0111000110011111110001010011000011000","0101011100100111001010011111100111100","0110100010111100100001110010110110101","0101101000011110100011101000011101110","1110100001000010001100010011100110010","0101111111110101000100010011111000100","0101100110100101110111010011000100110","0101111101011010110011111011011101100","1010000110011111101000010111110110000","1100101111000001010001111111001111110","1001010001000111111001011011001110101","0100111000010010001011101000011001101","1100110001010010100111110011110011000","0010111000011000111001010111100111100","0010100100001010011001110010010000110","1111101001111001010111101001111110100","0000000010001011111000110011100010010","1111111011000111001001110010101010000","1000001001000111000001100000100011100","1011101011100110100111100000111111111","1011101001100000011111010000011101001","1011101000111001011011111101011000100","1000001001100111110101010011000010110","1111111010110100010001110001010101111"];
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const coarse = matchMedia("(pointer: coarse)").matches;
+  const root = document.documentElement;
+  const $ = id => document.getElementById(id);
+  const css = name => getComputedStyle(root).getPropertyValue(name).trim();
+  let T = {};
+  const readTheme = () => {
+    T = {
+      fg: css("--fg"), dim: css("--dim"), faint: css("--faint"), line: css("--line"), off: css("--dot-off"), red: css("--red"),
+      ledOff: css("--led-off"), ledOn: css("--led-on"), qrFg: css("--qr-fg"), qrBg: css("--qr-bg"),
+    };
+  };
+  readTheme();
+  const rnd = Math.random;
+  const clamp = (v, a, b) => (v < a ? a : v > b ? b : v);
+
+  // ---------------------------------------------------------------- colour helpers
+  const hex = h => { h = h.replace("#", ""); if (h.length === 3) h = [...h].map(c => c + c).join(""); const n = parseInt(h, 16); return [n >> 16 & 255, n >> 8 & 255, n & 255]; };
+  const mix = (a, b, t) => { const A = hex(a), B = hex(b); return `rgb(${A.map((v, i) => Math.round(v + (B[i] - v) * t)).join(",")})`; };
+
+  // ---------------------------------------------------------------- dot text (the app's DotFont)
+  const layout = text => {
+    const cols = [];
+    const s = text.normalize("NFD").replace(/\p{Mn}+/gu, "");
+    for (const ch of s) {
+      if (ch === " ") cols.push(0, 0, 0);
+      else if (ch === "·") cols.push(1 << 4, 0);
+      else if (FONT[ch]) cols.push(...FONT[ch], 0);
+    }
+    while (cols.length && cols[cols.length - 1] === 0) cols.pop();
+    return cols;
+  };
+
+  // ---------------------------------------------------------------- the (4a) Pro's Glyph Matrix: 137 LEDs on a 13 × 13 grid
+  const N = 13;
+  const ROWS = [5, 9, 11, 11, 13, 13, 13, 13, 13, 11, 11, 9, 5];
+  const VIS = new Uint8Array(N * N);
+  ROWS.forEach((w, y) => { const s = (N - w) / 2; for (let x = s; x < s + w; x++) VIS[y * N + x] = 1; });
+  const isLed = (x, y) => x >= 0 && x < N && y >= 0 && y < N && VIS[y * N + x] === 1;
+
+  // Square LEDs with rounded corners; a lit one glows.
+  let LED = [];
+  const ledTable = () => { LED = []; for (let v = 0; v <= 255; v++) LED.push(mix(T.ledOff, T.ledOn, v / 255)); };
+  ledTable();
+  const paint = (canvas, f) => {
+    const ctx = canvas.getContext("2d"), W = canvas.width, cell = W / N, side = cell * 0.8, r = cell * 0.14, o = (cell - side) / 2;
+    const rect = i => { const x = (i % N) * cell + o, y = Math.floor(i / N) * cell + o; ctx.roundRect ? ctx.roundRect(x, y, side, side, r) : ctx.rect(x, y, side, side); };
+    ctx.clearRect(0, 0, W, W);
+    ctx.shadowBlur = 0;
+    ctx.fillStyle = T.ledOff;
+    ctx.beginPath();
+    for (let i = 0; i < N * N; i++) if (VIS[i] && !f[i]) rect(i);
+    ctx.fill();
+    ctx.shadowBlur = cell * 0.6;
+    for (let i = 0; i < N * N; i++) {
+      const v = f[i];
+      if (!VIS[i] || !v) continue;
+      ctx.beginPath(); rect(i);
+      ctx.fillStyle = LED[v];
+      ctx.shadowColor = `rgba(255,255,255,${(0.6 * v / 255).toFixed(3)})`;
+      ctx.fill();
+    }
+    ctx.shadowBlur = 0;
+  };
+
+  // ---------------------------------------------------------------- sand: the app's SandSim (after Adafruit's PixelDust)
+  // Every grain has a sub-pixel position and a velocity; gravity pushes them, and a grain that would land on an
+  // occupied dot skids along the free axis or bounces. One grain per LED; the round edge holds the sand.
+  const FREE = -1, SOLID = -2, MAX_V = 0.95, EPS = 0.001, MIN_SLIDE = 0.15, SLIDE_CHANCE = 0.5, SLIDE_SPEED = 0.25;
+  const DX = [1, 1, 0, -1, -1, -1, 0, 1], DY = [0, 1, 1, 1, 0, -1, -1, -1];
+  class Sand {
+    constructor(walls) {
+      const occ = this.occ = new Int16Array(N * N);
+      let cap = 0;
+      for (let i = 0; i < N * N; i++) { occ[i] = !VIS[i] || (walls && walls[i]) ? SOLID : FREE; if (occ[i] === FREE) cap++; }
+      this.capacity = cap;
+      this.px = new Float64Array(cap); this.py = new Float64Array(cap);
+      this.vx = new Float64Array(cap); this.vy = new Float64Array(cap);
+      this.lum = new Uint8Array(cap); this.order = new Int16Array(cap); this.keys = new Float64Array(cap);
+      this.count = 0; this.elasticity = 0.45; this.accel = 0.2;
+    }
+    free(x, y) { return x >= 0 && x < N && y >= 0 && y < N && this.occ[y * N + x] === FREE; }
+    cell(x, y) { return clamp(Math.floor(y), 0, N - 1) * N + clamp(Math.floor(x), 0, N - 1); }
+    add(x, y, b = 255) {
+      if (this.count >= this.capacity || !this.free(x, y)) return false;
+      const i = this.count++;
+      this.px[i] = x + 0.5; this.py[i] = y + 0.5; this.vx[i] = 0; this.vy[i] = 0;
+      this.lum[i] = clamp(b, 1, 255); this.occ[y * N + x] = i;
+      return true;
+    }
+    removeLast() {
+      if (!this.count) return false;
+      const i = --this.count, c = this.cell(this.px[i], this.py[i]);
+      if (this.occ[c] === i) this.occ[c] = FREE;
+      return true;
+    }
+    level() { return 140 + Math.floor(rnd() * 116); }
+    // Moves the grain on (fx, fy) to the free cell (tx, ty), keeping it moving that way.
+    transfer(fx, fy, tx, ty) {
+      if (fx < 0 || fx >= N || fy < 0 || fy >= N || !this.free(tx, ty)) return false;
+      const i = this.occ[fy * N + fx];
+      if (i < 0) return false;
+      this.occ[fy * N + fx] = FREE; this.occ[ty * N + tx] = i;
+      this.px[i] = tx + 0.5; this.py[i] = ty + 0.5; this.vx[i] = 0; this.vy[i] = clamp(ty - fy, -1, 1) * 0.5;
+      return true;
+    }
+    sprinkle(n, textured = true) {
+      const free = [];
+      for (let i = 0; i < N * N; i++) if (this.occ[i] === FREE) free.push(i);
+      for (let k = free.length - 1; k > 0; k--) { const j = Math.floor(rnd() * (k + 1)); const t = free[k]; free[k] = free[j]; free[j] = t; }
+      const m = Math.min(n, this.capacity - this.count, free.length);
+      for (let k = 0; k < m; k++) this.add(free[k] % N, Math.floor(free[k] / N), textured ? this.level() : 255);
+    }
+    shake(s = 0.8) {
+      for (let i = 0; i < this.count; i++) { this.vx[i] += (rnd() * 2 - 1) * s; this.vy[i] += (rnd() * 2 - 1) * s; }
+    }
+    step(gx, gy, gz = 0) {
+      const n = this.count;
+      if (!n) return;
+      const { px, py, vx, vy, order, keys } = this;
+      // A little randomness makes tall stacks topple; more of it when the phone stands up.
+      const jitter = 0.004 + 0.02 * (1 - Math.min(Math.abs(gz), 1));
+      const ax = gx * this.accel, ay = gy * this.accel;
+      for (let i = 0; i < n; i++) {
+        vx[i] += ax + (rnd() * 2 - 1) * jitter;
+        vy[i] += ay + (rnd() * 2 - 1) * jitter;
+        const v2 = vx[i] * vx[i] + vy[i] * vy[i];
+        if (v2 > MAX_V * MAX_V) { const k = MAX_V / Math.sqrt(v2); vx[i] *= k; vy[i] *= k; }
+      }
+      // Grains nearest the "floor" move first, so a falling column doesn't leave gaps.
+      for (let i = 0; i < n; i++) { order[i] = i; keys[i] = -(px[i] * gx + py[i] * gy); }
+      for (let a = 1; a < n; a++) {
+        const idx = order[a], key = keys[idx];
+        let b = a - 1;
+        while (b >= 0 && keys[order[b]] > key) { order[b + 1] = order[b]; b--; }
+        order[b + 1] = idx;
+      }
+      // Gravity rounded to one of the 8 neighbours, for the avalanche rule.
+      const dir = Math.hypot(gx, gy) < MIN_SLIDE ? -1 : (Math.round(Math.atan2(gy, gx) / (Math.PI / 4)) + 8) % 8;
+      for (let k = 0; k < n; k++) {
+        const i = order[k], before = this.cell(px[i], py[i]);
+        this.move(i);
+        if (dir >= 0 && this.cell(px[i], py[i]) === before) this.avalanche(i, dir, gx, gy);
+      }
+    }
+    // A grain that couldn't move rolls off whatever it sits on, 45° either side of "down", if that's downhill.
+    avalanche(i, dir, gx, gy) {
+      if (rnd() > SLIDE_CHANCE) return;
+      const x = Math.floor(this.px[i]), y = Math.floor(this.py[i]);
+      const first = rnd() < 0.5 ? 1 : 7;
+      for (const turn of [first, 8 - first]) {
+        const d = (dir + turn) % 8, nx = x + DX[d], ny = y + DY[d];
+        if (!this.free(nx, ny)) continue;
+        if (DX[d] * gx + DY[d] * gy <= 0.05) continue;
+        this.occ[y * N + x] = FREE; this.occ[ny * N + nx] = i;
+        this.px[i] = nx + 0.5; this.py[i] = ny + 0.5;
+        this.vx[i] = DX[d] * SLIDE_SPEED; this.vy[i] = DY[d] * SLIDE_SPEED;
+        return;
+      }
+    }
+    move(i) {
+      const { px, py, vx, vy, occ } = this, e = this.elasticity;
+      const x = px[i], y = py[i];
+      let nx = x + vx[i], ny = y + vy[i];
+      if (nx < 0) { nx = 0; vx[i] = -vx[i] * e; } else if (nx >= N) { nx = N - EPS; vx[i] = -vx[i] * e; }
+      if (ny < 0) { ny = 0; vy[i] = -vy[i] * e; } else if (ny >= N) { ny = N - EPS; vy[i] = -vy[i] * e; }
+      const ox = Math.floor(x), oy = Math.floor(y), cx = Math.floor(nx), cy = Math.floor(ny);
+      if ((cx !== ox || cy !== oy) && occ[cy * N + cx] !== FREE) {
+        if (cy === oy) { nx = x; vx[i] = -vx[i] * e; } // blocked sideways
+        else if (cx === ox) { ny = y; vy[i] = -vy[i] * e; } // blocked up / down
+        else { // diagonal: skid along one axis if possible, faster axis first
+          const xFirst = Math.abs(vx[i]) >= Math.abs(vy[i]);
+          const xFree = occ[oy * N + cx] === FREE, yFree = occ[cy * N + ox] === FREE;
+          if ((xFirst && xFree) || (!xFirst && !yFree && xFree)) { ny = y; vy[i] = -vy[i] * e; }
+          else if (yFree) { nx = x; vx[i] = -vx[i] * e; }
+          else { nx = x; ny = y; vx[i] = -vx[i] * e; vy[i] = -vy[i] * e; }
+        }
+      }
+      const from = oy * N + ox, to = Math.floor(ny) * N + Math.floor(nx);
+      if (from !== to) { if (occ[from] === i) occ[from] = FREE; occ[to] = i; }
+      px[i] = nx; py[i] = ny;
+    }
+    render(out) {
+      for (let i = 0; i < this.count; i++) { const c = this.cell(this.px[i], this.py[i]); if (this.lum[i] > out[c]) out[c] = this.lum[i]; }
+    }
+  }
+  // 60 physics steps a second whatever the frame rate, as in the app.
+  const stepper = () => { let acc = 0; return dt => { acc += Math.min(dt, 0.1) * 60; const n = Math.floor(acc); acc -= n; return Math.min(n, 6); }; };
+  const settle = (sim, steps = 240) => { for (let k = 0; k < steps; k++) sim.step(0, 1, 0); };
+
+  // ---------------------------------------------------------------- gravity: the phone's tilt, or the mouse
+  const DOWN = { x: 0, y: 1, z: 0 };
+  // From DeviceOrientation: gravity in screen terms (x right, y down), whatever way the screen is turned.
+  const tilt = { on: false, x: 0, y: 1, z: 0 };
+  addEventListener("deviceorientation", e => {
+    if (e.beta == null || e.gamma == null) return;
+    const b = e.beta * Math.PI / 180, g = e.gamma * Math.PI / 180;
+    const x = Math.cos(b) * Math.sin(g), y = Math.sin(b);
+    const a = ((screen.orientation && screen.orientation.angle) || window.orientation || 0) * Math.PI / 180;
+    tilt.x = x * Math.cos(a) + y * Math.sin(a);
+    tilt.y = -x * Math.sin(a) + y * Math.cos(a);
+    tilt.z = -Math.cos(b) * Math.cos(g);
+    if (!tilt.on) { tilt.on = true; onTilt.forEach(f => f()); }
+  });
+  const onTilt = [];
+  let asked = false;
+  const askTilt = () => { // iOS asks once, on a tap
+    if (asked) return;
+    asked = true;
+    const D = window.DeviceOrientationEvent;
+    if (D && typeof D.requestPermission === "function") D.requestPermission().catch(() => {});
+  };
+  // A tray under the pointer: the sand runs towards the mouse (or a dragging finger); right over the
+  // matrix it lies flat. A tap shakes.
+  const tray = (area, grips, rect, enabled, onTap) => {
+    const s = { x: 0, y: 1, z: 0, hover: false, drag: false, moved: false, id: null, sx: 0, sy: 0 };
+    const set = e => {
+      const r = rect(), R = Math.max(40, r.width * 0.5);
+      let dx = (e.clientX - (r.left + r.width / 2)) / R, dy = (e.clientY - (r.top + r.height / 2)) / R;
+      const m = Math.hypot(dx, dy);
+      if (m > 1) { dx /= m; dy /= m; }
+      s.x = dx; s.y = dy; s.z = Math.sqrt(Math.max(0, 1 - dx * dx - dy * dy));
+    };
+    area.addEventListener("pointermove", e => {
+      if (!enabled()) return;
+      if (s.drag && e.pointerId === s.id) {
+        if (!s.moved && Math.hypot(e.clientX - s.sx, e.clientY - s.sy) > 8) s.moved = true;
+        if (s.moved) set(e);
+      } else if (e.pointerType === "mouse") { s.hover = true; set(e); }
+    });
+    area.addEventListener("pointerleave", e => { if (e.pointerType === "mouse") s.hover = false; });
+    const end = tap => e => {
+      if (!s.drag || e.pointerId !== s.id) return;
+      s.drag = false;
+      if (tap && !s.moved && enabled()) onTap();
+    };
+    for (const grip of [].concat(grips)) {
+      grip.addEventListener("pointerdown", e => {
+        if (!enabled()) return;
+        askTilt();
+        s.drag = true; s.moved = false; s.id = e.pointerId; s.sx = e.clientX; s.sy = e.clientY;
+        try { grip.setPointerCapture(e.pointerId); } catch (err) {}
+      });
+      grip.addEventListener("pointerup", end(true));
+      grip.addEventListener("pointercancel", end(false));
+    }
+    s.active = () => s.hover || (s.drag && s.moved);
+    return s;
+  };
+  // Eases a demo's gravity towards whatever drives it now.
+  const follow = (g, src, dt) => { const k = 1 - Math.exp(-dt * 9); g.x += (src.x - g.x) * k; g.y += (src.y - g.y) * k; g.z += (src.z - g.z) * k; };
+
+  // ---------------------------------------------------------------- the app's Hourglass toy
+  // The glass is drawn faintly, the sand starts in the top bulb and one grain drops through the neck at a
+  // time, so the top empties in `seconds`. Turned over it runs back; on its side it pauses.
+  const hourglass = onDone => {
+    const NECK_ROW = Math.floor(N / 2), NECK_X = (N - 1) / 2, MAX_HALF = (N - 1) / 2 - 3, mid = NECK_ROW, reach = mid - 1;
+    const inside = new Uint8Array(N * N);
+    for (let y = 1; y < N - 1; y++) { // two straight-sided bulbs meeting at a one-dot neck
+      const half = Math.min(Math.round(Math.abs(y - mid) / reach * MAX_HALF * 1.5), MAX_HALF);
+      for (let x = NECK_X - half; x <= NECK_X + half; x++) if (isLed(x, y) && (isLed(x - 1, y) || half === 0)) inside[y * N + x] = 1;
+    }
+    for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) { // keep a solid rim of LEDs around the glass
+      if (inside[y * N + x] && (!isLed(x - 1, y) || !isLed(x + 1, y) || !isLed(x, y - 1) || !isLed(x, y + 1))) inside[y * N + x] = 0;
+    }
+    const outline = new Uint8Array(N * N);
+    for (let i = 0; i < N * N; i++) {
+      if (inside[i] || !VIS[i]) continue;
+      const x = i % N, y = Math.floor(i / N);
+      for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) if (isLed(x + dx, y + dy) && inside[(y + dy) * N + x + dx]) outline[i] = 1;
+    }
+    const h = { seconds: 30 };
+    let sim, interval = 1, dropT = 0, flash = 0, done = false, lastDown = true;
+    const upper = down => { let n = 0; for (let i = 0; i < sim.count; i++) { const row = Math.floor(sim.cell(sim.px[i], sim.py[i]) / N); if (down ? row < NECK_ROW : row > NECK_ROW) n++; } return n; };
+    h.fill = () => {
+      const walls = new Uint8Array(N * N); // the neck is solid; grains are passed through it one at a time
+      for (let i = 0; i < N * N; i++) walls[i] = !inside[i] || i === NECK_ROW * N + NECK_X ? 1 : 0;
+      sim = new Sand(walls); sim.elasticity = 0.3; sim.accel = 0.16;
+      const top = [];
+      for (let i = 0; i < N * N; i++) if (inside[i] && Math.floor(i / N) < NECK_ROW) top.push(i);
+      top.sort((a, b) => Math.floor(b / N) - Math.floor(a / N)); // the top bulb, bottom rows first
+      top.slice(0, Math.round(top.length * 0.82)).forEach(i => sim.add(i % N, Math.floor(i / N), sim.level()));
+      interval = h.seconds / Math.max(1, sim.count); dropT = interval; done = false; lastDown = true;
+    };
+    h.update = (dt, g, n) => {
+      for (let k = n; k > 0; k--) sim.step(g.x, g.y, g.z);
+      flash -= dt;
+      const down = g.y > 0.35, up = g.y < -0.35;
+      if (!down && !up) return; // on its side: paused
+      lastDown = down;
+      dropT -= dt;
+      if (dropT <= 0) {
+        const from = down ? NECK_ROW - 1 : NECK_ROW + 1, to = down ? NECK_ROW + 1 : NECK_ROW - 1;
+        if (sim.transfer(NECK_X, from, NECK_X, to)) { flash = 0.08; dropT += interval; } else dropT = 0;
+      }
+      const left = upper(down);
+      if (left === 0 && !done) { done = true; onDone(); } else if (left > 0) done = false;
+    };
+    h.render = f => { for (let i = 0; i < N * N; i++) if (outline[i]) f[i] = 34; sim.render(f); if (flash > 0) f[NECK_ROW * N + NECK_X] = 200; };
+    h.time = () => { const s = Math.round(upper(lastDown) * interval); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`; };
+    h.fill();
+    return h;
+  };
+
+  // ---------------------------------------------------------------- hero: the app's Sand and Hourglass toys on the phone back
+  const hero = (() => {
+    const canvas = $("matrix"), big = $("matrix-big"), btn = $("matrix-btn"), loupe = $("loupe"), stage = $("stage"), level = $("level");
+    const grains = $("grains"), clock = $("clock"), dur = $("dur");
+    const sim = new Sand();
+    sim.sprinkle(Math.round(sim.capacity * 0.42), true); // SandToy: 42 % of the LEDs, textured
+    if (reduce) settle(sim);
+    let touched = false;
+    addEventListener("pointerdown", () => { touched = true; }, { capture: true, passive: true });
+    const glassToy = hourglass(() => { // time's up: the phone buzzes
+      if (!reduce) { loupe.classList.remove("hit"); void loupe.offsetWidth; loupe.classList.add("hit"); }
+      try { if (touched && navigator.vibrate) navigator.vibrate([60, 80, 60]); } catch (e) {}
+    });
+    let toy = "sand";
+    const g = { x: 0, y: 1, z: 0 }, steps = stepper();
+    let shown = "";
+    const act = () => { // a tap: shake the sand, or refill the hourglass
+      if (toy === "sand") { sim.shake(0.9); if (reduce) settle(sim); } else glassToy.fill();
+      draw();
+    };
+    const tr = tray(stage, [btn, loupe], () => big.getBoundingClientRect(), () => true, act);
+    [btn, loupe].forEach(el => el.addEventListener("click", e => { if (e.detail === 0) act(); })); // keyboard
+    $("shake").addEventListener("click", () => { askTilt(); act(); });
+    $("refill").addEventListener("click", () => { askTilt(); act(); });
+    $("more").addEventListener("click", () => { sim.sprinkle(Math.max(4, Math.floor(sim.capacity / 20)), true); if (reduce) settle(sim); draw(); });
+    $("less").addEventListener("click", () => { for (let k = Math.max(4, Math.floor(sim.capacity / 20)); k > 0 && sim.count > 1; k--) sim.removeLast(); draw(); });
+    const DURS = [[30, "30 S"], [60, "1 MIN"], [180, "3 MIN"], [300, "5 MIN"]];
+    dur.addEventListener("click", () => {
+      const k = (DURS.findIndex(d => d[0] === glassToy.seconds) + 1) % DURS.length;
+      glassToy.seconds = DURS[k][0]; dur.textContent = DURS[k][1];
+      glassToy.fill(); draw();
+    });
+
+    const hint = () => {
+      const how = toy === "sand"
+        ? tilt.on ? "Penchez votre téléphone, le sable suit. Touchez la matrice pour secouer."
+          : coarse ? "Le sable suit l'inclinaison&nbsp;: penchez le téléphone, ou glissez sur la matrice. Touchez pour secouer."
+          : "Le sable suit l'inclinaison&nbsp;: bougez la souris autour, cliquez pour secouer."
+        : tilt.on ? "Un grain passe le goulot à la fois. Retournez le téléphone pour le relancer, touchez pour le remplir."
+          : coarse ? "Un grain passe le goulot à la fois. Glissez vers le haut de la matrice pour le retourner, touchez pour le remplir."
+          : "Un grain passe le goulot à la fois. La souris au-dessus le retourne, un clic le remplit.";
+      const what = toy === "sand" ? "Les 137 LED de la Glyph Matrix du Nothing Phone <span class=\"as-is\">(4a)</span> Pro, et en grand."
+        : "Le sablier, un vrai minuteur.";
+      $("hero-hint").innerHTML = `${what} ${how}`;
+    };
+    const pick = which => {
+      toy = which;
+      document.querySelectorAll(".toy").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.toy === toy)));
+      document.querySelectorAll("[data-for]").forEach(el => { el.hidden = el.dataset.for !== toy; });
+      const label = toy === "sand" ? "du sable. Touchez pour secouer." : "un sablier. Touchez pour le remplir.";
+      btn.setAttribute("aria-label", `Glyph Matrix : ${label}`);
+      loupe.setAttribute("aria-label", `La même Glyph Matrix, en grand : ${label}`);
+      if (toy === "hourglass") glassToy.fill();
+      hint(); draw();
+    };
+    document.querySelectorAll(".toy").forEach(b => b.addEventListener("click", () => pick(b.dataset.toy)));
+
+    const drawLevel = () => {
+      const ctx = level.getContext("2d"), W = level.width, c = W / 2, R = W * 0.42;
+      ctx.clearRect(0, 0, W, W);
+      ctx.strokeStyle = T.line; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.arc(c, c, R, 0, 7); ctx.stroke();
+      ctx.fillStyle = T.faint;
+      ctx.beginPath(); ctx.arc(c, c, 2.5, 0, 7); ctx.fill();
+      const m = Math.max(1, Math.hypot(g.x, g.y));
+      ctx.fillStyle = T.red;
+      ctx.beginPath(); ctx.arc(c + g.x * (R - 9) / m, c + g.y * (R - 9) / m, 7, 0, 7); ctx.fill();
+    };
+    const draw = () => {
+      const f = new Uint8Array(N * N);
+      if (toy === "sand") sim.render(f); else glassToy.render(f);
+      paint(canvas, f);
+      paint(big, f);
+      drawLevel();
+      const n = toy === "sand" ? String(sim.count) : glassToy.time();
+      if (n !== shown) { (toy === "sand" ? grains : clock).textContent = n; shown = n; }
+    };
+    const step = (now, dt) => {
+      follow(g, tr.active() ? tr : tilt.on ? tilt : DOWN, dt);
+      const n = steps(dt);
+      if (toy === "sand") for (let k = n; k > 0; k--) sim.step(g.x, g.y, g.z);
+      else glassToy.update(dt, g, n);
+      draw();
+    };
+    hint();
+    onTilt.push(hint);
+    return { el: stage, step, draw, live: () => !reduce };
+  })();
+
+  // ---------------------------------------------------------------- Envahisseurs: the app's InvadersGame, on 13 × 13
+  const game = (() => {
+    const canvas = $("game"), glass = $("game-glass");
+    const ui = { score: $("g-score"), lives: $("g-lives"), wave: $("g-wave"), best: $("g-best"), status: $("g-status"), play: $("g-play") };
+    const S = (...rows) => {
+      const w = Math.max(...rows.map(r => r.length)), h = rows.length, px = new Uint8Array(w * h);
+      rows.forEach((r, y) => [...r].forEach((c, x) => { px[y * w + x] = c === "#" ? 255 : c === "+" ? 170 : c === "-" ? 90 : 0; }));
+      return { w, h, px };
+    };
+    const lit = (s, x, y) => x >= 0 && x < s.w && y >= 0 && y < s.h && s.px[y * s.w + x] > 0;
+    const fits = (s, x, y) => { for (let sy = 0; sy < s.h; sy++) for (let sx = 0; sx < s.w; sx++) if (lit(s, sx, sy) && !isLed(x + sx, y + sy)) return false; return true; };
+    const SHIP = S(".#.", "###"), INV_A = S("###", "#.#"), INV_B = S("###", ".#."), BOSS_A = S(".###.", "##.##", "#.#.#"), BOSS_B = S(".###.", "##.##", ".#.#."), UFO = S("##");
+
+    // Layout, worked out from the matrix and the sprites as in the app.
+    const rowWidth = y => (y >= 0 && y < N ? ROWS[y] : 0);
+    let SHIP_BOTTOM = N - 1;
+    for (let y = N - 1; y >= 0; y--) if (rowWidth(y) >= Math.max(SHIP.w + 4, Math.floor(N * 0.65))) { SHIP_BOTTOM = y; break; }
+    const SHIP_TOP = SHIP_BOTTOM - SHIP.h + 1;
+    let MIN_X = null, MAX_X = 0;
+    for (let x = -SHIP.w; x <= N; x++) if (fits(SHIP, x, SHIP_TOP)) { if (MIN_X === null) MIN_X = x; MAX_X = x; }
+    const MAX_SPEED = N * 1.1, LIVES_ROW = SHIP_BOTTOM + 1;
+    let GUN = 0;
+    while (GUN < SHIP.w && !lit(SHIP, GUN, 0)) GUN++;
+    const GAP_X = INV_A.w >= 3 ? 2 : 1;
+    const COLS = clamp(Math.floor((N * 0.8 + GAP_X) / (INV_A.w + GAP_X)), 1, 6);
+    const SX = INV_A.w + GAP_X, SY = INV_A.h + 1, FORM_W = COLS * INV_A.w + (COLS - 1) * GAP_X;
+    let FORM_TOP = 1;
+    for (let y = 0; y < N; y++) if (rowWidth(y) >= FORM_W + 2) { FORM_TOP = y; break; }
+    const LANDING = SHIP_TOP - 1;
+    const RWS = LANDING - (FORM_TOP + 2 * INV_A.h) >= 3 ? 2 : 1;
+    const UFO_ROW = Math.max(0, FORM_TOP - UFO.h);
+    const PACE = 1.1, LIVES = 3, TILT_RANGE = 0.42, TOP = Math.floor((N - 7) / 2) - 1;
+
+    // Drawing into a frame.
+    const plot = (f, x, y, v) => { if (!isLed(x, y)) return; const i = y * N + x; if (v > f[i]) f[i] = Math.min(255, v); };
+    const sprite = (f, s, x, y, k = 1) => { for (let sy = 0; sy < s.h; sy++) for (let sx = 0; sx < s.w; sx++) { const v = s.px[sy * s.w + sx]; if (v) plot(f, x + sx, y + sy, Math.max(1, Math.round(v * k))); } };
+    const strip = (f, cols, x, top, v) => cols.forEach((col, c) => { for (let row = 0; row < 10; row++) if (col & (1 << row)) plot(f, x + c, top + row, v); });
+    const centred = (f, text) => { const s = layout(text); strip(f, s, Math.floor((N - s.length) / 2), TOP, 255); };
+
+    // ---- state
+    let mode = "demo"; // the ship plays on its own until someone takes over
+    let phase, phaseT, score, lives, wave, fx0, fy0, dir, stepT, anim, bossWave, bossHp, bossHpMax, bossX, bossY, bossFlash;
+    let shots = [], bursts = [], reload = 0, enemyFireT = 0, ufoX = 0, ufoDir = 1, ufoActive = false, ufoT = 14, marquee = null, x = 5;
+    const alive = new Array(COLS * RWS).fill(true);
+    let best = 0;
+    try { best = parseInt(localStorage.getItem("glyphies-invaders-best") || "0", 10) || 0; } catch (e) {}
+    const cell = () => clamp(Math.round(x), MIN_X, MAX_X);
+
+    const buzz = kind => {
+      if (mode !== "player") return;
+      if (kind === "big" && !reduce) { glass.classList.remove("hit"); void glass.offsetWidth; glass.classList.add("hit"); }
+      try { if (navigator.vibrate) navigator.vibrate(kind === "big" ? 90 : kind === "win" ? [25, 40, 25] : 10); } catch (e) {}
+    };
+    const startWave = () => {
+      shots = []; bursts = [];
+      ufoActive = false; ufoT = 10 + rnd() * 10;
+      dir = 1; stepT = 0;
+      bossWave = wave % 4 === 0;
+      if (bossWave) { bossHpMax = 5 + wave; bossHp = bossHpMax; bossX = Math.floor((N - BOSS_A.w) / 2); bossY = FORM_TOP; bossFlash = 0; }
+      else { alive.fill(true); fx0 = Math.floor((N - FORM_W) / 2); fy0 = FORM_TOP; }
+      enemyFireT = 1.2;
+      phase = "intro"; phaseT = 0;
+    };
+    const restart = () => {
+      score = 0; lives = LIVES; wave = 1; x = (MIN_X + MAX_X) / 2; marquee = null;
+      startWave();
+      phase = "countdown"; phaseT = 0;
+    };
+
+    const slide = (dt, target) => {
+      if (target == null) return;
+      const d = target - x, st = MAX_SPEED * dt;
+      x = Math.abs(d) <= st ? target : x + st * Math.sign(d);
+      x = clamp(x, MIN_X, MAX_X);
+    };
+    const formationFits = (ox, oy) => {
+      for (let r = 0; r < RWS; r++) for (let c = 0; c < COLS; c++) if (alive[r * COLS + c] && !fits(INV_A, ox + c * SX, oy + r * SY)) return false;
+      return true;
+    };
+    const moveFormation = dt => {
+      const left = alive.filter(Boolean).length;
+      if (!left) return;
+      const interval = Math.max(0.07, 0.68 / PACE * Math.pow(0.88, wave - 1) * (0.3 + 0.7 * left / alive.length));
+      stepT += dt;
+      if (stepT < interval) return;
+      stepT = 0; anim = !anim;
+      if (formationFits(fx0 + dir, fy0)) fx0 += dir;
+      else {
+        fy0 += 1; dir = -dir;
+        if (!formationFits(fx0, fy0) && formationFits(fx0 + dir, fy0)) fx0 += dir; // squeezed by the round edge
+      }
+      for (let r = RWS - 1; r >= 0; r--) for (let c = 0; c < COLS; c++) {
+        if (alive[r * COLS + c] && fy0 + r * SY + INV_A.h - 1 >= LANDING) { invaded(); return; }
+      }
+    };
+    const moveBoss = dt => {
+      bossFlash -= dt;
+      const interval = Math.max(0.08, 0.32 / PACE * Math.pow(0.95, wave - 1));
+      stepT += dt;
+      if (stepT < interval) return;
+      stepT = 0; anim = !anim;
+      if (fits(BOSS_A, bossX + dir, bossY)) bossX += dir;
+      else { dir = -dir; if (rnd() < 0.5 && bossY + BOSS_A.h < LANDING - 1) bossY++; }
+    };
+    const enemyShotSpeed = () => Math.min(N * 0.6 + wave * 0.4, N * 1.1) * PACE;
+    const enemyShoot = () => {
+      if (bossWave) { shots.push({ x: bossX + Math.floor(rnd() * BOSS_A.w), y: bossY + BOSS_A.h, speed: enemyShotSpeed(), enemy: true }); return; }
+      const columns = [];
+      for (let c = 0; c < COLS; c++) for (let r = 0; r < RWS; r++) if (alive[r * COLS + c]) { columns.push(c); break; }
+      if (!columns.length) return;
+      // Prefer the column near the ship now and then, so standing still isn't safe.
+      const me = cell() + GUN, mid = c => fx0 + c * SX + Math.floor(INV_A.w / 2);
+      const near = columns.reduce((a, c) => (Math.abs(mid(c) - me) < Math.abs(mid(a) - me) ? c : a));
+      const c = rnd() < 0.4 ? near : columns[Math.floor(rnd() * columns.length)];
+      let r = RWS - 1;
+      while (!alive[r * COLS + c]) r--;
+      shots.push({ x: mid(c), y: fy0 + r * SY + INV_A.h, speed: enemyShotSpeed(), enemy: true });
+    };
+    const moveUfo = dt => {
+      if (bossWave) return;
+      if (!ufoActive) {
+        ufoT -= dt;
+        if (ufoT <= 0) { ufoActive = true; ufoDir = rnd() < 0.5 ? 1 : -1; ufoX = ufoDir > 0 ? -UFO.w : N; }
+        return;
+      }
+      ufoX += ufoDir * N * 0.45 * dt;
+      if (ufoX > N + 1 || ufoX < -UFO.w - 1) { ufoActive = false; ufoT = 12 + rnd() * 12; }
+    };
+    const shipHit = () => { phase = "dying"; phaseT = 0; buzz("big"); bursts.push({ x: cell() + Math.floor(SHIP.w / 2), y: SHIP_TOP, t: 0 }); };
+    const invaded = () => { // they reached the ship: a life lost and the wave starts over
+      buzz("big");
+      lives--;
+      if (lives <= 0) { phase = "dying"; phaseT = 1.2; lives = 1; } else startWave();
+    };
+    const waveCleared = () => { buzz("win"); score += 10 * wave; wave++; startWave(); };
+    const hit = (s, row) => {
+      const sx = s.x;
+      if (s.enemy) {
+        if (row >= SHIP_TOP && row <= SHIP_BOTTOM && lit(SHIP, sx - cell(), row - SHIP_TOP)) { shipHit(); return true; }
+        return false;
+      }
+      if (ufoActive) {
+        const ux = Math.trunc(ufoX);
+        if (row >= UFO_ROW && row < UFO_ROW + UFO.h && lit(UFO, sx - ux, row - UFO_ROW)) {
+          ufoActive = false; ufoT = 14 + rnd() * 12;
+          score += 50 * (1 + Math.floor(rnd() * 3));
+          bursts.push({ x: sx, y: row, t: 0 }); buzz("win");
+          return true;
+        }
+      }
+      if (bossWave) {
+        if (bossHp > 0 && row >= bossY && row < bossY + BOSS_A.h && lit(BOSS_A, sx - bossX, row - bossY)) {
+          bossHp--; bossFlash = 0.15; buzz("tick");
+          if (bossHp <= 0) {
+            score += 100 + 25 * wave;
+            for (let k = 0; k < 4; k++) bursts.push({ x: bossX + Math.floor(rnd() * BOSS_A.w), y: bossY + Math.floor(rnd() * BOSS_A.h), t: 0 });
+          }
+          return true;
+        }
+        return false;
+      }
+      const inv = anim ? INV_B : INV_A;
+      for (let r = 0; r < RWS; r++) for (let c = 0; c < COLS; c++) {
+        const k = r * COLS + c;
+        if (!alive[k]) continue;
+        const ix = fx0 + c * SX, iy = fy0 + r * SY;
+        if (row >= iy && row < iy + INV_A.h && lit(inv, sx - ix, row - iy)) {
+          alive[k] = false;
+          score += r === 0 ? 30 : 20;
+          bursts.push({ x: ix + Math.floor(INV_A.w / 2), y: iy + Math.floor(INV_A.h / 2), t: 0 });
+          buzz("tick");
+          return true;
+        }
+      }
+      return false;
+    };
+    const play = (dt, target) => {
+      slide(dt, target);
+      reload -= dt;
+      if (reload <= 0 && !shots.some(s => !s.enemy)) { // auto-fire: one shot at a time
+        shots.push({ x: cell() + GUN, y: SHIP_TOP - 1, speed: N * 1.6, enemy: false });
+        reload = 0.15;
+      }
+      if (bossWave) moveBoss(dt); else moveFormation(dt);
+      if (phase !== "play") return;
+      enemyFireT -= dt;
+      const maxEnemy = Math.min(3, 1 + Math.floor(wave / 2)) + (bossWave ? 1 : 0);
+      if (enemyFireT <= 0) {
+        if (shots.filter(s => s.enemy).length < maxEnemy) enemyShoot();
+        enemyFireT = Math.max(0.35, 1.4 * Math.pow(0.9, wave - 1) / PACE) * (0.6 + rnd() * 0.8);
+      }
+      moveUfo(dt);
+      for (const s of shots) {
+        if (s.dead) continue;
+        const before = Math.trunc(s.y);
+        s.y += s.enemy ? s.speed * dt : -s.speed * dt;
+        const after = Math.trunc(s.y);
+        // every row crossed, so fast shots don't skip over a target
+        if (s.enemy) { for (let row = before + 1; row <= after; row++) if (hit(s, row)) { s.dead = true; break; } }
+        else { for (let row = before - 1; row >= after; row--) if (hit(s, row)) { s.dead = true; break; } }
+        if (!s.dead && (s.y < -1 || s.y > N)) s.dead = true;
+      }
+      for (const a of shots) for (const b of shots) { // shots cancel each other out
+        if (!a.dead && !b.dead && !a.enemy && b.enemy && a.x === b.x && Math.abs(a.y - b.y) < 1.2) {
+          a.dead = b.dead = true;
+          bursts.push({ x: a.x, y: Math.trunc(a.y), t: 0 });
+        }
+      }
+      shots = shots.filter(s => !s.dead);
+      if (phase === "play" && (bossWave ? bossHp <= 0 : !alive.some(Boolean))) waveCleared();
+    };
+    const gameOver = () => {
+      if (mode !== "player" || score <= best) return;
+      best = score;
+      try { localStorage.setItem("glyphies-invaders-best", String(best)); } catch (e) {}
+    };
+    const update = (dt, target, presses) => {
+      phaseT += dt;
+      bursts.forEach(b => (b.t += dt));
+      bursts = bursts.filter(b => b.t <= 0.3);
+      if (phase === "countdown") { slide(dt, target); if (phaseT >= 1.5) { phase = "intro"; phaseT = 0.6; } }
+      else if (phase === "intro") { slide(dt, target); if (phaseT >= 0.9) { phase = "play"; phaseT = 0; } }
+      else if (phase === "play") play(dt, target);
+      else if (phase === "dying") {
+        if (phaseT >= 1.2) {
+          lives--;
+          if (lives <= 0) {
+            phase = "over"; phaseT = 0;
+            const s = layout(`GAME OVER  ·  ${score}`);
+            marquee = { s, loop: s.length + N + 4, pos: 0, loops: 0 };
+            gameOver();
+          } else { shots = []; phase = "play"; phaseT = 0; }
+        }
+      } else if (phase === "over") {
+        marquee.pos += dt * 14;
+        while (marquee.pos >= marquee.loop) { marquee.pos -= marquee.loop; marquee.loops++; }
+        if (phaseT > 1.2 && presses > 0) restart();
+        else if (mode === "demo" && marquee.loops >= 1) restart();
+      }
+    };
+
+    const frame = () => {
+      const f = new Uint8Array(N * N);
+      const ship = k => sprite(f, SHIP, cell(), SHIP_TOP, k);
+      const livesRow = n => { n = Math.min(n, 5); const st = Math.floor((N - (n * 2 - 1)) / 2); for (let i = 0; i < n; i++) plot(f, st + i * 2, LIVES_ROW, 70); };
+      if (phase === "countdown") { centred(f, String(clamp(3 - Math.floor(phaseT / 0.5), 1, 3))); return f; }
+      if (phase === "intro") { if (phaseT < 0.6) centred(f, String(wave)); ship(1); livesRow(lives); return f; }
+      if (phase === "over") { strip(f, marquee.s, N - Math.floor(marquee.pos), TOP, 255); return f; }
+      if (bossWave) sprite(f, anim ? BOSS_B : BOSS_A, bossX, bossY, bossFlash > 0 ? 0.35 : 1);
+      else {
+        const s = anim ? INV_B : INV_A;
+        for (let r = 0; r < RWS; r++) for (let c = 0; c < COLS; c++) if (alive[r * COLS + c]) sprite(f, s, fx0 + c * SX, fy0 + r * SY, r === 0 ? 1 : 0.75);
+      }
+      if (ufoActive) sprite(f, UFO, Math.trunc(ufoX), UFO_ROW, Math.floor(phaseT * 6) % 2 === 0 ? 1 : 0.45);
+      for (const s of shots) plot(f, s.x, Math.trunc(s.y), s.enemy ? 130 : 255);
+      if (phase === "dying") { if (Math.floor(phaseT * 10) % 2 === 0) ship(0.6); } else ship(1);
+      livesRow(phase === "dying" ? lives - 1 : lives);
+      for (const b of bursts) {
+        const v = b.t < 0.12 ? 255 : 110;
+        if (b.t < 0.12) plot(f, b.x, b.y, v);
+        plot(f, b.x - 1, b.y - 1, v); plot(f, b.x + 1, b.y - 1, v); plot(f, b.x - 1, b.y + 1, v); plot(f, b.x + 1, b.y + 1, v);
+      }
+      return f;
+    };
+
+    // ---- the HUD next to the matrix
+    let hudKey = "";
+    const hud = () => {
+      const l = Math.max(0, phase === "dying" ? lives - 1 : lives);
+      const key = `${score}|${l}|${wave}|${best}|${mode}|${phase === "over"}|${tilt.on}`;
+      if (key === hudKey) return;
+      hudKey = key;
+      ui.score.textContent = String(score).padStart(4, "0");
+      [...ui.lives.children].forEach((d, i) => d.classList.toggle("off", i >= l));
+      ui.wave.textContent = bossWave && phase !== "over" ? `${wave}·B` : String(wave);
+      ui.best.textContent = String(best);
+      ui.status.textContent = mode === "demo" ? (reduce ? "Touchez Jouer pour lancer une partie" : "Démo\u00a0: le vaisseau joue seul")
+        : phase === "over" ? "Game over · touchez la matrice pour rejouer"
+        : tilt.on ? "Penchez le téléphone, ou glissez le doigt" : coarse ? "Glissez le doigt sur la matrice" : "← → ou A D, ou la souris sur la matrice";
+      ui.play.textContent = mode === "demo" ? "JOUER" : "RECOMMENCER";
+    };
+
+    // ---- input: keys, pointer, tilt; or the autopilot in the demo
+    const keys = { l: false, r: false };
+    let ptr = null, ptrOn = false, presses = 0;
+    const toTarget = e => { const r = canvas.getBoundingClientRect(); return clamp((e.clientX - r.left) / r.width * N - 0.5 - (SHIP.w - 1) / 2, MIN_X, MAX_X); };
+    const autopilot = () => {
+      const me = cell() + GUN;
+      let t = me;
+      if (bossWave) t = bossX + Math.floor(BOSS_A.w / 2);
+      else {
+        let bestX = null;
+        for (let c = 0; c < COLS; c++) {
+          let any = false;
+          for (let r = 0; r < RWS; r++) any = any || alive[r * COLS + c];
+          if (!any) continue;
+          const cx = fx0 + c * SX + Math.floor(INV_A.w / 2);
+          if (bestX === null || Math.abs(cx - me) < Math.abs(bestX - me)) bestX = cx;
+        }
+        if (bestX !== null) t = bestX;
+      }
+      let left = t - GUN;
+      for (const s of shots) { // step out of the way of a shot coming down
+        if (s.enemy && s.y >= 5 && s.x >= left - 1 && s.x <= left + SHIP.w) left = s.x - SHIP.w - 1 >= MIN_X ? s.x - SHIP.w - 1 : s.x + 2;
+      }
+      return clamp(left, MIN_X, MAX_X);
+    };
+    const target = () => {
+      if (mode === "demo") return autopilot();
+      if (keys.l !== keys.r) return keys.l ? MIN_X : MAX_X;
+      if (ptrOn && ptr != null) return ptr;
+      if (tilt.on) return MIN_X + (clamp(tilt.x / TILT_RANGE, -1, 1) + 1) / 2 * (MAX_X - MIN_X);
+      return null;
+    };
+    const start = () => { mode = "player"; restart(); hudKey = ""; hud(); draw(); };
+    ui.play.addEventListener("click", () => { askTilt(); start(); glass.focus({ preventScroll: true }); });
+    glass.addEventListener("pointerdown", e => {
+      askTilt();
+      if (mode === "demo") { start(); }
+      else presses++;
+      ptr = toTarget(e); ptrOn = true;
+      try { glass.setPointerCapture(e.pointerId); } catch (err) {}
+    });
+    glass.addEventListener("pointermove", e => {
+      if (mode !== "player") return;
+      if (e.pointerType === "mouse" || ptrOn) { ptr = toTarget(e); ptrOn = true; }
+    });
+    const lift = e => { if (e.pointerType !== "mouse") ptrOn = false; };
+    glass.addEventListener("pointerup", lift);
+    glass.addEventListener("pointercancel", () => { ptrOn = false; });
+    glass.addEventListener("pointerleave", e => { if (e.pointerType === "mouse") ptrOn = false; });
+    let visible = false;
+    const key = (e, down) => {
+      if (e.altKey || e.ctrlKey || e.metaKey) return;
+      const k = e.key, left = k === "ArrowLeft" || k === "a" || k === "A" || k === "q" || k === "Q", right = k === "ArrowRight" || k === "d" || k === "D";
+      const focused = document.activeElement === glass;
+      if (document.activeElement === $("draw-glass")) return;
+      if (left || right) {
+        if (!visible && !focused) return;
+        if (down && mode === "demo") start();
+        if (left) keys.l = down; else keys.r = down;
+        ptrOn = false;
+        e.preventDefault();
+      } else if (focused && down && (k === " " || k === "Enter")) {
+        if (mode === "demo") start(); else presses++;
+        e.preventDefault();
+      }
+    };
+    addEventListener("keydown", e => key(e, true));
+    addEventListener("keyup", e => key(e, false));
+    addEventListener("blur", () => { keys.l = keys.r = false; });
+
+    const draw = () => { paint(canvas, frame()); hud(); };
+    const step = (now, dt) => {
+      update(dt, target(), presses);
+      presses = 0;
+      draw();
+    };
+    // A still picture for reduced motion: a wave under way.
+    restart();
+    if (reduce) { phase = "play"; phaseT = 0; fy0 = FORM_TOP + 1; x = 5; shots = [{ x: 6, y: 6, enemy: false }, { x: 3, y: 8, enemy: true }]; }
+    return { el: canvas, step, draw, live: () => !reduce || mode === "player", onSeen: v => { visible = v; } };
+  })();
+
+  // ---------------------------------------------------------------- Éditeur: draw dot by dot, then turn it into sand
+  const editor = (() => {
+    const canvas = $("draw"), glass = $("draw-glass"), status = $("d-status");
+    const b = { clear: $("d-clear"), mirror: $("d-mirror"), sand: $("d-sand"), build: $("d-build") };
+    const CRAB = ["..#.....#..", "...#...#...", "..#######..", ".##.###.##.", "###########", "#.#######.#", "#.#.....#.#", "...##.##..."];
+    const pic = new Uint8Array(N * N);
+    CRAB.forEach((r, y) => [...r].forEach((c, x) => { if (c === "#") pic[(y + 2) * N + x + 1] = 255; }));
+    let mode = "draw", sim = null, homes = [], from = null, delay = null, t = 0, hover = -1, mirror = false, kbd = false;
+    const g = { x: 0, y: 1, z: 0 }, steps = stepper();
+
+    const frame = () => {
+      const f = new Uint8Array(N * N);
+      if (mode === "draw") {
+        f.set(pic);
+        if (hover >= 0) { // the dot under the pointer glows faintly; the keyboard cursor also dims a lit one
+          const mark = i => { f[i] = f[i] ? (kbd ? 150 : f[i]) : 64; };
+          mark(hover);
+          const m = Math.floor(hover / N) * N + (N - 1 - hover % N);
+          if (mirror && m !== hover) mark(m);
+        }
+      } else if (mode === "sand") sim.render(f);
+      else {
+        for (let i = 0; i < sim.count; i++) {
+          const d = clamp((t - delay[i]) / 0.5, 0, 1), e = 1 - Math.pow(1 - d, 3);
+          const hx = homes[i] % N + 0.5, hy = Math.floor(homes[i] / N) + 0.5;
+          const c = sim.cell(from[2 * i] + (hx - from[2 * i]) * e, from[2 * i + 1] + (hy - from[2 * i + 1]) * e);
+          if (sim.lum[i] > f[c]) f[c] = sim.lum[i];
+        }
+      }
+      return f;
+    };
+    const draw = () => paint(canvas, frame());
+    const say = () => {
+      status.textContent = mode === "draw" ? "Touchez pour allumer · glissez pour peindre"
+        : mode === "build" ? "Chaque grain retrouve sa place"
+        : tilt.on ? "Penchez le téléphone · touchez pour secouer"
+        : coarse ? "Glissez sur la matrice pour pencher · touchez pour secouer" : "Bougez la souris autour · cliquez pour secouer";
+      b.sand.disabled = mode !== "draw";
+      b.build.disabled = mode !== "sand";
+      b.mirror.disabled = mode !== "draw";
+      glass.dataset.mode = mode;
+    };
+
+    // ---- drawing: a tap toggles a dot, a drag paints (or erases, if it started on a lit dot)
+    const at = e => { const r = canvas.getBoundingClientRect(); return [Math.floor((e.clientX - r.left) / r.width * N), Math.floor((e.clientY - r.top) / r.height * N)]; };
+    let painting = false, val = 255, last = null;
+    const set = (x, y) => {
+      if (!isLed(x, y)) return;
+      pic[y * N + x] = val;
+      if (mirror && isLed(N - 1 - x, y)) pic[y * N + N - 1 - x] = val;
+    };
+    const line = ([x0, y0], [x1, y1]) => { // Bresenham, so a fast drag leaves no gaps
+      const dx = Math.abs(x1 - x0), dy = -Math.abs(y1 - y0), sx = x0 < x1 ? 1 : -1, sy = y0 < y1 ? 1 : -1;
+      let err = dx + dy;
+      for (let k = 0; k < 64; k++) {
+        set(x0, y0);
+        if (x0 === x1 && y0 === y1) break;
+        const e2 = 2 * err;
+        if (e2 >= dy) { err += dy; x0 += sx; }
+        if (e2 <= dx) { err += dx; y0 += sy; }
+      }
+    };
+    glass.addEventListener("pointerdown", e => {
+      if (mode !== "draw") return;
+      const [x, y] = at(e);
+      if (!isLed(x, y)) return;
+      e.preventDefault();
+      try { glass.setPointerCapture(e.pointerId); } catch (err) {}
+      painting = true; val = pic[y * N + x] ? 0 : 255; last = [x, y];
+      set(x, y);
+      draw();
+    });
+    glass.addEventListener("pointermove", e => {
+      if (mode !== "draw") return;
+      const p = at(e);
+      kbd = false;
+      if (painting) { line(last, p); last = p; draw(); return; }
+      if (e.pointerType !== "mouse") return;
+      const h = isLed(p[0], p[1]) ? p[1] * N + p[0] : -1;
+      if (h !== hover) { hover = h; draw(); }
+    });
+    const stop = () => { painting = false; };
+    glass.addEventListener("pointerup", stop);
+    glass.addEventListener("pointercancel", stop);
+    glass.addEventListener("pointerleave", () => { if (hover >= 0 && document.activeElement !== glass) { hover = -1; draw(); } });
+    // From the keyboard: arrows move a cursor, Space or Enter toggles the dot (or shakes the sand).
+    glass.addEventListener("focus", () => { if (mode === "draw" && hover < 0) { hover = 6 * N + 6; draw(); } });
+    glass.addEventListener("blur", () => { if (hover >= 0) { hover = -1; draw(); } });
+    glass.addEventListener("keydown", e => {
+      const k = e.key, d = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] }[k];
+      kbd = true;
+      if (d && mode === "draw") {
+        if (hover < 0) hover = 6 * N + 6;
+        let x = hover % N, y = Math.floor(hover / N);
+        for (let s = 0; s < N; s++) { x += d[0]; y += d[1]; if (!(x >= 0 && x < N && y >= 0 && y < N)) break; if (isLed(x, y)) { hover = y * N + x; break; } }
+        draw(); e.preventDefault();
+      } else if (k === " " || k === "Enter") {
+        e.preventDefault();
+        if (mode === "sand") { shake(); return; }
+        if (mode !== "draw" || hover < 0) return;
+        val = pic[hover] ? 0 : 255; set(hover % N, Math.floor(hover / N)); draw();
+      }
+    });
+
+    // ---- sand
+    const shake = () => { if (mode !== "sand") return; sim.shake(0.9); if (reduce) { settle(sim); draw(); } };
+    const tr = tray(glass, glass, () => canvas.getBoundingClientRect(), () => mode === "sand", shake);
+    b.sand.addEventListener("click", () => {
+      askTilt();
+      if (mode !== "draw") return;
+      sim = new Sand(); homes = [];
+      for (let i = 0; i < N * N; i++) if (pic[i] && sim.add(i % N, Math.floor(i / N), pic[i])) homes.push(i);
+      if (!sim.count) { status.textContent = "Dessinez d'abord quelques points"; return; }
+      sim.shake(0.25); // so it crumbles rather than dropping as one block
+      mode = "sand"; hover = -1;
+      if (reduce) settle(sim);
+      say(); draw();
+    });
+    b.build.addEventListener("click", () => {
+      if (mode !== "sand") return;
+      from = new Float64Array(sim.count * 2); delay = new Float64Array(sim.count);
+      for (let i = 0; i < sim.count; i++) {
+        from[2 * i] = sim.px[i]; from[2 * i + 1] = sim.py[i];
+        delay[i] = (1 - Math.floor(homes[i] / N) / (N - 1)) * 0.3 + rnd() * 0.15; // the bottom of the drawing comes back first
+      }
+      t = 0; mode = reduce ? "draw" : "build";
+      say(); draw();
+    });
+    b.clear.addEventListener("click", () => { pic.fill(0); mode = "draw"; sim = null; say(); draw(); });
+    b.mirror.addEventListener("click", () => { mirror = !mirror; b.mirror.setAttribute("aria-pressed", String(mirror)); });
+    onTilt.push(say);
+
+    const step = (now, dt) => {
+      if (mode === "sand") {
+        follow(g, tr.active() ? tr : tilt.on ? tilt : DOWN, dt);
+        for (let k = steps(dt); k > 0; k--) sim.step(g.x, g.y, g.z);
+      } else if (mode === "build") {
+        t += dt;
+        if (t > 1) { mode = "draw"; say(); }
+      }
+      draw();
+    };
+    say();
+    return { el: canvas, step, draw, live: () => !reduce && mode !== "draw" };
+  })();
+
+  // ---------------------------------------------------------------- feature icons (dot pictograms; "2" is the red dot)
+  const ICONS = {
+    sand: ["0002000", "0000000", "0000100", "0010000", "0000000", "0001000", "0011100", "0111110", "1111111"],
+    hourglass: ["1111111", "0100010", "0111110", "0011100", "0002000", "0010100", "0101010", "0111110", "1111111"],
+    invader: ["0100010", "0010100", "0111110", "1101011", "1111111", "1011101", "0100010", "0000000", "0002000"],
+    pen: ["0000020", "0000111", "0001110", "0011100", "0111000", "0110000", "1000000", "0000000", "1011011"],
+    frames: ["1110111", "1210101", "1110111", "0000000", "0010000", "0011000", "0011100", "0011000", "0010000"],
+    mic: ["0011100", "0111110", "0111110", "0111110", "0011100", "1000001", "0100010", "0011100", "0001000"],
+    compass: ["0011100", "0100010", "1000021", "1000101", "1001001", "1010001", "1000001", "0100010", "0011100"],
+    bricks: ["1101101", "0110110", "1101101", "0000000", "0000000", "0000200", "0000000", "0000000", "0011100"],
+    home: ["1111111", "1000001", "1002001", "1000001", "1111111", "0000000", "1110111", "1010101", "1110111"],
+    glyph: ["0011100", "0111110", "1101011", "1111111", "1010101", "1111111", "1101011", "0111110", "0011100"],
+    update: ["0001000", "0011100", "0101010", "1001001", "0001000", "0001000", "0001000", "0000000", "1111111"],
+    theme: ["0011100", "0111010", "1111001", "1111001", "1111001", "1111001", "1111001", "0111010", "0011100"],
+  };
+  const drawIcon = canvas => {
+    const rows = ICONS[canvas.dataset.icon], ctx = canvas.getContext("2d"), W = canvas.width;
+    const n = 9, cell = W / n, ox = (W - rows[0].length * cell) / 2, marked = rows.some(r => r.includes("2"));
+    ctx.clearRect(0, 0, W, W);
+    rows.forEach((r, y) => [...r].forEach((b, x) => {
+      const on = b !== "0", red = marked ? b === "2" : y === 0 && x === rows[0].indexOf("1");
+      ctx.fillStyle = on ? (red ? T.red : T.fg) : T.off;
+      ctx.beginPath(); ctx.arc(ox + (x + 0.5) * cell, (y + 0.5) * cell, cell * (on ? 0.36 : 0.18), 0, 7); ctx.fill();
+    }));
+  };
+
+  // ---------------------------------------------------------------- QR code (drawn in dots)
+  const drawQR = () => {
+    const canvas = $("qr"), ctx = canvas.getContext("2d"), n = QR.length, W = canvas.width, cell = W / n;
+    ctx.fillStyle = T.qrBg; ctx.fillRect(0, 0, W, W);
+    ctx.fillStyle = T.qrFg;
+    const finder = (r, c) => (r < 7 && c < 7) || (r < 7 && c >= n - 7) || (r >= n - 7 && c < 7);
+    const rr = (x, y, w, h, rad) => { ctx.beginPath(); ctx.roundRect ? ctx.roundRect(x, y, w, h, rad) : ctx.rect(x, y, w, h); };
+    for (const [r0, c0] of [[0, 0], [0, n - 7], [n - 7, 0]]) {
+      rr(c0 * cell, r0 * cell, 7 * cell, 7 * cell, cell * 1.8); ctx.fill();
+      ctx.fillStyle = T.qrBg; rr((c0 + 1) * cell, (r0 + 1) * cell, 5 * cell, 5 * cell, cell * 1.2); ctx.fill();
+      ctx.fillStyle = T.qrFg; rr((c0 + 2) * cell, (r0 + 2) * cell, 3 * cell, 3 * cell, cell * 0.9); ctx.fill();
+    }
+    for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) {
+      if (QR[r][c] !== "1" || finder(r, c)) continue;
+      ctx.beginPath(); ctx.arc((c + 0.5) * cell, (r + 0.5) * cell, cell * 0.46, 0, 7); ctx.fill();
+    }
+  };
+
+  // ---------------------------------------------------------------- paint + loop (only what's on screen moves)
+  const demos = [hero, game, editor];
+  const paintAll = () => {
+    document.querySelectorAll("canvas[data-icon]").forEach(drawIcon);
+    drawQR();
+    demos.forEach(d => d.draw());
+  };
+  paintAll();
+  const onTheme = () => { readTheme(); ledTable(); paintAll(); };
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", onTheme);
+  new MutationObserver(onTheme).observe(root, { attributes: true, attributeFilter: ["data-theme"] });
+
+  const seen = new Map();
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    seen.set(e.target, e.isIntersecting);
+    demos.forEach(d => { if (d.el === e.target && d.onSeen) d.onSeen(e.isIntersecting); });
+  }), { rootMargin: "60px" });
+  demos.forEach(d => { seen.set(d.el, false); io.observe(d.el); });
+  let last = 0;
+  const loop = now => {
+    const dt = last ? Math.min(0.1, (now - last) / 1000) : 1 / 60;
+    last = now;
+    for (const d of demos) if (seen.get(d.el) && d.live()) d.step(now, dt);
+    requestAnimationFrame(loop);
+  };
+  requestAnimationFrame(loop);
+
+  // ---------------------------------------------------------------- theme switch (remembered on this device)
+  const dark = matchMedia("(prefers-color-scheme: dark)");
+  const modeButtons = document.querySelectorAll(".mode button");
+  const showMode = () => {
+    const current = root.dataset.theme || (dark.matches ? "dark" : "light");
+    modeButtons.forEach(b => b.setAttribute("aria-pressed", String(b.dataset.mode === current)));
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.content = current === "dark" ? "#000000" : "#EEE8DA";
+  };
+  try { const saved = localStorage.getItem("glyphies-theme"); if (saved === "dark" || saved === "light") root.dataset.theme = saved; } catch (e) {}
+  modeButtons.forEach(b => b.addEventListener("click", () => {
+    root.dataset.theme = b.dataset.mode;
+    try { localStorage.setItem("glyphies-theme", b.dataset.mode); } catch (e) {}
+    showMode();
+  }));
+  dark.addEventListener("change", showMode);
+  new MutationObserver(showMode).observe(root, { attributes: true, attributeFilter: ["data-theme"] });
+  showMode();
+
+  // ---------------------------------------------------------------- copy link
+  const copy = $("copy");
+  copy.addEventListener("click", () => {
+    const url = $("apk-url").textContent;
+    const done = ok => { copy.textContent = ok ? "COPIÉ" : "SÉLECTIONNÉ"; setTimeout(() => (copy.textContent = "COPIER"), 1800); };
+    const select = () => { const s = getSelection(), r = document.createRange(); r.selectNodeContents($("apk-url")); s.removeAllRanges(); s.addRange(r); done(false); };
+    try { navigator.clipboard.writeText(url).then(() => done(true), select); } catch (e) { select(); }
+  });
+})();
+</script>
+</body>
+</html>
