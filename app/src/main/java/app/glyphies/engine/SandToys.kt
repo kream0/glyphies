@@ -74,7 +74,7 @@ class SandToy(
 /**
  * Hourglass timer: the glass is drawn faintly, the sand starts in the top bulb and one grain
  * drops through the neck at a time, so the top empties in [seconds]. Turn the phone over and
- * it runs back; lay it on its side and it pauses, like the real thing. Tap to start again.
+ * it runs back; lay it on its side and it pauses, like the real thing. A volume key refills it.
  * Buzzes when the time is up.
  */
 class HourglassToy(
@@ -130,7 +130,9 @@ class HourglassToy(
     private fun upper(down: Boolean): Int = sim.cells().count { if (down) it / shape.width < neckRow else it / shape.width > neckRow }
 
     override fun update(dt: Float, input: InputFrame, fx: Fx) {
-        if (input.presses > 0) fillTop()
+        // Only a volume key refills it: fingers resting on the screen while you watch the back
+        // shouldn't reset a running timer.
+        if (input.volumeUp + input.volumeDown > 0) fillTop()
         repeat(stepper.steps(dt)) { sim.step(input.gx, input.gy, input.gz) }
         flash -= dt
         // Upright (either way up) and a grain waiting at the neck: let one through.

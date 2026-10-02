@@ -43,7 +43,7 @@ enum class BuiltIn(val id: String, val isGame: Boolean) {
     val controls: String
         get() = when (this) {
             SAND -> tr("Tilt · shake · volume +/− for more or less sand", "Inclinez · secouez · volume +/− pour plus ou moins de sable")
-            HOURGLASS -> tr("Stand it up · turn it over · tap to refill", "Tenez-le debout · retournez-le · touchez pour le remplir")
+            HOURGLASS -> tr("Stand it up · turn it over · volume key to refill", "Tenez-le debout · retournez-le · touche de volume pour le remplir")
             INVADERS -> if (app.glyphies.Graph.settings.current.autoFire) {
                 tr("Tilt to move · fires on its own", "Inclinez pour bouger · tir automatique")
             } else {
