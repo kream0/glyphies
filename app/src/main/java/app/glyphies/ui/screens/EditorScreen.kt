@@ -60,6 +60,7 @@ import app.glyphies.glyph.GlyphOutput
 import app.glyphies.glyph.GlyphSupport
 import app.glyphies.glyph.MatrixShape
 import app.glyphies.play.Catalog
+import app.glyphies.play.FaceDown
 import app.glyphies.tr
 import app.glyphies.trCount
 import app.glyphies.ui.AppViewModel
@@ -234,6 +235,9 @@ fun EditorScreen(app: AppViewModel, id: String, onClose: () -> Unit) {
                         Row(Modifier.padding(horizontal = 20.dp, vertical = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                             PillButton(tr("Clear", "Effacer"), { paint.clearFrame() }, icon = Ic.Delete)
                             PillButton(tr("Flip", "Retourner"), { paint.flip() })
+                        }
+                        if (FaceDown.canShow(creation)) {
+                            FaceDownButton(creation.id, Modifier.padding(horizontal = 20.dp, vertical = 4.dp))
                         }
                     }
                 }

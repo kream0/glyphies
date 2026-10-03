@@ -8,6 +8,7 @@ import app.glyphies.data.GameTemplate
 import app.glyphies.data.label
 import app.glyphies.engine.AnalogClock
 import app.glyphies.engine.Driver
+import app.glyphies.engine.EmojiToy
 import app.glyphies.engine.GameConfig
 import app.glyphies.engine.HourglassToy
 import app.glyphies.engine.InvadersGame
@@ -16,8 +17,10 @@ import app.glyphies.engine.NoFx
 import app.glyphies.engine.Playable
 import app.glyphies.engine.SandToy
 import app.glyphies.engine.Trigger
+import app.glyphies.glyph.EmojiRaster
 import app.glyphies.glyph.GlyphSupport
 import app.glyphies.glyph.MatrixShape
+import app.glyphies.isFrench
 import app.glyphies.play.BuiltIn
 import app.glyphies.play.Catalog
 import app.glyphies.tr
@@ -69,6 +72,7 @@ class Entry private constructor(
                 BuiltIn.SAND -> tr("Tilt · shake", "Incliner · secouer")
                 BuiltIn.HOURGLASS -> tr("Timer · ${duration(s.hourglassSeconds)}", "Minuteur · ${duration(s.hourglassSeconds)}")
                 BuiltIn.CLOCK -> tr("Time · face down", "Heure · face cachée")
+                BuiltIn.EMOJI -> "${s.emoji} · " + tr("tap to pick", "toucher pour choisir")
                 BuiltIn.INVADERS -> if (s.autoFire) tr("Tilt · auto-fire", "Incliner · tir auto") else tr("Tilt · tap to fire", "Incliner · toucher pour tirer")
             },
             shape = shape,
@@ -113,6 +117,11 @@ class Entry private constructor(
             BuiltIn.SAND -> SandToy(shape)
             BuiltIn.HOURGLASS -> HourglassToy(shape, seconds = 20)
             BuiltIn.CLOCK -> AnalogClock(shape)
+            BuiltIn.EMOJI -> {
+                // The preview goes through the set on its own.
+                var shown = s.emoji
+                EmojiToy(shape, selected = { shown }, onSelect = { shown = it }, raster = EmojiRaster::render, french = isFrench)
+            }
             BuiltIn.INVADERS -> InvadersGame(shape, GameConfig(move = Move.TOUCH, trigger = Trigger.AUTO))
         }
 

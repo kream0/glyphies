@@ -18,6 +18,7 @@ Three tabs:
 - **Sand:** grains of sand follow the tilt of the phone, with real physics (each grain has a speed, bounces, and piles roll off at 45° like real sand). Shake to throw them about; volume + / − (or + / − on screen) adds or removes sand.
 - **Hourglass:** a real timer (30 s, 1, 3, 5 or 10 min). One grain passes the neck at a time; turn the phone over and it runs back, lay it on its side and it pauses. It vibrates when the time is up.
 - **Clock:** an analog clock: hour marks on the rim (brighter at 12, 3, 6, 9), anti-aliased hour and minute hands, and the seconds going round the rim (tap to hide them). It's what the back shows face down by default.
+- **Emoji:** pick an emoji in the row under the matrix and it shows on the back, drawn in dots and animated (eyes that blink, a heart that beats, a flame that flickers, a ghost that floats…). Tap or volume + for the next one, volume − for the previous. The last button takes any other emoji from the keyboard, drawn from the phone's emoji font.
 - **Invaders:** Space Invaders on the back of the phone. Tilt to slide the ship, it fires on its own (or on a tap / volume key: *Settings → Controls*). The formation marches, bounces off the round edge and comes down; a UFO crosses now and then; every fourth wave is a boss. Lives are the dim dots on the bottom row, hits vibrate, and the best score is kept.
 
 ## Create
@@ -40,7 +41,7 @@ In the **Editor** tab (the samples show each idea):
 
 ## Glyph Matrix
 
-- **Face down, instead of Nothing's clock:** ⋯ → *Show face down* on the clock, sand, the hourglass or any of your drawings and animations (or *Settings → Glyph Matrix → Face down*) puts it on the back for when the app is closed. The analog clock until you pick something else.
+- **Face down, instead of Nothing's clock:** *Show face down* on the clock, sand, the hourglass, the emoji or any of your drawings and animations (the button under what's playing, in the editor, or ⋯ on a tile; or *Settings → Glyph Matrix → Face down*) puts it on the back for when the app is closed. The analog clock until you pick something else.
   - **Phone (4a) Pro:** choose Glyphies once in *Settings → Glyph Interface → Flip to Glyph → Always-on Glyph Toy*; then it shows whenever the phone lies face down. Sand reads the tilt when Android lets a toy use the accelerometer; lying flat it gets a slow sway so it keeps flowing. The hourglass turns itself over a few seconds after it runs out.
   - **Phone (3):** add *Glyphies* to the Glyph Button carousel; a long press restarts it.
 - While the app is open, games and animations use the app channel of the matrix.
@@ -98,6 +99,7 @@ base64 -w0 glyphies.jks   # → KEYSTORE_BASE64
 | Sand physics (after Adafruit's PixelDust, plus a 45° avalanche rule) | `engine/SandSim.kt`, `engine/SandToys.kt` |
 | Invaders and the game templates | `engine/Invaders.kt`, `Falling.kt`, `Maze.kt`, `Fly.kt`, `Bricks.kt` |
 | Animations and their sensor drivers | `engine/Animation.kt` |
+| Clock and emoji (hand-drawn dot emoji; others drawn from the emoji font) | `engine/Clock.kt`, `engine/Emoji.kt`, `glyph/EmojiRaster.kt` |
 | Sensors: gravity, shakes, microphone loudness / claps, light, proximity, compass, volume keys | `sense/Sensors.kt` |
 | Game loop: input → update → frame → matrix + screen | `play/Player.kt` |
 | Creations (frames as hex, sprites, game settings) and samples | `data/Creation.kt`, `CreationStore.kt`, `Seeds.kt` |

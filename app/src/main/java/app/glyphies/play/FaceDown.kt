@@ -33,8 +33,10 @@ object FaceDown {
         key.removePrefix("builtin:").takeIf { key.startsWith("builtin:") }?.let { n -> BuiltIn.entries.firstOrNull { it.name == n } }
 
     /** Display name of a choice ("Clock", or the creation's name). */
-    fun name(key: String): String =
-        builtIn(key)?.title ?: Graph.creations.get(key)?.name ?: BuiltIn.CLOCK.title
+    fun name(key: String): String {
+        val b = builtIn(key) ?: return Graph.creations.get(key)?.name ?: BuiltIn.CLOCK.title
+        return if (b == BuiltIn.EMOJI) "${b.title} ${Graph.settings.current.emoji}" else b.title
+    }
 
     /** Everything that can go on the back. */
     fun choices(): List<String> =
@@ -47,6 +49,7 @@ object FaceDown {
             BuiltIn.SAND -> return SandToy(device, fill = 0.38f)
             BuiltIn.HOURGLASS -> return HourglassToy(device, seconds = Graph.settings.current.hourglassSeconds)
             BuiltIn.CLOCK -> return AnalogClock(device)
+            BuiltIn.EMOJI -> return Catalog.emojiToy(device, interactive = false)
             BuiltIn.INVADERS, null -> Unit
         }
         val c = Graph.creations.get(key)?.takeIf { canShow(it) } ?: return AnalogClock(device)

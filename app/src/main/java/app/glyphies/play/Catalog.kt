@@ -1,5 +1,6 @@
 package app.glyphies.play
 
+import app.glyphies.Graph
 import app.glyphies.data.AppSettings
 import app.glyphies.data.Creation
 import app.glyphies.data.CreationKind
@@ -7,6 +8,7 @@ import app.glyphies.data.GameTemplate
 import app.glyphies.engine.AnalogClock
 import app.glyphies.engine.AnimationPlayer
 import app.glyphies.engine.BricksGame
+import app.glyphies.engine.EmojiToy
 import app.glyphies.engine.FallingGame
 import app.glyphies.engine.FlyGame
 import app.glyphies.engine.GameConfig
@@ -19,7 +21,9 @@ import app.glyphies.engine.SandToy
 import app.glyphies.engine.ShooterSprites
 import app.glyphies.engine.Sprite
 import app.glyphies.engine.Trigger
+import app.glyphies.glyph.EmojiRaster
 import app.glyphies.glyph.MatrixShape
+import app.glyphies.isFrench
 import app.glyphies.tr
 
 /** The animations and games that come with the app. */
@@ -27,6 +31,7 @@ enum class BuiltIn(val id: String, val isGame: Boolean) {
     SAND("sand", false),
     HOURGLASS("hourglass", false),
     CLOCK("clock", false),
+    EMOJI("emoji", false),
     INVADERS("invaders", true);
 
     val title: String
@@ -34,6 +39,7 @@ enum class BuiltIn(val id: String, val isGame: Boolean) {
             SAND -> tr("Sand", "Sable")
             HOURGLASS -> tr("Hourglass", "Sablier")
             CLOCK -> tr("Clock", "Horloge")
+            EMOJI -> "Emoji"
             INVADERS -> tr("Invaders", "Envahisseurs")
         }
 
@@ -41,6 +47,7 @@ enum class BuiltIn(val id: String, val isGame: Boolean) {
         get() = when (this) {
             SAND -> tr("Grains of sand that follow the tilt of the phone. Shake to throw them about.", "Des grains de sable qui suivent l'inclinaison du téléphone. Secouez pour les projeter.")
             HOURGLASS -> tr("A real timer: the sand runs through the neck one grain at a time. Turn it over to start again.", "Un vrai minuteur : le sable passe le col grain par grain. Retournez-le pour recommencer.")
+            EMOJI -> tr("Pick an emoji: it shows on the back, drawn in dots and animated (blinking eyes, a beating heart…). Any other emoji works too.", "Choisissez un emoji : il s'affiche au dos, dessiné en points et animé (yeux qui clignent, cœur qui bat…). Tout autre emoji marche aussi.")
             CLOCK -> tr("An analog clock with hands, hour marks and the seconds going round. Put it on the back for when the phone lies face down.", "Une horloge à aiguilles, avec les heures et les secondes qui tournent. Mettez-la au dos pour quand le téléphone est retourné.")
             INVADERS -> tr("Space Invaders on the back of the phone. Tilt to move, the ship fires on its own.", "Space Invaders au dos du téléphone. Inclinez pour bouger, le vaisseau tire tout seul.")
         }
@@ -50,6 +57,7 @@ enum class BuiltIn(val id: String, val isGame: Boolean) {
             SAND -> tr("Tilt · shake · volume +/− for more or less sand", "Inclinez · secouez · volume +/− pour plus ou moins de sable")
             HOURGLASS -> tr("Stand it up · turn it over · volume key to refill", "Tenez-le debout · retournez-le · touche de volume pour le remplir")
             CLOCK -> tr("Tap to hide or show the seconds", "Touchez pour masquer ou afficher les secondes")
+            EMOJI -> tr("Pick below · tap or volume + for the next, volume − for the previous", "Choisissez ci-dessous · toucher ou volume + : suivant, volume − : précédent")
             INVADERS -> if (app.glyphies.Graph.settings.current.autoFire) {
                 tr("Tilt to move · fires on its own", "Inclinez pour bouger · tir automatique")
             } else {
@@ -59,6 +67,15 @@ enum class BuiltIn(val id: String, val isGame: Boolean) {
 }
 
 object Catalog {
+    /** The Emoji animation, showing (and, when [interactive], changing) the emoji picked in the app. */
+    fun emojiToy(shape: MatrixShape, interactive: Boolean): Playable = EmojiToy(
+        shape,
+        selected = { Graph.settings.current.emoji },
+        onSelect = { k -> if (interactive) Graph.settings.update { it.copy(emoji = k) } },
+        raster = EmojiRaster::render,
+        french = isFrench,
+    )
+
     fun labels(): Labels = Labels(
         gameOver = "GAME OVER",
         win = tr("WELL DONE", "BRAVO"),
@@ -69,6 +86,7 @@ object Catalog {
         BuiltIn.SAND -> SandToy(shape)
         BuiltIn.HOURGLASS -> HourglassToy(shape, seconds = s.hourglassSeconds)
         BuiltIn.CLOCK -> AnalogClock(shape)
+        BuiltIn.EMOJI -> emojiToy(shape, interactive = true)
         BuiltIn.INVADERS -> InvadersGame(
             shape,
             GameConfig(trigger = if (s.autoFire) Trigger.AUTO else Trigger.TAP, tiltRange = s.tilt.tiltRange, labels = labels()),

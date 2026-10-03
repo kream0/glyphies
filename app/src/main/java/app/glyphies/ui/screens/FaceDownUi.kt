@@ -3,11 +3,18 @@ package app.glyphies.ui.screens
 import android.content.Intent
 import android.provider.Settings as AndroidSettings
 import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.glyphies.Graph
 import app.glyphies.glyph.GlyphSupport
 import app.glyphies.play.FaceDown
 import app.glyphies.tr
 import app.glyphies.ui.components.Ic
+import app.glyphies.ui.components.LocalSheets
+import app.glyphies.ui.components.PillButton
+import app.glyphies.ui.components.PillStyle
 import app.glyphies.ui.components.SheetAction
 import app.glyphies.ui.components.SheetSpec
 import app.glyphies.ui.theme.P
@@ -79,3 +86,24 @@ fun faceDownPicker(): SheetSpec = SheetSpec(
         )
     },
 )
+
+/**
+ * The "Show face down" button of a detail screen (the player, the editor): puts [key] on the
+ * back, then says where to switch the Glyphies toy on.
+ */
+@Composable
+fun FaceDownButton(key: String, modifier: Modifier = Modifier) {
+    val settings by Graph.settings.state.collectAsStateWithLifecycle()
+    val sheets = LocalSheets.current
+    val on = (settings.toy ?: FaceDown.DEFAULT) == key
+    PillButton(
+        if (on) tr("On the back, face down", "Au dos, face cachée") else tr("Show face down", "Afficher face cachée"),
+        {
+            FaceDown.set(key)
+            sheets(faceDownGuide(FaceDown.name(key)))
+        },
+        modifier,
+        icon = if (on) Ic.Check else Ic.Glyph,
+        style = if (on) PillStyle.Outline else PillStyle.Filled,
+    )
+}

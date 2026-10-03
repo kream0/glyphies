@@ -48,6 +48,7 @@ import app.glyphies.engine.Need
 import app.glyphies.glyph.GlyphOutput
 import app.glyphies.glyph.GlyphSupport
 import app.glyphies.play.BuiltIn
+import app.glyphies.play.FaceDown
 import app.glyphies.play.PlayState
 import app.glyphies.tr
 import app.glyphies.ui.duration
@@ -145,9 +146,14 @@ fun PlayerScreen(onClose: () -> Unit) {
             Hud(s)
             Spacer(Modifier.height(14.dp))
 
+            // What this item would be on the back face down (not games: they need you).
+            val faceKey = s.builtIn?.takeIf { FaceDown.canShow(it) }?.let { FaceDown.key(it) }
+                ?: s.creationId?.let { id -> Graph.creations.get(id)?.takeIf { FaceDown.canShow(it) }?.id }
+            val emoji = s.builtIn == BuiltIn.EMOJI
+
             Box(
                 Modifier
-                    .fillMaxWidth(0.9f)
+                    .fillMaxWidth(if (emoji) 0.72f else if (faceKey != null) 0.84f else 0.9f)
                     .clip(CircleShape)
                     .background(if (P.isDark) P.surface else P.surfaceHigh)
                     .padding(18.dp),
@@ -157,6 +163,10 @@ fun PlayerScreen(onClose: () -> Unit) {
             }
 
             Spacer(Modifier.height(18.dp))
+            if (emoji) {
+                EmojiPicker(Modifier.fillMaxWidth())
+                Spacer(Modifier.height(14.dp))
+            }
             if (s.newBest) {
                 Text(tr("NEW BEST!", "NOUVEAU RECORD !"), style = Type.displaySmall, color = P.accent)
                 Spacer(Modifier.height(8.dp))
@@ -173,6 +183,10 @@ fun PlayerScreen(onClose: () -> Unit) {
 
             Spacer(Modifier.weight(1f))
 
+            if (faceKey != null) {
+                FaceDownButton(faceKey)
+                Spacer(Modifier.height(10.dp))
+            }
             Row(horizontalArrangement = Arrangement.spacedBy(10.dp), verticalAlignment = Alignment.CenterVertically) {
                 if (s.builtIn == BuiltIn.SAND) {
                     RoundButton("−") { Graph.sensors.volumeKey(plus = false, pressed = true); Graph.sensors.volumeKey(plus = false, pressed = false) }

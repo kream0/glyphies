@@ -92,6 +92,8 @@ data class AppSettings(
     /** The how-to for Flip to Glyph has been shown once. */
     val toyGuideShown: Boolean = false,
     val hourglassSeconds: Int = 60,
+    /** The emoji the Emoji animation shows. */
+    val emoji: String = "😀",
     /** Tiles on the home screen play a live preview (off: a still picture, saves battery). */
     val animatedTiles: Boolean = true,
     /** What was played last ("builtin:SAND" or a creation id), for "Continue" on the home screen. */
@@ -131,6 +133,7 @@ class Settings(context: Context) {
             toy = prefs.getString("toy", null) ?: prefs.getString("toyCreation", null),
             toyGuideShown = prefs.getBoolean("toyGuideShown", d.toyGuideShown),
             hourglassSeconds = prefs.getInt("hourglassSeconds", d.hourglassSeconds).coerceIn(10, 3600),
+            emoji = prefs.getString("emoji", null)?.takeIf { it.isNotBlank() } ?: d.emoji,
             animatedTiles = prefs.getBoolean("animatedTiles", d.animatedTiles),
             lastPlayed = prefs.getString("lastPlayed", null),
             lastEdited = prefs.getString("lastEdited", null),
@@ -155,6 +158,7 @@ class Settings(context: Context) {
             .putString("toy", s.toy)
             .putBoolean("toyGuideShown", s.toyGuideShown)
             .putInt("hourglassSeconds", s.hourglassSeconds)
+            .putString("emoji", s.emoji)
             .putBoolean("animatedTiles", s.animatedTiles)
             .putString("lastPlayed", s.lastPlayed)
             .putString("lastEdited", s.lastEdited)
