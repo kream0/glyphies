@@ -35,3 +35,7 @@
   into matrix coordinates in `Sensors.snapshot()` (the "You look at" setting mirrors x).
 - Frame values are brightness 0..255; values 1..9 are maze markers (`engine/Marks`), never
   real brightness (the pen's dimmest level is 50).
+- Raw frames for Nothing's Glyph service go up to 4095 (the SDK's own renderer scales 0..255
+  images to 0..4095). The face-down toy sends the full range (`Frames.toRaw`, with its own
+  brightness setting) because the system dims it; the app channel keeps 0..255, which the
+  owner finds right while playing. ytune still sends 0..255 on both paths.

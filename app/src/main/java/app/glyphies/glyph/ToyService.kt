@@ -107,7 +107,10 @@ class ToyService : Service() {
                         }
                         val frame = p.shape.blank()
                         p.render(frame)
-                        s.show(device.mask(Frames.fit(frame, p.shape.width, p.shape.height, device.width, device.height)))
+                        val fitted = device.mask(Frames.fit(frame, p.shape.width, p.shape.height, device.width, device.height))
+                        // Face down the system dims the matrix, so the toy uses the service's
+                        // full range (the app channel keeps 0..255, which reads well up close).
+                        s.show(Frames.toRaw(fitted, Graph.settings.current.faceDownBrightness))
                     }
                     delay((p?.frameMs ?: 200L).coerceIn(60L, 250L))
                 }

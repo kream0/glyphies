@@ -46,7 +46,7 @@ In the **Editor** tab (the samples show each idea):
 - While the app is open, games and animations use the app channel of the matrix.
 - **Which way is left:** by default the controls follow what you see on the back of the phone (from behind, the screen's left is your right). If you'd rather look at the screen: *Settings → Controls → You look at → Screen*.
 - **Volume keys** are buttons while something plays (fire, flap, more / less sand); turn that off in *Settings → Controls*.
-- *Settings → Glyph Matrix* has the brightness, an on/off switch, a test, and status lines (service found, connected, accepted, frames sent) that explain a dark matrix.
+- *Settings → Glyph Matrix* has the brightness (with the app open, and face down: face down Nothing dims the matrix, so that one uses the LEDs' full power), an on/off switch, a test, and status lines (service found, connected, accepted, frames sent) that explain a dark matrix.
 - The app targets Android 16 because Nothing's Glyph service only waives its API key for apps that do. Nothing's Glyph SDK is closed source and can't be redistributed, so it isn't in this repo: the build downloads it from [Nothing's Glyph-Developer-Kit](https://github.com/Nothing-Developer-Programme/Glyph-Developer-Kit) at a pinned commit and checks its SHA-256.
 
 ## Languages and themes

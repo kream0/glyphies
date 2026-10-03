@@ -97,6 +97,18 @@ object Frames {
         return out
     }
 
+    /** Full power of an LED in the raw frames Nothing's Glyph service takes (its SDK renders 0..4095). */
+    const val RAW_MAX = 4095
+
+    /**
+     * Our 0..255 brightness on the service's full 0..[RAW_MAX] scale, at [percent] of full power.
+     * A lit dot never rounds down to off.
+     */
+    fun toRaw(frame: IntArray, percent: Int): IntArray = IntArray(frame.size) { i ->
+        val v = frame[i]
+        if (v <= 0) 0 else (v.coerceAtMost(255).toLong() * RAW_MAX * percent.coerceIn(1, 100) / (255L * 100)).toInt().coerceIn(1, RAW_MAX)
+    }
+
     /** Lowercase hex, two characters per cell. */
     fun encode(frame: IntArray): String {
         val sb = StringBuilder(frame.size * 2)

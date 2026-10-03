@@ -182,9 +182,22 @@ private fun GlyphSection(output: Boolean, brightness: Int, previewSize: Int) {
         tr("Light up the Glyph Matrix", "Allumer la Glyph Matrix"),
         tr("Games, animations and drawings show on the back of the phone", "Jeux, animations et dessins s'affichent au dos du téléphone"),
     ) { NothingSwitch(output, { on -> Graph.settings.update { it.copy(glyphOutput = on) } }) }
-    Block(tr("Brightness", "Luminosité"), null) {
+    Block(
+        tr("Brightness, app open", "Luminosité, app ouverte"),
+        tr("While you play or draw.", "Pendant que vous jouez ou dessinez."),
+    ) {
         val steps = listOf(25, 50, 75, 100)
         Segmented(steps.map { "$it %" }, steps.indexOf(brightness).coerceAtLeast(0), { i -> Graph.settings.update { it.copy(brightness = steps[i]) } })
+    }
+    Block(
+        tr("Brightness, face down", "Luminosité, face cachée"),
+        tr(
+            "What the back shows with the app closed. Nothing dims the matrix face down, so this uses the LEDs' full power.",
+            "Ce que le dos affiche app fermée. Nothing atténue la matrice face cachée, donc celle-ci utilise toute la puissance des LED.",
+        ),
+    ) {
+        val steps = listOf(25, 50, 75, 100)
+        Segmented(steps.map { "$it %" }, steps.indexOf(settings.faceDownBrightness).coerceAtLeast(0), { i -> Graph.settings.update { it.copy(faceDownBrightness = steps[i]) } })
     }
     Line(
         tr("Turn it on once", "À activer une fois"),

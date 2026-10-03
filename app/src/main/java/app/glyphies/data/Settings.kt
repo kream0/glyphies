@@ -70,8 +70,10 @@ data class AppSettings(
     val autoUpdate: Boolean = true,
     /** Send what plays to the Glyph Matrix (otherwise it only shows on the screen). */
     val glyphOutput: Boolean = true,
-    /** Matrix brightness, 25..100 %. */
+    /** Matrix brightness while the app is open, 25..100 %. */
     val brightness: Int = 100,
+    /** Matrix brightness face down (the Glyph Toy), 25..100 % of the LEDs' full power. */
+    val faceDownBrightness: Int = 100,
     val facing: Facing = Facing.BACK,
     val tilt: Sensitivity = Sensitivity.MEDIUM,
     val mic: Sensitivity = Sensitivity.MEDIUM,
@@ -118,6 +120,7 @@ class Settings(context: Context) {
             autoUpdate = prefs.getBoolean("autoUpdate", d.autoUpdate),
             glyphOutput = prefs.getBoolean("glyphOutput", d.glyphOutput),
             brightness = prefs.getInt("brightness", d.brightness).coerceIn(25, 100),
+            faceDownBrightness = prefs.getInt("faceDownBrightness", d.faceDownBrightness).coerceIn(25, 100),
             facing = enumOr(prefs.getString("facing", null), d.facing),
             tilt = enumOr(prefs.getString("tilt", null), d.tilt),
             mic = enumOr(prefs.getString("mic", null), d.mic),
@@ -141,6 +144,7 @@ class Settings(context: Context) {
             .putBoolean("autoUpdate", s.autoUpdate)
             .putBoolean("glyphOutput", s.glyphOutput)
             .putInt("brightness", s.brightness)
+            .putInt("faceDownBrightness", s.faceDownBrightness)
             .putString("facing", s.facing.name)
             .putString("tilt", s.tilt.name)
             .putString("mic", s.mic.name)
